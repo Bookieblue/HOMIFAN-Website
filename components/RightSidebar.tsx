@@ -12,7 +12,7 @@ const RightSidebar = () => {
           <div className="absolute left-5 h-[350px] mt-5 w-0.5 border-l border-dashed border-gray-400"></div>
 
           {/* Timeline items */}
-          <div className="flex flex-col items-start gap-8 ml-1">
+          <div className="flex flex-col items-start gap-4 sm:gap-8 ml-1">
           {history.map((item, index) => (
               <div key={index} className="relative flex items-center space-x-4">
                 <div className={`w-8 h-8 rounded-full overflow-hidden border border-gray-300 flex-shrink-0 flexCenter cursor-pointer ${index === 0 ? 'bg-blue-50' : 'bg-white'}`}>

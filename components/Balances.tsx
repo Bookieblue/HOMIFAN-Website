@@ -18,12 +18,12 @@ const Balances = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch('https://v2.base-borderless.com/api/transactions');
+        const response = await fetch('/api/fetchTransactions');
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        console.log('Fetched data:', data); 
+        console.log('Fetched data:', data);
 
         // Extract balance and transactions from the response
         const balance = data.data.balance;
