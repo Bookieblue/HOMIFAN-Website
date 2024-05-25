@@ -31,7 +31,7 @@ const Hashtag = () =>{
     return(
         <div  className='flexStart w-full lg:w-1/2 bg-white rounded-xl gap-5 shadow-xl px-3 py-4'>
         <div className='bg-gray-20 p-3 rounded-sm'>
-        <Image src='/home-black.svg' width={40} height={20} alt='home' className='size-4 md:size-5' />
+        <Image src='/home-black.svg' width={40} height={20} alt='home' className='size-6 md:size-5' />
         </div>
         <div className='cursor-pointer'>
             <p className='medium-18 text-gray-40'>Hashtag research</p>
