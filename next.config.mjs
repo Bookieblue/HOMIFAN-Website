@@ -2,12 +2,12 @@
 const nextConfig = {
     async rewrites() {
         return [
-          {
-            source: '/api/:transactions*',
-            destination: 'https://v2.base-borderless.com/api/:transactions*',
-          },
-        ]
-      },
+            {
+                source: '/api/:path*',
+                destination: 'https://v2.base-borderless.com/api/:path*',
+            },
+        ];
+    },
 };
 
 export default nextConfig;
