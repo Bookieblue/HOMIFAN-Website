@@ -15,26 +15,37 @@ const Balances = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [balance, setBalance] = useState<number>(0);
 
+  
+  
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch('https://v2.base-borderless.com/api/transactions');
+        console.log('Fetching data from API...');
+        const response = await fetch('/api/handleBalance', {
+          method: 'GET',
+        });
+
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
         }
+
         const data = await response.json();
-        console.log('Fetched data:', data); 
+        console.log('Fetched data:', data);
 
         // Extract balance and transactions from the response
         const balance = data.data.balance;
         const transactions: Transaction[] = data.data.transactions;
 
-        console.log('Formatted transactions:', transactions); 
+        console.log('Formatted transactions:', transactions);
 
         setBalance(balance);
         setTransactions(transactions);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        if (error instanceof Error) {
+          console.error('Error fetching data:', error.message);
+        } else {
+          console.error('Unknown error occurred:', error);
+        }
       }
     };
 
