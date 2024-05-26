@@ -7,13 +7,13 @@ const nextConfig = {
                 source: "/api/:path*",
                 headers: [
                     { key: "Access-Control-Allow-Credentials", value: "true" },
-                    { key: "Access-Control-Allow-Origin", value: "https://v2.base-borderless.com/api/transactions" }, 
+                    { key: "Access-Control-Allow-Origin", value: "https://v2.base-borderless.com" },
                     { key: "Access-Control-Allow-Methods", value: "GET,DELETE,PATCH,POST,PUT" },
                     { key: "Access-Control-Allow-Headers", value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" },
-                ]
-            }
-        ]
-    }
-}
+                ],
+            },
+        ];
+    },
+};
 
-export default nextConfig
+export default nextConfig;
