@@ -4,7 +4,7 @@ import https from 'https';
 import fetch from 'node-fetch';
 
 const agent = new https.Agent({
-  rejectUnauthorized: false, // Ignore SSL certificate errors for debugging
+  rejectUnauthorized: false, // To ignore SSL certificate errors for debugging
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -14,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log('Fetching data from external API...');
     const response = await fetch('https://v2.base-borderless.com/api/transactions', {
       method: 'GET',
-      agent: agent, // Use the agent to ignore SSL errors
+      agent: agent, // The agent to ignore SSL errors
     });
 
     if (!response.ok) {
