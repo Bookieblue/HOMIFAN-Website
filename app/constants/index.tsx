@@ -49,7 +49,6 @@ export const heroData = {
   subtitle: 'WELCOME TO OUR CHURCH',
   ctaText: 'JOIN US NOW',
   prayerText: 'PRAYER REQUEST',
-  backgroundImage: '/hero-bg.svg',
 };
 
 
@@ -69,49 +68,41 @@ export const aboutFounderCardProps = {
 export const aboutUsData = {
   title: 'WE ARE THE BODY OF CHRIST',
   subtitle: 'ABOUT US',
-  backgroundImage: '/hero-bg.svg',
 };
 
 export const articlesData = {
   title: 'INSPIRATION FOR YOUR FAITH JOURNEY',
   subtitle: 'ARTICLES',
-  backgroundImage: '/hero-bg.svg',
 };
 
 export const eventsData = {
   title: 'BE PART OF OUR EVENTS',
   subtitle: 'OUR EVENTS',
-  backgroundImage: '/hero-bg.svg',
 };
 
 export const contactData = {
   title: "WE'RE DELIGHTED TO CONNECT WITH YOU!",
   subtitle: 'CONTACT US',
-  backgroundImage: '/hero-bg.svg',
 };
 
 export const givingData = {
   title: "HELP FURTHER THE MISSION OF THE CHURCH",
   subtitle: 'GIVING',
-  backgroundImage: '/hero-bg.svg',
 };
 
 export const prayerData = {
   title: "HOW CAN WE PRAY FOR YOU?LET US KNOW ",
   subtitle: 'PRAYER REQUEST',
-  backgroundImage: '/hero-bg.svg',
 };
 
 export const JoinusData = {
   title: "WELCOME TO OUR FAMILY ",
   subtitle: 'JOIN US',
-  backgroundImage: '/hero-bg.svg',
 };
 
 export const publicationData = {
   title: "FIND YOUR NEXT GREAT READ AT OUR ONLINE BOOK STORE",
   subtitle: 'PUBLICATION STORE',
-  backgroundImage: '/hero-bg.svg',
 };
 
 export const missionVisionData = {

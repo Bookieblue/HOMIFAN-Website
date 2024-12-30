@@ -12,12 +12,15 @@ import { FounderGreeting } from "@/components/FounderGreetings";
 import ExperienceSection from "@/components/VideoExperience";
 import { HeroSection } from "@/components/Hero";
 import BackToTopButton from "@/components/BackToTop";
+import { HeroContent } from "@/components/HeroContent";
 
 export default function Home() {
   return (
     <div className="">
       <Navbar />
-      <HeroSection {...heroData} />;
+      <HeroSection>
+        <HeroContent {...heroData} />
+      </HeroSection>
       <FounderGreeting  {...founderCardProps} />
       <ExperienceSection />
       <ChurchSection />

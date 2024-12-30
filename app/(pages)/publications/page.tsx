@@ -3,10 +3,13 @@ import AuthorHighlight from '@/components/Author';
 import BackToTopButton from '@/components/BackToTop';
 import FooterSection from '@/components/Footer';
 import { HeroSection } from '@/components/Hero';
+import { HeroContent } from '@/components/HeroContent';
 import Navbar from '@/components/NavBar';
 import PublicationCard from '@/components/PublicationCard';
 import WhyBuyBooks from '@/components/WhyBuyBooks';
 import React from 'react'
+import publicationImage from '@/public/publication-image.png'
+import Image from 'next/image';
 
 const page = () => {
 
@@ -65,7 +68,9 @@ const page = () => {
   return (
     <>
     <Navbar />
-    <HeroSection {...publicationData} />
+    <HeroSection>
+      <HeroContent {...publicationData} />
+    </HeroSection>
     <AuthorHighlight />
     
    <div className="max-container padding-container p-6">

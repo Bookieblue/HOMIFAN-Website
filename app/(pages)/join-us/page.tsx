@@ -10,14 +10,15 @@ import {
 import BackToTopButton from "@/components/BackToTop";
 import WeeklySchedule from "@/components/WeeklySchedule";
 import MembershipForm from "@/components/forms/membership";
+import { HeroContent } from "@/components/HeroContent";
 
-
-  
   const page = () => {
     return (
       <div>
         <Navbar />
-        <HeroSection {...JoinusData} />
+        <HeroSection>
+          <HeroContent {...JoinusData} />
+        </HeroSection>
         <WeeklySchedule />
         <MembershipForm />
         <JoinUsSection />
