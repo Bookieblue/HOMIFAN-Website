@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export interface Article {
-  id: number;
+  id: string;
   date: string;
   title: string;
   excerpt: string;

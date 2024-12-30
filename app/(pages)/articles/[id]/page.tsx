@@ -13,7 +13,7 @@ import { footerProps, articlesData as articleHeroInfo } from '@/app/constants';
 
 const Article: React.FC = () => {
   const { id } = useParams();
-  const article = articlesData.find(article => article.id === Number(id));
+  const article = articlesData.find(article => article.id === id);
   const moreArticles =
     articlesData.length > 3 ? articlesData.slice(0, 3) : articlesData;
 
