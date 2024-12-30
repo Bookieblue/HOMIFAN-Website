@@ -1,25 +1,17 @@
-import Link from "next/link";
-import React from "react";
+import React from 'react';
+import Link from 'next/link';
+import { Article } from './FeaturedArticle';
 
-export interface ArticleCardProps {
-  date: string;
-  title: string;
-  excerpt: string;
-  author: string;
-  imageUrl: string;
-  url: string;
-}
-
-const ArticleCard: React.FC<ArticleCardProps> = ({
+const ArticleCard: React.FC<Article> = ({
+  id,
   date,
   title,
   excerpt,
   author,
   imageUrl,
-  url,
 }) => {
   return (
-    <Link href={url}>
+    <Link href={`/articles/${id}`}>
       <div className="block overflow-hidden rounded-lg shadow-md hover:shadow-xl hover:border-purple-50 hover:border transition-shadow transform hover:scale-[1.04] duration-200 h-full">
         <div className="relative w-full h-48 overflow-hidden">
           <img
