@@ -17,11 +17,24 @@ const config = {
         "2xl": "1400px",
         'max-sm': {'max': '200px'}, 
       },
-    },
+    }, 
     extend: {
       colors: {
-        blue: {
-          50: '#3579DC',
+        main: {
+          50: '#161722',
+        },
+        purple: {
+          50: '#695CAE',
+        },
+        yellow: {
+          50: '#FFD2A4',
+          70: '#FFD0A0',
+        },
+        black:{
+          50: '#1E1E1E'
+        },
+        white:{
+          50: '#EAE7F5'
         },
         gray: {
           10: '##A9ADB1',
@@ -29,6 +42,15 @@ const config = {
           30: '#88909C',
           40: '#404650',
           50: '#8E97A4',
+        },
+        animation: {
+          'scale-pulse': 'scalePulse 1.5s ease-in-out infinite',
+        },
+        keyframes: {
+          scalePulse: {
+            '0%, 100%': { transform: 'scale(2)' },
+            '50%': { transform: 'scale(2)' },
+          },
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

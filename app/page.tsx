@@ -1,20 +1,34 @@
-import LeftSidebar from "@/components/LeftSidebar";
-import Main from "@/components/Main";
-import RightSidebar from "@/components/RightSidebar";
-import Image from "next/image";
+import FooterSection from "@/components/Footer";
+import { footerProps, founderCardProps, heroData } from "./constants/index";
+import JoinUsSection from "@/components/JoinUs";
+import Testimonials from "@/components/Testimonials";
+import { UpcomingEvents } from "@/components/UpcomingEvents";
+import MomentsGallery from "@/components/MomentGallery";
+import StayUpToDateSection from "@/components/StayUpToDate";
+import DonateSection from "@/components/Donate";
+import ChurchSection from "@/components/Branches";
+import Navbar from "@/components/NavBar";
+import { FounderGreeting } from "@/components/FounderGreetings";
+import ExperienceSection from "@/components/VideoExperience";
+import { HeroSection } from "@/components/Hero";
+import BackToTopButton from "@/components/BackToTop";
 
 export default function Home() {
   return (
-   <div className="grid grid-cols-[60px_1fr] h-full lg:grid-cols-[230px_1fr_300px] bg-gray-20 ">
-   <div>
-       <LeftSidebar />
-   </div>
-   <div>
-       <Main />
-   </div>
-   <div className="hidden lg:block">
-       <RightSidebar />
-   </div>
-</div>
+    <div className="">
+      <Navbar />
+      <HeroSection {...heroData} />;
+      <FounderGreeting  {...founderCardProps} />
+      <ExperienceSection />
+      <ChurchSection />
+      <StayUpToDateSection />
+      <DonateSection />
+      <MomentsGallery />
+      <UpcomingEvents />
+      <Testimonials />
+      <JoinUsSection />
+      <FooterSection {...footerProps} />
+      <BackToTopButton />
+    </div>
   );
 }
