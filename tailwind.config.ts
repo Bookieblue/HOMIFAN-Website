@@ -34,6 +34,7 @@ const config = {
           50: '#1E1E1E'
         },
         white:{
+          DEFAULT: '#fff',
           50: '#EAE7F5'
         },
         gray: {
