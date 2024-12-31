@@ -1,5 +1,6 @@
-import { ArrowRight } from "lucide-react";
-import React from "react";
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
 
 interface PublicationCardProps {
   id: string;
@@ -10,6 +11,7 @@ interface PublicationCardProps {
 }
 
 const PublicationCard: React.FC<PublicationCardProps> = ({
+  id,
   title,
   desc,
   price,
@@ -30,9 +32,11 @@ const PublicationCard: React.FC<PublicationCardProps> = ({
         </div>
         <div className="flex justify-between items-center">
           <p className="text-lg font-bold text-[#161722]">NGN {price}</p>
-          <button className="mt-3 bg-purple-50 text-white text-sm px-2 py-1 rounded-lg hover:bg-purple-700">
-           <ArrowRight className="size-4 text-white-50" />
-          </button>
+          <Link href={`/publications/${id}`}>
+            <button className="mt-3 bg-purple-50 text-white text-sm px-2 py-1 rounded-lg hover:bg-purple-700">
+              <ArrowRight className="size-4 text-white-50" />
+            </button>
+          </Link>
         </div>
       </div>
     </div>
