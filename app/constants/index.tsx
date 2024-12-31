@@ -1,4 +1,61 @@
-
+export const publications = [
+  {
+    id: "1",
+    title: "Become a Better Christian",
+    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
+    price: "10,000",
+    imageUrl: "/ebooks.svg", // Replace with actual image URLs
+  },
+  {
+    id: "2",
+    title: "Become a Better Christian",
+    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
+    price: "10,000",
+    imageUrl: "/ebooks.svg", // Replace with actual image URLs
+  },
+  {
+    id: "3",
+    title: "Become a Better Christian",
+    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
+    price: "10,000",
+    imageUrl: "/ebooks.svg", // Replace with actual image URLs
+  },
+  {
+    id: "4",
+    title: "Become a Better Christian",
+    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
+    price: "10,000",
+    imageUrl: "/ebooks.svg", // Replace with actual image URLs
+  },
+  {
+    id: "5",
+    title: "Become a Better Christian",
+    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
+    price: "10,000",
+    imageUrl: "/ebooks.svg", // Replace with actual image URLs
+  },
+  {
+    id: "6",
+    title: "Become a Better Christian",
+    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
+    price: "10,000",
+    imageUrl: "/ebooks.svg", // Replace with actual image URLs
+  },
+  {
+    id: "7",
+    title: "Become a Better Christian",
+    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
+    price: "10,000",
+    imageUrl: "/ebooks.svg", // Replace with actual image URLs
+  },
+  {
+    id: "8",
+    title: "Become a Better Christian",
+    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
+    price: "10,000",
+    imageUrl: "/ebooks.svg", // Replace with actual image URLs
+  },
+]
 
 export const footerProps = {
   logoSrc: '/logo.svg', 

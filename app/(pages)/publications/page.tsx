@@ -1,4 +1,4 @@
-import { footerProps, prayerData, publicationData } from '@/app/constants';
+import { footerProps, prayerData, publicationData, publications } from '@/app/constants';
 import AuthorHighlight from '@/components/Author';
 import BackToTopButton from '@/components/BackToTop';
 import FooterSection from '@/components/Footer';
@@ -13,58 +13,6 @@ import Image from 'next/image';
 
 const page = () => {
 
-    const publications = [
-        {
-          title: "Become a Better Christian",
-          desc: "It’s only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-          price: "10,000",
-          imageUrl: "/ebooks.svg", // Replace with actual image URLs
-        },
-        {
-          title: "Become a Better Christian",
-          desc: "It’s only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-          price: "10,000",
-          imageUrl: "/ebooks.svg", // Replace with actual image URLs
-        },
-        {
-          title: "Become a Better Christian",
-          desc: "It’s only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-          price: "10,000",
-          imageUrl: "/ebooks.svg", // Replace with actual image URLs
-        },
-        {
-          title: "Become a Better Christian",
-          desc: "It’s only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-          price: "10,000",
-          imageUrl: "/ebooks.svg", // Replace with actual image URLs
-        },
-        {
-          title: "Become a Better Christian",
-          desc: "It’s only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-          price: "10,000",
-          imageUrl: "/ebooks.svg", // Replace with actual image URLs
-        },
-        {
-          title: "Become a Better Christian",
-          desc: "It’s only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-          price: "10,000",
-          imageUrl: "/ebooks.svg", // Replace with actual image URLs
-        },
-        {
-          title: "Become a Better Christian",
-          desc: "It’s only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-          price: "10,000",
-          imageUrl: "/ebooks.svg", // Replace with actual image URLs
-        },
-        {
-          title: "Become a Better Christian",
-          desc: "It’s only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-          price: "10,000",
-          imageUrl: "/ebooks.svg", // Replace with actual image URLs
-        },
-        
-    ]
-
   return (
     <>
     <Navbar />
@@ -76,7 +24,7 @@ const page = () => {
    <div className="max-container padding-container p-6">
       <h1 className="text-center uppercase">Our books</h1>
       <p className='uppercase text-4xl font-bold text-center text-[#161722] mb-5 mt-3'>Explore our Christian publications</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {publications.map((pub, index) => (
           <PublicationCard
             key={index}
