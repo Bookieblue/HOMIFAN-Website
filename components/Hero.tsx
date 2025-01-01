@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   children,
-  className,
+  className = 'h-screen',
   backgroundImage = '/hero-bg.svg',
 }) => {
   return (
