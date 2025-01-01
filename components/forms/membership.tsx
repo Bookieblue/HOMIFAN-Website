@@ -28,7 +28,7 @@ const MembershipForm = () => {
   return (
     <div className="padding-container max-container">
       <div className="flex flex-col items-center px-6 py-8">
-        <div className=" w-full flex flex-col lg:flex-row items-center gap-8 bg-[white] shadow-lg rounded-md p-8">
+        <div className=" w-full flex flex-col lg:flex-row items-center gap-8 bg-white shadow-lg rounded-md p-8">
           <form onSubmit={handleSubmit} className="w-full lg:w-1/2 space-y-4 ">
             <h2 className="text-3xl uppercase font-semibold text-main-50">
               Become a Member

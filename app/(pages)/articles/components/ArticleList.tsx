@@ -28,7 +28,7 @@ const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => {
             key={i}
             onClick={() => paginate(i)}
             className={`mx-1 px-3 py-2 border rounded-md ${
-              currentPage === i ? 'bg-purple-50 text-white' : 'bg-[white]'
+              currentPage === i ? 'bg-purple-50 text-white' : 'bg-white'
             }`}
           >
             {i}
@@ -48,7 +48,7 @@ const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => {
             key={i}
             onClick={() => paginate(i)}
             className={`mx-1 px-3 py-2 border rounded-md ${
-              currentPage === i ? 'bg-purple-50 text-white' : 'bg-[white]'
+              currentPage === i ? 'bg-purple-50 text-white' : 'bg-white'
             }`}
           >
             {i}
@@ -76,7 +76,7 @@ const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => {
           className={`px-4 py-2 border rounded-md ${
             currentPage === 1
               ? 'bg-gray-200 text-black-50 cursor-not-allowed'
-              : 'bg-[white] '
+              : 'bg-white '
           }`}
         >
           Previous
@@ -90,7 +90,7 @@ const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => {
           className={`px-4 py-2 border rounded-md ${
             currentPage === totalPages
               ? 'bg-gray-200 text-black-50  cursor-not-allowed'
-              : 'bg-[white]'
+              : 'bg-white'
           }`}
         >
           Next

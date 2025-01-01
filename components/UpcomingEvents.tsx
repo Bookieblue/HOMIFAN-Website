@@ -57,7 +57,7 @@ export const UpcomingEvents = () => {
           <button className="w-full bg-[#1E1E1E] text-white flexCenter gap-3 py-2 rounded-lg mb-3 hover:bg-purple-50 transition">
             Register Now <ArrowRight className="size-4" />
           </button>
-          <button className="w-full border bg-[white] border-black-50 flexCenter gap-3 text-main-50 py-2 rounded-lg hover:bg-gray-100 transition">
+          <button className="w-full border bg-white border-black-50 flexCenter gap-3 text-main-50 py-2 rounded-lg hover:bg-gray-100 transition">
             Partnership <ArrowRight className="size-4" />
           </button>
           <button className=" mt-4  text-main-50 text-sm p-1 border-b w-fit flex items-center gap-3 border-black-50 transition">

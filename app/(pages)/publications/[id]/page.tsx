@@ -34,7 +34,7 @@ const Publication = () => {
         <HeroSection backgroundImage="/pub_hero_img.jpg" />
         <div className="max-container padding-container w-4/5 relative -top-10">
           <div className="bg-[#F5F2F0] py-3 rounded-t-[12px]"></div>
-          <div className="bg-[white] flex *:w-full gap-x-6 gap-y-3 p-4 md:p-6 lg:px-8 lg:py-10">
+          <div className="bg-white flex *:w-full gap-x-6 gap-y-3 p-4 md:p-6 lg:px-8 lg:py-10">
             <Image
               width={5}
               height={7}
@@ -98,7 +98,7 @@ const Publication = () => {
           <p className="uppercase max-w-lg mx-auto text-4xl font-bold text-center text-[#161722] mb-5 mt-3">
             Explore our other publications
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {morePublications.map((pub, index) => (
               <PublicationCard
                 key={index}

@@ -105,7 +105,7 @@ const Navbar: React.FC = () => {
                     )}
                   </a>
                   {link.hasDropdown && dropdownOpen && (
-                    <div className="absolute top-full mt-2 w-40 bg-[white] shadow-lg rounded-md overflow-hidden">
+                    <div className="absolute top-full mt-2 w-40 bg-white shadow-lg rounded-md overflow-hidden">
                       {link.dropdownOptions?.map((option, idx) => (
                         <a
                           key={idx}

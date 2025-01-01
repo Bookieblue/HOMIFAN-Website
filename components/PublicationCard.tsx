@@ -20,7 +20,7 @@ const PublicationCard: React.FC<PublicationCardProps> = ({
   return (
     <div className="flex flex-col rounded-lg shadow-md overflow-hidden hover:shadow-lg">
       <img src={imageUrl} alt={title} className="h-40 w-full object-cover" />
-      <div className="p-4 bg-[white]">
+      <div className="p-4 bg-white">
         <h3 className="text-lg font-semibold">{title}</h3>
         <p className="text-sm text-[#161722]">{desc}</p>
         <div className="flex items-center my-2">

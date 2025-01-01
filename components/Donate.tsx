@@ -20,7 +20,7 @@ const donateData = [
 
 const DonateSection: React.FC = () => {
   return (
-    <section className="flex flex-col lg:flex-row items-start justify-center p-6 lg:p-12 bg-[white] padding-container max-container">
+    <section className="flex flex-col lg:flex-row items-start justify-center p-6 lg:p-12 bg-white padding-container max-container">
       {donateData.map((card, index) => (
         <React.Fragment key={index}>
           {/* Left: Image */}

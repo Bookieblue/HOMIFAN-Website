@@ -62,7 +62,7 @@ const WeeklySchedule: React.FC = () => {
 
       {/* Weekly Schedule Section */}
       <div className="padding-container max-container">
-        <div className="w-full  bg-[white] p-8 rounded-lg">
+        <div className="w-full  bg-white p-8 rounded-lg">
           <h2 className="text-2xl font-bold mb-4">WEEKLY SCHEDULE</h2>
           <p className="text-gray-600 mb-6">
             We offer a variety of services designed to meet you wherever you are

@@ -20,7 +20,7 @@ const ArticleCard: React.FC<Article> = ({
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="p-4 flex flex-col h-[200px] bg-[white]">
+        <div className="p-4 flex flex-col h-[200px] bg-white">
           <p className="text-xs text-gray-500">{date}</p>
           <h2 className="text-lg font-bold text-gray-800 mt-2">{title}</h2>
           <p className="text-sm text-gray-600 mt-1 flex-grow">{excerpt}</p>
