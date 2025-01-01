@@ -12,3 +12,35 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Member {
+  id String @id @default(uuid())
+
+  firstName       String @map("first_name")
+  lastName        String @map("last_name")
+  phoneNumber     String @map("phone_number")
+  email           String @unique
+  country         String
+  cityAndState    String @map("city_state")
+  areaOfInterest  String @map("area_of_interest")
+  methodOfContact String @map("method_of_contact")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("members")
+}
+
+model Article {
+  id String @id @default(uuid())
+
+  title       String
+  content     String
+  attachments String[]
+  author String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("articles")
+}
