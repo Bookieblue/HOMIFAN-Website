@@ -7,7 +7,8 @@ import Navbar from '@/components/NavBar';
 import BackToTopButton from '@/components/BackToTop';
 import { HeroContent } from '@/components/HeroContent';
 import VideoDisplay from '@/components/VideoDisplay';
-import { MediaCard, mediaCardData, videoDisplayData } from '.';
+import { videoDisplayData } from '.';
+import MediaList from './components/MediaList';
 
 const Media: React.FC = () => {
   return (
@@ -20,11 +21,7 @@ const Media: React.FC = () => {
         <div className=" py-10 px-4 my-10">
           <VideoDisplay {...videoDisplayData} />
         </div>
-        <div className="grid gap-4 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {mediaCardData.map(data => (
-            <MediaCard key={data.id} {...data} />
-          ))}
-        </div>
+        <MediaList />
       </div>
       <JoinUsSection />
       <FooterSection {...footerProps} />

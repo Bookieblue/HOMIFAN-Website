@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-interface Article {
+export interface Article {
   id: string;
   date: string;
   title: string;
