@@ -12,17 +12,13 @@ import WhyBuyBooks from '@/components/WhyBuyBooks';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
+import Redirect from '@/components/Redirect';
 
 const Publication = () => {
   const { id } = useParams();
-  const router = useRouter();
   const publication = publications.find(publication => publication.id == id);
 
-  useEffect(() => {
-    if (publication === undefined) {
-      router.push('/publications');
-    }
-  }, [publication, router]);
+  Redirect(publication, '/publications');
 
   const morePublications =
     publications.length > 4 ? publications.slice(0, 4) : publications;
@@ -31,8 +27,8 @@ const Publication = () => {
     publication !== undefined && (
       <>
         <Navbar />
-        <HeroSection backgroundImage="/pub_hero_img.jpg" />
-        <div className="max-container padding-container w-4/5 relative -top-10">
+        <HeroSection className='h-[70svh] md:h-[80svh]' backgroundImage="/pub_hero_img.jpg" />
+        <div className="max-container padding-container md:w-4/5 relative -top-64">
           <div className="bg-[#F5F2F0] py-3 rounded-t-[12px]"></div>
           <div className="bg-white flex *:w-full gap-x-6 gap-y-3 p-4 md:p-6 lg:px-8 lg:py-10">
             <Image
