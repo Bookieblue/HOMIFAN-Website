@@ -56,7 +56,7 @@ const ChurchSection: React.FC = () => {
             <h3 className="text-lg text-purple-50 font-semibold mb-4">
               OUR SERVICES
             </h3>
-            <ul>
+            <ul className='text-main-50'>
               {servicesData.map((service, index) => (
                 <li key={index} className="mb-6">
                   <h4 className="text-lg font-bold flex gap-3">
@@ -111,7 +111,7 @@ const ChurchSection: React.FC = () => {
                         <br />
                         {branch.contactNumber}
                       </p>
-                      <button className="border-b border-black-50 gap-3 text-white font-semibold mt-6 px-2 py-1 flex items-center">
+                      <button className="border-b text-main-50 border-black-50 gap-3 font-semibold mt-6 px-2 py-1 flex items-center">
                         <Image
                           src="/whatsap-icon.svg"
                           width={20}

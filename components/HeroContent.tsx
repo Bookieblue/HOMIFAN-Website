@@ -28,8 +28,8 @@ export const HeroContent: React.FC<HeroContentProps> = ({
 
   return (
     <div className="relative z-10 lg:w-[50%] text-start text-white-50 mt-10">
-      <p className="text-xl md:text-2xl mb-5 lg:mb-8">{subtitle}</p>
-      <h1 className="text-4xl md:text-6xl font-bold mb-4">{title}</h1>
+      <p className="uppercase text-xl md:text-2xl mb-5 lg:mb-8">{subtitle}</p>
+      <h1 className="uppercase text-4xl md:text-6xl font-bold mb-4">{title}</h1>
 
       <div className="lg:flex-row flex flex-col gap-3">
         {ctaText && (

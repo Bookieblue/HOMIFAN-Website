@@ -11,7 +11,7 @@ import React from 'react';
 import publicationImage from '@/public/publicationImage.jpg';
 import Image from 'next/image';
 
-const Publications = () => {
+const Publications: React.FC = () => {
   return (
     <>
       <Navbar />

@@ -25,7 +25,7 @@ const BackToTopButton: React.FC = () => {
     isVisible && (
       <button
         onClick={scrollToTop}
-        className="z-20 fixed bottom-8 right-8 p-3 bg-white-50 text-white rounded-lg shadow-lg hover:bg-purple-50 hover:text-white transition duration-300 animate-scale-pulse"
+        className="z-20 fixed bottom-8 right-8 p-3 bg-white-50 text-main-50 rounded-lg shadow-lg hover:bg-purple-50 hover:text-white transition duration-300 animate-scale-pulse"
         aria-label="Scroll to top"
       >
         Scroll to top ↑
