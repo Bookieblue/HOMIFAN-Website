@@ -15,7 +15,7 @@ const Publications = () => {
   return (
     <>
       <Navbar />
-      <HeroSection backgroundImage="/pub_hero_img.jpg">
+      <HeroSection className='pb-0' backgroundImage="/pub_hero_img.jpg">
         <div className="lg:flex lg:gap-10">
           <HeroContent {...publicationData} />
           <div className="w-1/2 max-lg:hidden self-end">

@@ -12,7 +12,10 @@ const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => {
   const totalPages = Math.ceil(articles.length / articlesPerPage);
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  const currentArticles = articles.slice(indexOfFirstArticle, indexOfLastArticle);
+  const currentArticles = articles.slice(
+    indexOfFirstArticle,
+    indexOfLastArticle
+  );
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
@@ -25,7 +28,7 @@ const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => {
             key={i}
             onClick={() => paginate(i)}
             className={`mx-1 px-3 py-2 border rounded-md ${
-              currentPage === i ? 'bg-purple-50 text-[white]' : 'bg-[white]'
+              currentPage === i ? 'bg-purple-50 text-white' : 'bg-[white]'
             }`}
           >
             {i}
@@ -35,13 +38,17 @@ const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => {
     } else {
       if (currentPage > 3) pages.push(<span key="start-ellipsis">...</span>);
 
-      for (let i = Math.max(1, currentPage - 2); i <= Math.min(totalPages, currentPage + 2); i++) {
+      for (
+        let i = Math.max(1, currentPage - 2);
+        i <= Math.min(totalPages, currentPage + 2);
+        i++
+      ) {
         pages.push(
           <button
             key={i}
             onClick={() => paginate(i)}
             className={`mx-1 px-3 py-2 border rounded-md ${
-              currentPage === i ? 'bg-purple-50 text-[white]' : 'bg-[white]'
+              currentPage === i ? 'bg-purple-50 text-white' : 'bg-[white]'
             }`}
           >
             {i}
@@ -49,7 +56,8 @@ const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => {
         );
       }
 
-      if (currentPage < totalPages - 2) pages.push(<span key="end-ellipsis">...</span>);
+      if (currentPage < totalPages - 2)
+        pages.push(<span key="end-ellipsis">...</span>);
     }
     return pages;
   };
@@ -66,19 +74,23 @@ const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => {
           onClick={() => currentPage > 1 && paginate(currentPage - 1)}
           disabled={currentPage === 1}
           className={`px-4 py-2 border rounded-md ${
-            currentPage === 1 ? 'bg-gray-200 text-black-50 cursor-not-allowed' : 'bg-[white] '
+            currentPage === 1
+              ? 'bg-gray-200 text-black-50 cursor-not-allowed'
+              : 'bg-[white] '
           }`}
         >
           Previous
         </button>
-        
+
         {renderPageNumbers()}
-        
+
         <button
           onClick={() => currentPage < totalPages && paginate(currentPage + 1)}
           disabled={currentPage === totalPages}
           className={`px-4 py-2 border rounded-md ${
-            currentPage === totalPages ? 'bg-gray-200 text-black-50  cursor-not-allowed' : 'bg-[white]'
+            currentPage === totalPages
+              ? 'bg-gray-200 text-black-50  cursor-not-allowed'
+              : 'bg-[white]'
           }`}
         >
           Next

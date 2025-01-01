@@ -4,6 +4,10 @@ export const publications = [
     title: "Become a Better Christian",
     desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
     price: "10,000",
+    bookType: 'Published Book',
+    language: 'English',
+    pagination: '150',
+    dimension: '20.3 x 25.4 x 4.7 cm',
     imageUrl: "/ebooks.svg", // Replace with actual image URLs
   },
   {
@@ -11,6 +15,10 @@ export const publications = [
     title: "Become a Better Christian",
     desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
     price: "10,000",
+    bookType: 'Published Book',
+    language: 'English',
+    pagination: '150',
+    dimension: '20.3 x 25.4 x 4.7 cm',
     imageUrl: "/ebooks.svg", // Replace with actual image URLs
   },
   {
@@ -18,6 +26,10 @@ export const publications = [
     title: "Become a Better Christian",
     desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
     price: "10,000",
+    bookType: 'Published Book',
+    language: 'English',
+    pagination: '150',
+    dimension: '20.3 x 25.4 x 4.7 cm',
     imageUrl: "/ebooks.svg", // Replace with actual image URLs
   },
   {
@@ -25,6 +37,10 @@ export const publications = [
     title: "Become a Better Christian",
     desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
     price: "10,000",
+    bookType: 'Published Book',
+    language: 'English',
+    pagination: '150',
+    dimension: '20.3 x 25.4 x 4.7 cm',
     imageUrl: "/ebooks.svg", // Replace with actual image URLs
   },
   {
@@ -32,6 +48,10 @@ export const publications = [
     title: "Become a Better Christian",
     desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
     price: "10,000",
+    bookType: 'Published Book',
+    language: 'English',
+    pagination: '150',
+    dimension: '20.3 x 25.4 x 4.7 cm',
     imageUrl: "/ebooks.svg", // Replace with actual image URLs
   },
   {
@@ -39,6 +59,10 @@ export const publications = [
     title: "Become a Better Christian",
     desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
     price: "10,000",
+    bookType: 'Published Book',
+    language: 'English',
+    pagination: '150',
+    dimension: '20.3 x 25.4 x 4.7 cm',
     imageUrl: "/ebooks.svg", // Replace with actual image URLs
   },
   {
@@ -46,6 +70,10 @@ export const publications = [
     title: "Become a Better Christian",
     desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
     price: "10,000",
+    bookType: 'Published Book',
+    language: 'English',
+    pagination: '150',
+    dimension: '20.3 x 25.4 x 4.7 cm',
     imageUrl: "/ebooks.svg", // Replace with actual image URLs
   },
   {
@@ -53,6 +81,10 @@ export const publications = [
     title: "Become a Better Christian",
     desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
     price: "10,000",
+    bookType: 'Published Book',
+    language: 'English',
+    pagination: '150',
+    dimension: '20.3 x 25.4 x 4.7 cm',
     imageUrl: "/ebooks.svg", // Replace with actual image URLs
   },
 ]
