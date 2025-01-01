@@ -1,6 +1,5 @@
 'use client';
 import { ChevronDown } from 'lucide-react';
-import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -132,11 +131,7 @@ const Navbar: React.FC = () => {
                 {navbarData.givingText}
               </button>
               <button
-                className={`${
-                  isScrolled
-                    ? 'bg-purple-50 border-purple-50 text-white hover:bg-white hover:font-bold'
-                    : 'bg-purple-50 border-purple-50 text-white hover:bg-white hover:font-bold'
-                } py-2 px-4 flexCenter gap-2 relative rounded-lg`}
+                className="bg-purple-50 border-purple-50 text-white hover:font-bold py-2 px-4 flexCenter gap-2 relative rounded-lg"
               >
                 {navbarData.joinUsText}
                 <ChevronDown className="size-4" />

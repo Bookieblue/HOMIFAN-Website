@@ -8,26 +8,15 @@ import Navbar from '@/components/NavBar';
 import PublicationCard from '@/components/PublicationCard';
 import WhyBuyBooks from '@/components/WhyBuyBooks';
 import React from 'react';
-import publicationImage from '@/public/publicationImage.jpg';
-import Image from 'next/image';
 
 const Publications: React.FC = () => {
   return (
     <>
       <Navbar />
-      <HeroSection className='pb-0' backgroundImage="/pub_hero_img.jpg">
-        <div className="lg:flex lg:gap-10">
-          <HeroContent {...publicationData} />
-          <div className="w-1/2 max-lg:hidden self-end">
-            <Image
-              src={publicationImage}
-              alt="Image of one of our publication"
-            />
-          </div>
-        </div>
+      <HeroSection backgroundImage="/pub_hero_img.jpg">
+        <HeroContent {...publicationData} />
       </HeroSection>
       <AuthorHighlight />
-
       <div className="max-container padding-container p-6">
         <h1 className="text-center uppercase">Our books</h1>
         <p className="uppercase text-4xl font-bold text-center text-[#161722] mb-5 mt-3">

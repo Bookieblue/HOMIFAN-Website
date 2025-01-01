@@ -21,7 +21,7 @@ import VideoDisplay from '@/components/VideoDisplay';
 
 export default function Home() {
   return (
-    <div className="">
+    <>
       <Navbar />
       <HeroSection>
         <HeroContent {...heroData} />
@@ -39,6 +39,6 @@ export default function Home() {
       <JoinUsSection />
       <FooterSection {...footerProps} />
       <BackToTopButton />
-    </div>
+    </>
   );
 }
