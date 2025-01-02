@@ -13,10 +13,10 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
 import Redirect from '@/components/Redirect';
+import Heading from '@/components/Heading';
 
 const Publication: React.FC = () => {
   const { id } = useParams();
-  const [] = useState(false)
   const publication = publications.find(publication => publication.id == id);
 
   Redirect(publication, '/publications');
@@ -32,7 +32,7 @@ const Publication: React.FC = () => {
           className="h-[50svh]"
           backgroundImage="/pub_hero_img.jpg"
         />
-        <div className="max-container text-main-50 padding-container px-6 relative -top-12">
+        <div className="max-container text-main-50 padding-container px-6 relative -top-14">
           <div className="bg-[#F5F2F0] py-3 rounded-t-[12px]"></div>
           <div className="bg-white flex *:w-full gap-x-6 gap-y-3 p-4 md:p-6 lg:px-8 lg:py-10">
             <div className="max-lg:hidden relative w-full min-h-[500px]">
@@ -47,7 +47,7 @@ const Publication: React.FC = () => {
               <div className="flex flex-col gap-y-2.5">
                 <p>OUR PUBLICATION</p>
                 <div className="grid gap-y-3">
-                  <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                  <h2 className="font-bold text-balance text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                     {publication.title}
                   </h2>
                 </div>
@@ -57,7 +57,7 @@ const Publication: React.FC = () => {
                 <p>{publication.desc}</p>
               </div>
               <div className="flex flex-col max-lg:flex-col-reverse gap-y-6">
-                <button className="bg-purple-50 max-w-52 border-purple-50 text-white hover:font-bold py-2 px-4 flexCenter gap-2 relative rounded-lg">
+                <button className="bg-purple-50 max-w-52 border-purple-50 text-white hover:font-bold p-3 flexCenter gap-1 relative rounded-lg">
                   BUY YOUR COPY NOW
                   <ChevronDown
                     strokeWidth={3}
@@ -94,10 +94,11 @@ const Publication: React.FC = () => {
         </div>
         <AuthorHighlight />
         <div className="max-container padding-container p-6">
-          <h1 className="text-center uppercase">Our books</h1>
-          <p className="uppercase max-w-lg mx-auto text-4xl font-bold text-center text-[#161722] mb-5 mt-3">
-            Explore our other publications
-          </p>
+          <Heading
+            className="mb-5"
+            heading="Explore our other publications"
+            subHeading="Our books"
+          />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {morePublications.map((pub, index) => (
               <PublicationCard
