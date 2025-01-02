@@ -7,6 +7,7 @@ import JoinUsSection from '@/components/JoinUs'
 import Navbar from '@/components/NavBar'
 import { UpcomingEvents } from '@/components/UpcomingEvents'
 import React from 'react'
+import Events from './components/Events'
 
 const page = () => {
   return (
@@ -16,6 +17,7 @@ const page = () => {
           <HeroContent {...eventsData} />
         </HeroSection>
         <UpcomingEvents />
+        <Events />
         <JoinUsSection />
         <FooterSection {...footerProps} />
         <BackToTopButton />

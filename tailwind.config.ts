@@ -24,6 +24,7 @@ const config = {
           50: '#161722',
         },
         purple: {
+          10: '#F2EFFE',
           50: '#695CAE',
         },
         yellow: {
