@@ -7,6 +7,7 @@ import ArticlesList from './ArticleList';
 export const articlesData = [
   {
     id: "1",
+    tag: 'Relationship',
     date: "Tuesday 13 Sept, 2024",
     title: "10 Ways to Become a Better Christian in this Season",
     excerpt:
@@ -16,6 +17,7 @@ export const articlesData = [
   },
   {
     id: "2",
+    tag: 'Prayer',
     date: "Wednesday 14 Sept, 2024",
     title: "Understanding the Power of Prayer in Challenging Times",
     excerpt:
@@ -25,6 +27,7 @@ export const articlesData = [
   },
   {
     id: "3",
+    tag: 'Gospel',
     date: "Friday 15 Sept, 2024",
     title: "How to Spread the Gospel in Everyday Life",
     excerpt:
@@ -34,6 +37,7 @@ export const articlesData = [
   },
   {
     id: "4",
+    tag: 'Faith',
     date: "Sunday 17 Sept, 2024",
     title: "The Importance of Faith in Times of Adversity",
     excerpt:
@@ -43,6 +47,7 @@ export const articlesData = [
   },
   {
     id: "5",
+    tag: 'Community',
     date: "Monday 18 Sept, 2024",
     title: "Developing a Heart for Service in the Church Community",
     excerpt:
@@ -52,6 +57,7 @@ export const articlesData = [
   },
   {
     id: "6",
+    tag: 'Wisdom',
     date: "Tuesday 19 Sept, 2024",
     title: "Biblical Wisdom for Modern Financial Stewardship",
     excerpt:
@@ -61,6 +67,7 @@ export const articlesData = [
   },
   {
     id: "7",
+    tag: 'Habits',
     date: "Wednesday 20 Sept, 2024",
     title: "5 Habits for Consistent Bible Study",
     excerpt:
@@ -70,6 +77,7 @@ export const articlesData = [
   },
   {
     id: "8",
+    tag: 'Worship',
     date: "Thursday 21 Sept, 2024",
     title: "Why Worship is Essential to a Christian's Life",
     excerpt:
@@ -79,6 +87,7 @@ export const articlesData = [
   },
   {
     id: "9",
+    tag: 'Relationships',
     date: "Friday 22 Sept, 2024",
     title: "How to Build Stronger Relationships within Your Church Family",
     excerpt:
@@ -88,6 +97,7 @@ export const articlesData = [
   },
   {
     id: "10",
+    tag: 'Temptation',
     date: "Saturday 23 Sept, 2024",
     title: "Overcoming Temptation: Strategies from the Bible",
     excerpt:
@@ -97,6 +107,7 @@ export const articlesData = [
   },
   {
     id: "11",
+    tag: 'Christianity',
     date: "Tuesday 13 Sept, 2024",
     title: "10 Ways to Become a Better Christian in this Season",
     excerpt:
@@ -118,12 +129,12 @@ export const ArticlePage: React.FC = () => {
   };
 
   return (
-    <div className=" mb-20">
+    <>
       <FeaturedArticle {...featuredArticle}
       />
       <h2 className="text-center text-3xl font-bold my-6">View All Articles</h2>
       <SearchBar onSearch={handleSearch} />
       <ArticlesList articles={articles} />
-    </div>
+    </>
   );
 };
