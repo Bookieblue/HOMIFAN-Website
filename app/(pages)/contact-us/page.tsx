@@ -9,12 +9,15 @@ import {
   import Navbar from "@/components/NavBar";
 import BackToTopButton from "@/components/BackToTop";
 import ContactForm from "@/components/forms/contact-us";
-  
+import { HeroContent } from "@/components/HeroContent";
+
   const page = () => {
     return (
       <div>
         <Navbar />
-        <HeroSection {...contactData} />
+        <HeroSection>
+          <HeroContent {...contactData} />
+        </HeroSection>
         <ContactForm />
         <FooterSection {...footerProps} />
         <BackToTopButton />

@@ -9,12 +9,15 @@ import {
   import Navbar from "@/components/NavBar";
 import BackToTopButton from "@/components/BackToTop";
 import PrayerRequestForm from "@/components/forms/prayer";
-  
+import { HeroContent } from "@/components/HeroContent";
+
   const page = () => {
     return (
       <div>
         <Navbar />
-        <HeroSection {...prayerData} />
+        <HeroSection>
+          <HeroContent {...prayerData} />
+        </HeroSection>
         <PrayerRequestForm />
         <FooterSection {...footerProps} />
         <BackToTopButton />

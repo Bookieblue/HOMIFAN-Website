@@ -1,5 +1,5 @@
-import { ArrowRight } from "lucide-react";
-import React from "react";
+import { ArrowRight } from 'lucide-react';
+import React from 'react';
 
 interface CardProps {
   imageSrc: string;
@@ -10,25 +10,25 @@ interface CardProps {
 
 const cardData = [
   {
-    imageSrc: "/sermon.jpeg",
-    title: "WATCH AND LISTEN TO OUR SERMONS",
+    imageSrc: '/sermon.jpeg',
+    title: 'WATCH AND LISTEN TO OUR SERMONS',
     description:
-      "Each sermon is crafted to nourish your spirit and deepen your understanding of God’s Word as a believer.",
-    buttonText: "VIEW SERMONS",
+      'Each sermon is crafted to nourish your spirit and deepen your understanding of God’s Word as a believer.',
+    buttonText: 'VIEW SERMONS',
   },
   {
-    imageSrc: "/article-bg.svg",
-    title: "LEARN FROM OUR CHRISTIAN ARTICLES",
+    imageSrc: '/article-bg.svg',
+    title: 'LEARN FROM OUR CHRISTIAN ARTICLES',
     description:
-      "Dive into articles that explore various topics related to faith, Christian living, and work of God as a Christian.",
-    buttonText: "READ ARTICLES",
+      'Dive into articles that explore various topics related to faith, Christian living, and work of God as a Christian.',
+    buttonText: 'READ ARTICLES',
   },
   {
-    imageSrc: "/books-bg.svg",
-    title: "GET CHRISTIAN SPIRITUAL BOOKS",
+    imageSrc: '/books-bg.svg',
+    title: 'GET CHRISTIAN SPIRITUAL BOOKS',
     description:
-      "Explore Christian books on topics related to faith, Christian living, and spiritual growth. Christian living, ",
-    buttonText: "GET BOOKS",
+      'Explore Christian books on topics related to faith, Christian living, and spiritual growth. Christian living, ',
+    buttonText: 'GET BOOKS',
   },
 ];
 
@@ -57,7 +57,7 @@ const StayUpToDateSection: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-black-50 bg-opacity-50"></div>
                 <div className="absolute top-32 lg:top-40 p-2 lg:p-6 text-left bg-transparent">
-                  <h3 className="text-lg lg:text-2xl font-bold text-[white]">
+                  <h3 className="text-lg lg:text-2xl font-bold text-white">
                     {card.title}
                   </h3>
                   <p className="mt-4 text-white-50">{card.description}</p>
