@@ -39,11 +39,12 @@ const config = {
           50: '#EAE7F5'
         },
         gray: {
-          10: '##A9ADB1',
+          10: '#A9ADB1',
           20: '#E9EBEC',
           30: '#88909C',
           40: '#404650',
           50: '#8E97A4',
+          100: '#F5F2F0',
         },
         animation: {
           'scale-pulse': 'scalePulse 1.5s ease-in-out infinite',

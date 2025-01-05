@@ -6,7 +6,7 @@ const PrayerRequestForm: React.FC = () => {
       <div className="min-h-screen flex justify-center items-center my-10 p-4">
         <div className="w-full bg-white rounded-xl  p-8 md:flex md:gap-8">
           {/* Left Section - Form */}
-          <div className="md:w-1/2 bg-[#F5F2F0] p-6 rounded-lg">
+          <div className="md:w-1/2 bg-gray-100 p-6 rounded-lg">
             <h2 className="text-2xl font-bold mb-4">
               FILL OUR PRAYER REQUEST FORM
             </h2>

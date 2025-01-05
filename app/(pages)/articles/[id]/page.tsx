@@ -28,11 +28,9 @@ const Article: React.FC = () => {
         <Navbar />
         <HeroSection className="h-[50svh]" />
         <div className="max-container padding-container px-6 relative -top-14">
-          <div className="bg-[#F5F2F0] py-6 md:py-10 lg:py-16 rounded-lg shadow-md text-main-50">
+          <div className="bg-gray-100 py-6 md:py-10 lg:py-16 rounded-lg shadow-md text-main-50">
             <div className="grid gap-4 text-center">
-              <p className="purple-gradient">
-                {article.tag}
-              </p>
+              <p className="purple-gradient">{article.tag}</p>
               <h1 className="text-2xl text-balance max-w-3xl mx-auto uppercase tracking-wide sm:text-3xl font-bold md:text-4xl lg:text-5xl">
                 {article.title}
               </h1>

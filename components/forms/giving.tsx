@@ -77,7 +77,7 @@ const Giving: React.FC = () => {
 
           {/* Right Section - Online Payment Form */}
           <div className="p-4">
-            <div className="bg-[#F5F2F0] rounded-lg p-6">
+            <div className="bg-gray-100 rounded-lg p-6">
               <h2 className="text-lg font-semibold mb-4">
                 Do the Payment Online via Card
               </h2>

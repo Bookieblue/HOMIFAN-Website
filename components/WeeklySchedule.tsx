@@ -71,7 +71,7 @@ const WeeklySchedule: React.FC = () => {
           </p>
 
           {/* Tabs for Locations */}
-          <div className="flex space-x-4 mb-6 bg-[#F5F2F0] p-3 rounded-lg">
+          <div className="flex space-x-4 mb-6 bg-gray-100 p-3 rounded-lg">
             <button
               onClick={() => setActiveTab('Akure')}
               className={`py-2 px-4 rounded-full font-semibold ${
@@ -119,7 +119,7 @@ const WeeklySchedule: React.FC = () => {
 
             {/* Right Section - Info Boxes */}
             <div className="w-full md:w-1/3 md:pl-4 mt-6 md:mt-0 space-y-4">
-              <div className="bg-[#F5F2F0] p-4 border rounded-md">
+              <div className="bg-gray-100 p-4 border rounded-md">
                 <h3 className="font-bold">YOUTH FELLOWSHIP</h3>
                 <p>
                   <strong>Time:</strong> Saturdays at 4:00 PM - 6:00 PM
@@ -133,7 +133,7 @@ const WeeklySchedule: React.FC = () => {
                   leadership development.
                 </p>
               </div>
-              <div className="bg-[#F5F2F0] p-4 border rounded-md">
+              <div className="bg-gray-100 p-4 border rounded-md">
                 <h3 className="font-bold">SPECIAL SERVICES</h3>
                 <p>
                   <strong>Yearly Programme:</strong> In the month of November
@@ -147,7 +147,7 @@ const WeeklySchedule: React.FC = () => {
                   Chairperson Programme.
                 </p>
               </div>
-              <div className="bg-[#F5F2F0] p-4 border rounded-md">
+              <div className="bg-gray-100 p-4 border rounded-md">
                 <h3 className="font-bold">VIRTUAL SERVICE OPTIONS</h3>
                 <p>Location: YouTube</p>
                 <p>

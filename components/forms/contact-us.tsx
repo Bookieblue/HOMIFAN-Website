@@ -1,4 +1,3 @@
-import { FacebookIcon, LucideTwitter } from 'lucide-react';
 import React from 'react';
 import * as yup from 'yup';
 
@@ -111,7 +110,7 @@ const ContactForm: React.FC = () => {
         </div>
 
         {/* Right Section - Contact Form */}
-        <div className="flex-1 bg-[#F5F2F0]  rounded-lg p-8">
+        <div className="flex-1 bg-gray-100  rounded-lg p-8">
           <h2 className="text-lg font-bold mb-6">FILL OUR CONTACT FORM</h2>
         </div>
       </div>
