@@ -32,7 +32,7 @@ const SingleMediaPage: React.FC = () => {
           <HeroContent {...mediaData} />
         </HeroSection>
         <div className="padding-container max-container">
-          <div className=" py-10 px-4 my-10">
+          <div className="py-10 px-4 my-10">
             <VideoDisplay heading={media.title} />
           </div>
           <div className="pb-20">

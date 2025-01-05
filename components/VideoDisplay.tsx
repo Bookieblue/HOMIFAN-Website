@@ -23,11 +23,11 @@ const VideoDisplay = ({
             </h4>
           )}
           {heading && (
-            <h1 className="md:text-4xl text-3xl text-balance font-bold uppercase">
+            <h1 className="md:text-4xl lg:text-5xl text-3xl text-balance font-bold uppercase">
               {heading}
             </h1>
           )}
-          {text && <p className="text-base lg:text-lg mt-2">{text}</p>}
+          {text && <p className="text-base md:text-lg mt-2">{text}</p>}
         </div>
       )}
       {/* Video Container */}

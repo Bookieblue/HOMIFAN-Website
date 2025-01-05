@@ -1,10 +1,12 @@
-export const eventCardData = [
+import { Event } from '@/components/UpcomingEvents';
+
+export const bgColors = ['#FFD0A0', '#695CAE', '#FFFFFF'];
+export const events: Array<Event> = [
   {
     id: '1',
-    day: 'Friday',
-    endTime: '5:30PM',
-    startTime: '4:30 PM',
-    date: '20th, September 2024',
+    date: '20',
+    month: 'Sept',
+    time: 'Friday 4:30PM - 5:30PM',
     channel: 'Zoom Live Meeting',
     title: 'A Man after Gods Heart in this Time',
     description:
@@ -12,10 +14,9 @@ export const eventCardData = [
   },
   {
     id: '2',
-    day: 'Friday',
-    endTime: '5:30PM',
-    startTime: '4:30 PM',
-    date: '20th, September 2024',
+    date: '20',
+    month: 'Sept',
+    time: 'Friday 4:30PM - 5:30PM',
     channel: 'Zoom Live Meeting',
     title: 'A Man after Gods Heart in this Time',
     description:
@@ -23,10 +24,9 @@ export const eventCardData = [
   },
   {
     id: '3',
-    day: 'Friday',
-    endTime: '5:30PM',
-    startTime: '4:30 PM',
-    date: '20th, September 2024',
+    date: '20',
+    month: 'Sept',
+    time: 'Friday 4:30PM - 5:30PM',
     channel: 'Zoom Live Meeting',
     title: 'A Man after Gods Heart in this Time',
     description:

@@ -80,6 +80,12 @@ body {
   color: #161722;
 }
 
+@layer components {
+  .purple-gradient {
+    @apply text-xs md:text-sm uppercase tracking-widest font-bold bg-gradient-to-r text-transparent bg-clip-text from-[#695CAE] to-[#BCB3ED]
+  }
+}
+
 @layer utilities {
   .btn_black {
     @apply border-black bg-transparent px-8 py-3 text-black;
