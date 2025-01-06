@@ -43,7 +43,7 @@ const WeeklySchedule: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-8">
+    <div className="min-h-screen flex flex-col items-center p-8 overflow-hidden">
       {/* Header Section */}
       <div className="text-center mb-12 w-1/2">
         <p className="text-gray-500 font-semibold text-sm">BECOME A MEMBER</p>
@@ -51,13 +51,13 @@ const WeeklySchedule: React.FC = () => {
           JOIN US IN MAKING A DIFFERENCE
         </h1>
         <p className="text-gray-600">
-          Whether you're new to the faith or looking for a church to call home,
+          Whether you&apos;re new to the faith or looking for a church to call home,
           we invite you to become part of our family and experience the joy of
           walking together in Christ.
         </p>
-        <button className="mt-6 px-6 py-3 bg-purple-50 text-white font-semibold rounded transition">
+        <a href='#membership'><button className="mt-6 px-6 py-3 bg-purple-50 text-white font-semibold rounded transition">
           FILL MEMBERSHIP FORM
-        </button>
+        </button></a>
       </div>
 
       {/* Weekly Schedule Section */}

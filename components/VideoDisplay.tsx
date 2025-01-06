@@ -32,6 +32,7 @@ const VideoDisplay = ({
       )}
       {/* Video Container */}
       <div className="relative w-full lg:h-auto border border-black-50 p-3 rounded-lg overflow-hidden">
+        <video src='' />
         {/* Background Image */}
         <Image
           width={16}
