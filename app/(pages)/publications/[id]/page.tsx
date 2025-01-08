@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { footerProps, publications } from '@/app/constants';
 import AuthorHighlight from '@/components/Author';
 import BackToTopButton from '@/components/BackToTop';
@@ -11,9 +11,9 @@ import PublicationCard from '@/components/PublicationCard';
 import WhyBuyBooks from '@/components/WhyBuyBooks';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { ChevronDown } from 'lucide-react';
 import Redirect from '@/components/Redirect';
 import Heading from '@/components/Heading';
+import BtnDropdown from './BtnDropdown';
 
 const Publication: React.FC = () => {
   const { id } = useParams();
@@ -33,7 +33,7 @@ const Publication: React.FC = () => {
           backgroundImage="/pub_hero_img.jpg"
         />
         <div className="max-container text-main-50 padding-container px-6 relative -top-14">
-          <div className="bg-[#F5F2F0] py-3 rounded-t-[12px]"></div>
+          <div className="bg-gray-100 py-3 rounded-t-[12px]"></div>
           <div className="bg-white flex *:w-full gap-x-6 gap-y-3 p-4 md:p-6 lg:px-8 lg:py-10">
             <div className="max-lg:hidden relative w-full min-h-[500px]">
               <Image
@@ -52,19 +52,12 @@ const Publication: React.FC = () => {
                   </h2>
                 </div>
                 <h3 className="text-lg md:text-xl font-semibold lg:text-2xl">
-                  {publication.price}
+                  NGN {publication.price}
                 </h3>
                 <p>{publication.desc}</p>
               </div>
               <div className="flex flex-col max-lg:flex-col-reverse gap-y-6">
-                <button className="bg-purple-50 max-w-52 border-purple-50 text-white hover:font-bold p-3 flexCenter gap-1 relative rounded-lg">
-                  BUY YOUR COPY NOW
-                  <ChevronDown
-                    strokeWidth={3}
-                    absoluteStrokeWidth
-                    className="size-4"
-                  />
-                </button>
+                <BtnDropdown />
                 <div>
                   <p className="uppercase grid gap-y-2.5 font-semibold text-base lg:text-lg">
                     Feature of the book
