@@ -1,33 +1,13 @@
-import React from 'react';
-import * as yup from 'yup';
-
-// SocialMediaIcons Component
-interface SocialMediaIconsProps {
-  icons: string[];
-}
-
-const SocialMediaIcons: React.FC<SocialMediaIconsProps> = ({ icons }) => (
-  <div className="flex gap-4 mb-6">
-    {icons.map((icon, index) => (
-      <i key={index} className={`${icon} text-2xl`}></i>
-    ))}
-  </div>
-);
+import { icons } from './constant';
+import ContactForm from './form';
 
 // AddressCard Component
-interface AddressCardProps {
+const AddressCard: React.FC<{
   title: string;
   address: string;
   phone: string;
   email: string;
-}
-
-const AddressCard: React.FC<AddressCardProps> = ({
-  title,
-  address,
-  phone,
-  email,
-}) => (
+}> = ({ title, address, phone, email }) => (
   <div className=" text-main-50 border border-main-50 rounded-lg p-4 mb-4">
     <h3 className="">{title}</h3>
     <p className="text-main-50 text-[24px] font-bold">{address}</p>
@@ -38,44 +18,7 @@ const AddressCard: React.FC<AddressCardProps> = ({
   </div>
 );
 
-// Main ContactForm Component
-
-// Validation schema with Yup
-const schema = yup.object().shape({
-  firstName: yup.string().required('First name is required'),
-  lastName: yup.string().required('Last name is required'),
-  phoneNumber: yup
-    .string()
-    .matches(/^\+?[0-9]{10,15}$/, 'Phone number is not valid')
-    .required('Phone number is required'),
-  email: yup.string().email('Email is not valid').required('Email is required'),
-  country: yup.string().required('Country is required'),
-  city: yup.string().required('City & State is required'),
-  preferredContact: yup.string().required('Please select a contact method'),
-  message: yup.string().required('Message is required'),
-});
-
-interface FormValues {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-  country: string;
-  city: string;
-  preferredContact: string;
-  message: string;
-}
-
-// Main ContactForm Component
-const ContactForm: React.FC = () => {
-  const icons = [
-    'fab fa-facebook-f',
-    'fab fa-instagram',
-    'fab fa-twitter',
-    'fab fa-youtube',
-    'fab fa-whatsapp',
-  ];
-
+const Contact: React.FC = () => {
   return (
     <div className="padding-container max-conatiner">
       <div className="flex flex-col md:flex-row gap-8 p-8 my-10 rounded-lg bg-white  ">
@@ -92,7 +35,11 @@ const ContactForm: React.FC = () => {
 
           <h2 className="mb-2 uppercase">Our Social media handles</h2>
           {/* Social Media Icons */}
-          <SocialMediaIcons icons={icons} />
+          <div className="flex gap-4 mb-6">
+            {icons.map((icon, index) => (
+              <i key={index} className={`${icon} text-2xl`}></i>
+            ))}
+          </div>
 
           {/* Address Sections */}
           <AddressCard
@@ -111,11 +58,11 @@ const ContactForm: React.FC = () => {
 
         {/* Right Section - Contact Form */}
         <div className="flex-1 bg-gray-100  rounded-lg p-8">
-          <h2 className="text-lg font-bold mb-6">FILL OUR CONTACT FORM</h2>
+          <ContactForm />
         </div>
       </div>
     </div>
   );
 };
 
-export default ContactForm;
+export default Contact;

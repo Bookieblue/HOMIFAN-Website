@@ -1,9 +1,9 @@
 import * as yup from 'yup';
 
-type FormField = {
+export type FormField = {
   label: string;
   placeholder?: string;
-  htmlFor: keyof typeof initialValues;
+  htmlFor: string;
   type?: 'text' | 'email' | 'password';
   choices?: { label: string; value: string; disabled?: boolean }[];
 };
@@ -15,12 +15,9 @@ export const initialValues = {
   cityState: '',
   firstName: '',
   phoneNumber: '',
-  interestArea: '',
-  contactMethod: '',
-  prayerRequest: '',
 };
 
-export const schema = yup.object().shape({
+export const sharedSchema = yup.object().shape({
   firstName: yup.string().required('First name is required'),
   lastName: yup.string().required('Last name is required'),
   phoneNumber: yup
@@ -33,12 +30,9 @@ export const schema = yup.object().shape({
     .email('Invalid email format'),
   country: yup.string().required('Country is required'),
   cityState: yup.string().required('City & State are required'),
-  interestArea: yup.string().required('Area of interest is required'),
-  contactMethod: yup.string().required('Preferred contact method is required'),
-  prayerRequest: yup.string(),
-});
+})
 
-export const membershipFormElement: Array<FormField> = [
+export const sharedFormElements: Array<FormField> = [
   {
     type: 'text',
     label: 'First Name',
@@ -74,24 +68,5 @@ export const membershipFormElement: Array<FormField> = [
     htmlFor: 'cityState',
     label: 'City & State',
     placeholder: 'eg. Akure, Ondo state',
-  },
-  {
-    htmlFor: 'interestArea',
-    label: 'Areas of Interest',
-    choices: [
-      { label: 'Areas of Interest', value: '', disabled: true },
-      { label: 'Volunteering', value: 'volunteering' },
-      { label: 'Church Events', value: 'events' },
-    ],
-  },
-  {
-    htmlFor: 'contactMethod',
-    label: 'Preferred method of contact',
-    choices: [
-      { label: 'Preferred Contact Method', value: '', disabled: true },
-      { label: 'WhatsApp', value: 'whatsApp' },
-      { label: 'Email', value: 'email' },
-      { label: 'Phone Call', value: 'phone' },
-    ],
   },
 ];

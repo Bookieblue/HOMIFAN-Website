@@ -1,4 +1,5 @@
 import React from 'react';
+import GivingForm from './form';
 
 const Giving: React.FC = () => {
   return (
@@ -35,13 +36,13 @@ const Giving: React.FC = () => {
                 </h3>
                 <p className="mb-4">For offering, Tithe, Family Fest.</p>
                 <div className="flex items-center gap-10">
-                  <div className="">
+                  <div>
                     <p className="uppercase font-semibold">Naira Account</p>
                     <p>Bank name: First Bank of Nigeria</p>
                     <p>Account number: 3099727513</p>
                     <p>Account name: House of Prayer</p>
                   </div>
-                  <div className="">
+                  <div>
                     <p className="uppercase font-semibold">Dollar Account</p>
                     <p>Bank name: Zenith Bank of Nigeria</p>
                     <p>Account number: 3099727513</p>
@@ -58,13 +59,13 @@ const Giving: React.FC = () => {
                   to Missionaries.
                 </p>
                 <div className="flex items-center gap-6">
-                  <div className="">
+                  <div>
                     <p className="uppercase font-semibold">Naira Account</p>
                     <p>Bank name: First Bank of Nigeria</p>
                     <p>Account number: 3099727513</p>
                     <p>Account name: House of Prayer</p>
                   </div>
-                  <div className="">
+                  <div>
                     <p className="uppercase font-semibold">Dollar Account</p>
                     <p>Bank name: Zenith Bank of Nigeria</p>
                     <p>Account number: 3099727513</p>
@@ -74,11 +75,10 @@ const Giving: React.FC = () => {
               </div>
             </div>
           </div>
-
           {/* Right Section - Online Payment Form */}
-          <div className="p-4">
-            <div className="bg-gray-100 rounded-lg p-6">
-              <h2 className="text-lg font-semibold mb-4">
+          <div className="m-4 bg-gray-100 rounded-lg p-6">
+            <div>
+              <h2 className="text-lg uppercase font-semibold mb-4">
                 Do the Payment Online via Card
               </h2>
               <p className="text-gray-600 mb-6">
@@ -86,6 +86,12 @@ const Giving: React.FC = () => {
                 support outreach efforts, and transform lives through the power
                 of prayer and ministry.
               </p>
+            </div>
+            <div>
+              <h2 className="text-lg uppercase font-semibold mb-4">
+                Personal Info
+              </h2>
+              <GivingForm />
             </div>
           </div>
         </div>

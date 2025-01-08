@@ -1,7 +1,7 @@
 import React from 'react';
-import MembershipForm from '.';
+import MembershipForm from './form';
 
-const Membership = () => {
+const Membership: React.FC = () => {
   return (
     <div id="membership" className="padding-container max-container">
       <div className="flex flex-col items-center px-6 py-8">

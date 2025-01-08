@@ -3,7 +3,11 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { initialValues, membershipFormElement, schema } from './constants';
+import {
+  membershipSchema,
+  membershipFormElement,
+  membershipValues as initialValues,
+} from './constants';
 
 const MembershipForm: React.FC = () => {
   const {
@@ -11,8 +15,8 @@ const MembershipForm: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
     defaultValues: initialValues,
+    resolver: yupResolver(membershipSchema),
   });
 
   const onSubmit = (data: any) => {
@@ -40,12 +44,12 @@ const MembershipForm: React.FC = () => {
               <input
                 type={field.type}
                 placeholder={field.placeholder}
-                {...register(field.htmlFor)}
+                {...register(field.htmlFor as keyof typeof initialValues)}
                 className="w-full bg-transparent border-black-50 border rounded-xl indent-4 py-2.5"
               />
             ) : (
               <select
-                {...register(field.htmlFor)}
+                {...register(field.htmlFor as keyof typeof initialValues)}
                 className="w-full bg-transparent border-black-50 border rounded-xl indent-4 py-2.5"
               >
                 {field.choices?.map(choice => (
@@ -59,15 +63,15 @@ const MembershipForm: React.FC = () => {
                 ))}
               </select>
             )}
-            {errors[field.htmlFor] && (
+            {errors[field.htmlFor as keyof typeof initialValues] && (
               <p className="text-red-500 text-sm">
-                {errors[field.htmlFor]?.message}
+                {errors[field.htmlFor as keyof typeof initialValues]?.message}
               </p>
             )}
           </div>
         ))}
       </div>
-      <div className="">
+      <div>
         <label className="text-black-50/80" htmlFor="prayerRequest">
           Prayer Requests
         </label>
