@@ -2,17 +2,22 @@ import {  eventsData, footerProps } from '@/app/constants'
 import BackToTopButton from '@/components/BackToTop'
 import FooterSection from '@/components/Footer'
 import { HeroSection } from '@/components/Hero'
+import { HeroContent } from '@/components/HeroContent'
 import JoinUsSection from '@/components/JoinUs'
 import Navbar from '@/components/NavBar'
 import { UpcomingEvents } from '@/components/UpcomingEvents'
 import React from 'react'
+import Events from './components/Events'
 
 const page = () => {
   return (
     <div>
         <Navbar />
-        <HeroSection {...eventsData} />
+        <HeroSection>
+          <HeroContent {...eventsData} />
+        </HeroSection>
         <UpcomingEvents />
+        <Events />
         <JoinUsSection />
         <FooterSection {...footerProps} />
         <BackToTopButton />
