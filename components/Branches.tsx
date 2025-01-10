@@ -87,7 +87,7 @@ const ChurchSection: React.FC = () => {
           {/* Right Side - Branches */}
           <div className="w-full lg:w-[80%]">
             <p className="mb-7 text-white text-xl">
-              You can't afford to miss a wonderful service at any of our
+              You can&apos;t afford to miss a wonderful service at any of our
               churches.
             </p>
             <div className="gap-6 flex flex-col lg:flex-row ">
