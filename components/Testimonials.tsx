@@ -68,7 +68,7 @@ const Testimonials = () => {
               className=" bg-white border p-6 rounded-lg shadow-md"
             >
               <p className="text-lg font-light text-gray-700 mb-4">
-                "{testimonial.text}"
+                &quot;{testimonial.text}&quot;
               </p>
               <div className="flex items-center">
                 <img

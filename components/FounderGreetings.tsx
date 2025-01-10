@@ -42,7 +42,7 @@ export const FounderGreeting: React.FC<HeroCardProps> = ({
           <h4 className="text-purple-500 font-bold">{missionTitle}</h4>
           {missionTexts.map((quote, index) => (
             <p key={index} className="text-black mt-2">
-              "{quote}"
+              &quot;{quote}&quot;
             </p>
           ))}
           <Image
