@@ -1,6 +1,10 @@
 import { IPublication } from "@/app/interface";
 import cloudinary from "@/app/lib/cloudinary";
 import prisma from "@/app/lib/prisma";
+import {
+  sendErrorResponse,
+  sendSuccessResponse,
+} from "@/app/utils/apiResponse";
 import { paginateQuery } from "@/app/utils/paginate";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -23,13 +27,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (pub) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: "Publication already exists",
-        },
-        { status: 400 }
-      );
+      return sendErrorResponse(NextResponse, "Publication already exists", 409);
     }
 
     const file = formData.get("coverImage") as File | null;
@@ -65,13 +63,11 @@ export async function POST(request: NextRequest) {
       data: payload,
     });
 
-    return NextResponse.json(
-      {
-        status: true,
-        data: newPub,
-        message: "Publication added successfully",
-      },
-      { status: 201 }
+    return sendSuccessResponse(
+      NextResponse,
+      newPub,
+      "Publication added successfully",
+      201
     );
   } catch (error) {
     throw error;
@@ -92,12 +88,11 @@ export async function GET(request: NextRequest) {
       },
     });
     const { data: publications, ...metadata } = result;
-
-    return NextResponse.json({
-      status: true,
-      data: { publications, ...metadata },
-      message: "Publications retrieved successfully",
-    });
+    return sendSuccessResponse(
+      NextResponse,
+      { publications, ...metadata },
+      "Publications retrieved successfully"
+    );
   } catch (error) {
     throw error;
   }

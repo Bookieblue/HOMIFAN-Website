@@ -1,5 +1,9 @@
 import { IArticle } from "@/app/interface";
 import prisma from "@/app/lib/prisma";
+import {
+  sendErrorResponse,
+  sendSuccessResponse,
+} from "@/app/utils/apiResponse";
 import { formatZodError } from "@/app/utils/formatter";
 import { paginateQuery } from "@/app/utils/paginate";
 import { articleSchema } from "@/app/validators";
@@ -45,19 +49,14 @@ export async function GET(request: NextRequest) {
     const { data, ...metadata } = result;
     const articles = data;
 
-    return NextResponse.json(
-      {
-        message: "Articles retrieved successfully",
-        data: { articles, ...metadata },
-      },
-      { status: 200 }
+    return sendSuccessResponse(
+      NextResponse,
+      { articles, ...metadata },
+      "Articles retrieved successfully"
     );
   } catch (error: any) {
     console.error("Error fetching articles:", error);
-    return NextResponse.json(
-      { message: "Failed to fetch articles", error: error.message || error },
-      { status: 500 }
-    );
+    throw error;
   }
 }
 
@@ -79,12 +78,10 @@ export async function POST(request: NextRequest) {
     // Validate payload with Zod schema
     const validation = articleSchema.safeParse(payload);
     if (!validation.success) {
-      return NextResponse.json(
-        {
-          message: "Validation error",
-          errors: formatZodError(validation.error),
-        },
-        { status: 400 }
+      return sendErrorResponse(
+        NextResponse,
+        formatZodError(validation.error),
+        400
       );
     }
 
@@ -94,35 +91,33 @@ export async function POST(request: NextRequest) {
     });
 
     if (existingArticle) {
-      return NextResponse.json(
-        { message: "Article already exists" },
-        { status: 409 }
+      return sendErrorResponse(
+        NextResponse,
+        "Oops...Article already exists",
+        409
       );
     }
 
     const files = formData.get("articleImage") as File[] | null;
     if ((files && !files[0]) || (files && !(files[0] instanceof Blob))) {
-      return NextResponse.json(
-        { message: "File is required" },
-        { status: 400 }
+      return sendErrorResponse(
+        NextResponse,
+        "Oops...Article image is required",
+        409
       );
     }
 
     // Create a new article
     const newArticle = await prisma.article.create({ data: payload });
 
-    return NextResponse.json(
-      {
-        message: "Article created successfully",
-        data: newArticle,
-      },
-      { status: 201 }
+    return sendSuccessResponse(
+      NextResponse,
+      newArticle,
+      "Article created successfully",
+      201
     );
   } catch (error: any) {
     console.error("Error creating article:", error);
-    return NextResponse.json(
-      { message: "Failed to create article", error: error.message || error },
-      { status: 500 }
-    );
+    throw error;
   }
 }

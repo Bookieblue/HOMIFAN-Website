@@ -1,5 +1,9 @@
 import { IPrayerRequest } from "@/app/interface";
 import prisma from "@/app/lib/prisma";
+import {
+  sendErrorResponse,
+  sendSuccessResponse,
+} from "@/app/utils/apiResponse";
 import { paginateQuery } from "@/app/utils/paginate";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -14,12 +18,10 @@ export async function POST(request: NextRequest) {
     });
 
     if (prayerReq) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: "Oops...This prayer Request already exists",
-        },
-        { status: 409 }
+      return sendErrorResponse(
+        NextResponse,
+        "Oops...This prayer Request already exists",
+        409
       );
     }
 
@@ -27,13 +29,10 @@ export async function POST(request: NextRequest) {
       data: payload,
     });
 
-    return NextResponse.json(
-      {
-        status: true,
-        data: newPrayerReq,
-        message: "Prayer request added successfully",
-      },
-      { status: 200 }
+    return sendSuccessResponse(
+      NextResponse,
+      newPrayerReq,
+      "Prayer request added successfully"
     );
   } catch (error) {
     throw error;
@@ -54,22 +53,13 @@ export async function GET(request: NextRequest) {
 
     const { data, ...metadata } = result;
     const prayerRepests = data;
-
-    return NextResponse.json(
-      {
-        message: "Prayer requests retrieved successfully",
-        data: { prayerRepests, ...metadata },
-      },
-      { status: 200 }
+    return sendSuccessResponse(
+      NextResponse,
+      { prayerRepests, ...metadata },
+      "Prayer requests retrieved successfully"
     );
   } catch (error: any) {
     console.error("Error fetching prayer requests:", error);
-    return NextResponse.json(
-      {
-        message: "Failed to fetch  prayer requests",
-        error: error.message || error,
-      },
-      { status: 500 }
-    );
+    throw error;
   }
 }

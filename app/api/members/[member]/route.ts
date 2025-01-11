@@ -1,4 +1,8 @@
 import prisma from "@/app/lib/prisma";
+import {
+  sendErrorResponse,
+  sendSuccessResponse,
+} from "@/app/utils/apiResponse";
 import { formatZodError } from "@/app/utils/formatter";
 import { NextResponse } from "next/server";
 import { z } from "zod";
@@ -15,9 +19,10 @@ export const GET = async (
     const validation = memberIdSchema.safeParse(memberId);
 
     if (!validation.success) {
-      return NextResponse.json(
-        { message: formatZodError(validation.error) },
-        { status: 400 }
+      return sendErrorResponse(
+        NextResponse,
+        formatZodError(validation.error),
+        400
       );
     }
 
@@ -26,25 +31,17 @@ export const GET = async (
     });
 
     if (!member) {
-      return NextResponse.json(
-        { message: "Oops...Member not found!" },
-        { status: 404 }
-      );
+      return sendErrorResponse(NextResponse, "Oops...Member not found!", 404);
     }
 
-    return NextResponse.json(
-      {
-        data: member,
-        message: "Member retrieved successfully",
-      },
-      { status: 200 }
+    return sendSuccessResponse(
+      NextResponse,
+      member,
+      "Member retrieved successfully"
     );
   } catch (error) {
     console.error("Error retrieving member:", error);
 
-    return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
-    );
+    throw error;
   }
 };
