@@ -40,7 +40,7 @@ const StayUpToDateSection: React.FC = () => {
           WATCH, READ, LISTEN AND GROW
         </p>
         <h2 className="text-center text-black-50 text-3xl lg:text-5xl font-bold mt-4">
-          STAY UP TO DATE WITH GOD'S WORD WITH US
+          STAY UP TO DATE WITH GOD&apos;S WORD WITH US
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 px-4 w-full ">
