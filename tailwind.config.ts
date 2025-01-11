@@ -24,6 +24,7 @@ const config = {
           50: '#161722',
         },
         purple: {
+          10: '#F2EFFE',
           50: '#695CAE',
         },
         yellow: {
@@ -34,14 +35,16 @@ const config = {
           50: '#1E1E1E'
         },
         white:{
+          DEFAULT: '#fff',
           50: '#EAE7F5'
         },
         gray: {
-          10: '##A9ADB1',
+          10: '#A9ADB1',
           20: '#E9EBEC',
           30: '#88909C',
           40: '#404650',
           50: '#8E97A4',
+          100: '#F5F2F0',
         },
         animation: {
           'scale-pulse': 'scalePulse 1.5s ease-in-out infinite',

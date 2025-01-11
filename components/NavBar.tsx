@@ -1,6 +1,5 @@
-'use client'
+'use client';
 import { ChevronDown } from 'lucide-react';
-import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -56,7 +55,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   const toggleDropdown = () => {
-    setDropdownOpen((prev) => !prev);
+    setDropdownOpen(prev => !prev);
   };
 
   const handleGivingClick = () => {
@@ -70,9 +69,17 @@ const Navbar: React.FC = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto ">
-        <div className={`${isScrolled ? 'h-20' : 'h-36'} flex justify-between items-center`}>
+        <div
+          className={`${
+            isScrolled ? 'h-20' : 'h-36'
+          } flex justify-between items-center`}
+        >
           <div className="flex-shrink-0">
-            <img src={navbarData.logo} alt="Logo" className={`${isScrolled ? 'w-14' : 'w-20'}`} />
+            <img
+              src={navbarData.logo}
+              alt="Logo"
+              className={`${isScrolled ? 'w-14' : 'w-20'}`}
+            />
           </div>
           <div
             className={`${
@@ -86,14 +93,18 @@ const Navbar: React.FC = () => {
                     href={link.href}
                     onClick={link.hasDropdown ? toggleDropdown : undefined}
                     className={`${
-                      isScrolled ? 'text-[black] hover:text-purple-50' : 'text-[white] hover:text-yellow-50'
+                      isScrolled
+                        ? 'text-[black] hover:text-purple-50'
+                        : 'text-white hover:text-yellow-50'
                     }  hover:font-bold font-medium flex items-center`}
                   >
                     {link.name}
-                    {link.hasDropdown && <ChevronDown className="ml-1 size-4" />}
+                    {link.hasDropdown && (
+                      <ChevronDown className="ml-1 size-4" />
+                    )}
                   </a>
                   {link.hasDropdown && dropdownOpen && (
-                    <div className="absolute top-full mt-2 w-40 bg-[white] shadow-lg rounded-md overflow-hidden">
+                    <div className="absolute top-full mt-2 w-40 bg-white shadow-lg rounded-md overflow-hidden">
                       {link.dropdownOptions?.map((option, idx) => (
                         <a
                           key={idx}
@@ -114,17 +125,13 @@ const Navbar: React.FC = () => {
                 className={`${
                   isScrolled
                     ? 'bg-transparent border border-black-50 text-[black] hover:bg-white hover:font-bold'
-                    : 'bg-transparent border text-[white] hover:font-bold'
+                    : 'bg-transparent border text-white hover:font-bold'
                 } py-2 px-4 rounded-lg`}
               >
                 {navbarData.givingText}
               </button>
               <button
-                className={`${
-                  isScrolled
-                    ? 'bg-purple-50 border-purple-50 text-[white] hover:bg-white hover:font-bold'
-                    : 'bg-purple-50 border-purple-50 text-[white] hover:bg-white hover:font-bold'
-                } py-2 px-4 flexCenter gap-2 relative rounded-lg`}
+                className="bg-purple-50 border-purple-50 text-white hover:font-bold py-2 px-4 flexCenter gap-2 relative rounded-lg"
               >
                 {navbarData.joinUsText}
                 <ChevronDown className="size-4" />
