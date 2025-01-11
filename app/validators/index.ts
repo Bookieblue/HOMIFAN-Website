@@ -17,3 +17,9 @@ export const articleSchema = z.object({
   attachments: z.array(z.string()).optional(),
   author: z.string(),
 });
+
+export const publicationSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  price: z.number(),
+});

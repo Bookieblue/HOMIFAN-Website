@@ -5,7 +5,9 @@ import {
   sendErrorResponse,
   sendSuccessResponse,
 } from "@/app/utils/apiResponse";
+import { formatZodError } from "@/app/utils/formatter";
 import { paginateQuery } from "@/app/utils/paginate";
+import { publicationSchema } from "@/app/validators";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -21,6 +23,16 @@ export async function POST(request: NextRequest) {
       description,
       price: Number(price),
     };
+
+    const validation = publicationSchema.safeParse(payload);
+
+    if (!validation.success) {
+      return sendErrorResponse(
+        NextResponse,
+        formatZodError(validation.error),
+        400
+      );
+    }
 
     const pub = await prisma.publication.findFirst({
       where: { title, description },
