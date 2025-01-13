@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 interface CardProps {
@@ -39,9 +40,11 @@ const DonateSection: React.FC = () => {
               {card.title}
             </h2>
             <p className="text-gray-600 mt-4">{card.description}</p>
-            <button className="bg-purple-50 w-fit gap-3 text-white font-semibold mt-6 px-6 py-2 rounded-lg flex items-center">
-              {card.buttonText} <ArrowRight className="size-4" />
-            </button>
+            <Link href="/giving">
+              <button className="bg-purple-50 w-fit gap-3 text-white font-semibold mt-6 px-6 py-2 rounded-lg flex items-center">
+                {card.buttonText} <ArrowRight className="size-4" />
+              </button>
+            </Link>
           </div>
         </React.Fragment>
       ))}

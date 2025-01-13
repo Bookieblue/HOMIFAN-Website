@@ -1,7 +1,10 @@
+'use client';
 import { ArrowRight, Clock, Search } from 'lucide-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Heading from './Heading';
 import { events } from '@/app/(pages)/events/components/constants';
+import Link from 'next/link';
+import { useParams, usePathname } from 'next/navigation';
 
 export interface Event {
   id: string;
@@ -15,6 +18,7 @@ export interface Event {
 
 export const UpcomingEvents = () => {
   const event = events[0];
+  const pathname = usePathname();
 
   return (
     <section className="py-16 padding-container max-container">
@@ -48,8 +52,25 @@ export const UpcomingEvents = () => {
             </div>
           </div>
           <button className="w-full bg-[#1E1E1E] text-white flexCenter gap-3 py-2 rounded-lg mt-8 mb-3 hover:bg-purple-50 transition">
-            Register Now <ArrowRight absoluteStrokeWidth strokeWidth={3} className="size-4" />
+            Register Now
+            <ArrowRight
+              absoluteStrokeWidth
+              strokeWidth={3}
+              className="size-4"
+            />
           </button>
+          <Link href="/giving">
+            <button className="w-full border bg-white border-black-50 flexCenter gap-3 text-main-50 py-2 rounded-lg hover:bg-gray-100 transition">
+              Partnership <ArrowRight className="size-4" />
+            </button>
+          </Link>
+          {!pathname.includes('events') && (
+            <Link href="/events">
+              <button className=" mt-4  text-main-50 text-sm p-1 border-b w-fit flex items-center gap-3 border-black-50 transition">
+                View Upcoming Events <ArrowRight className="size-4" />
+              </button>
+            </Link>
+          )}
         </div>
 
         {/* Right Section: Event Image */}

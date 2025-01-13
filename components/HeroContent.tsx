@@ -31,7 +31,7 @@ export const HeroContent: React.FC<HeroContentProps> = ({
       <p className="uppercase text-xl md:text-2xl mb-5 lg:mb-8">{subtitle}</p>
       <h1 className="uppercase text-4xl md:text-6xl font-bold mb-4">{title}</h1>
 
-      <div className="lg:flex-row flex flex-col gap-3">
+      <div className="flex-row max-sm:flex-col flex gap-3">
         {ctaText && (
           <button
             onClick={handleCTAClick}
