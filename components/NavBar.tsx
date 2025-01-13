@@ -141,11 +141,7 @@ const Navbar: React.FC = () => {
               <button className="bg-purple-50 border-purple-50 text-white py-2 px-4 gap-2 relative rounded-lg">
                 <a
                   onClick={toggleJoinUsDropdown}
-                  className={`${
-                    isScrolled
-                      ? 'text-[black] hover:text-purple-50'
-                      : 'text-white hover:text-yellow-50'
-                  } hover:font-bold font-medium flex items-center`}
+                  className="hover:font-bold font-medium flex items-center"
                 >
                   {navbarData.joinUs.name}
                   <ChevronDown className="size-4" />

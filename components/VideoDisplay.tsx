@@ -31,15 +31,13 @@ const VideoDisplay = ({
         </div>
       )}
       {/* Video Container */}
-      <div className="relative w-full lg:h-auto border border-black-50 p-3 rounded-lg overflow-hidden">
+      <div className="relative w-full min-h-[500px] border border-black-50 rounded-lg overflow-hidden">
         <video src='' />
         {/* Background Image */}
         <Image
-          width={16}
-          height={9}
           src={imageUrl}
-          layout="responsive"
-          className="w-full h-full rounded-lg object-cover"
+          layout="fill"
+          className="w-full p-3 h-full rounded-2xl object-cover"
           alt="Experience the Life at House of Prayer Ministries"
         />
 

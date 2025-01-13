@@ -6,15 +6,6 @@ import {
   sharedSchema,
 } from '../constants';
 
-
-export const icons = [
-  'fab fa-facebook-f',
-  'fab fa-instagram',
-  'fab fa-twitter',
-  'fab fa-youtube',
-  'fab fa-whatsapp',
-];
-
 export const contactValues = {
   ...initialValues,
   message: '',
