@@ -76,7 +76,18 @@
 
 body {
   font-family: "Roboto Condensed";
-  background: #FCF6F0;
+  background: #F5F2F0;
+  color: #161722;
+}
+
+input {
+  outline: none;
+}
+
+@layer components {
+  .purple-gradient {
+    @apply text-xs md:text-sm uppercase tracking-widest font-bold bg-gradient-to-r text-transparent bg-clip-text from-[#695CAE] to-[#BCB3ED]
+  }
 }
 
 @layer utilities {
@@ -230,6 +241,10 @@ body {
   .bold-16 {
     @apply text-[16px] font-[700];
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

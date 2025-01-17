@@ -16,12 +16,15 @@ import MissionVision from "@/components/MissionVision";
 import React from "react";
 import Navbar from "@/components/NavBar";
 import BackToTopButton from "@/components/BackToTop";
+import { HeroContent } from "@/components/HeroContent";
 
 const page = () => {
   return (
     <div>
       <Navbar />
-      <HeroSection {...aboutUsData} />
+      <HeroSection>
+        <HeroContent {...aboutUsData} />
+      </HeroSection>
       <FounderGreeting {...aboutFounderCardProps} />
       <History {...historyData} />
       <MissionVision {...missionVisionData} />
