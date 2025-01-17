@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 interface CardProps {
@@ -10,6 +11,7 @@ interface CardProps {
 
 const cardData = [
   {
+    url: '/media',
     imageSrc: '/sermon.jpeg',
     title: 'WATCH AND LISTEN TO OUR SERMONS',
     description:
@@ -17,6 +19,7 @@ const cardData = [
     buttonText: 'VIEW SERMONS',
   },
   {
+    url: '/articles',
     imageSrc: '/article-bg.svg',
     title: 'LEARN FROM OUR CHRISTIAN ARTICLES',
     description:
@@ -24,6 +27,7 @@ const cardData = [
     buttonText: 'READ ARTICLES',
   },
   {
+    url: '/publications',
     imageSrc: '/books-bg.svg',
     title: 'GET CHRISTIAN SPIRITUAL BOOKS',
     description:
@@ -61,9 +65,11 @@ const StayUpToDateSection: React.FC = () => {
                     {card.title}
                   </h3>
                   <p className="mt-4 text-white-50">{card.description}</p>
-                  <button className="bg-purple-50 gap-3 text-white-50 font-semibold mt-6 w-full lg:w-[250px] py-2 rounded-lg flex items-center justify-center mx-auto">
-                    {card.buttonText} <ArrowRight className="size-4" />
-                  </button>
+                  <Link href={card.url}>
+                    <button className="bg-purple-50 gap-3 text-white-50 font-semibold mt-6 w-full lg:w-[250px] py-2 rounded-lg flex items-center justify-center mx-auto">
+                      {card.buttonText} <ArrowRight className="size-4" />
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

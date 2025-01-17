@@ -27,9 +27,9 @@ export default function Home() {
         <HeroContent {...heroData} />
       </HeroSection>
       <FounderGreeting {...founderCardProps} />
-      <section className="flex flex-col items-center py-20 px-4  padding-container max-container ">
+      <div className="flex flex-col items-center py-20 px-4 padding-container max-container">
         <VideoDisplay {...videoDisplayData} />
-      </section>
+      </div>
       <ChurchSection />
       <StayUpToDateSection />
       <DonateSection />

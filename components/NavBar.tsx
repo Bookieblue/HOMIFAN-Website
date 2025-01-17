@@ -10,13 +10,6 @@ interface NavbarLink {
   dropdownOptions?: { name: string; href: string }[];
 }
 
-interface NavbarProps {
-  logo: string;
-  links: NavbarLink[];
-  givingText: string;
-  joinUsText: string;
-}
-
 const navbarData = {
   logo: '/logo.svg',
   links: [
@@ -26,7 +19,6 @@ const navbarData = {
     { name: 'Our Events', href: '/events' },
     {
       name: 'Media Resources',
-      href: '#',
       hasDropdown: true,
       dropdownOptions: [
         { name: 'Publication Store', href: '/publications' },
@@ -36,13 +28,31 @@ const navbarData = {
     { name: 'Contact Us', href: '/contact-us' },
   ],
   givingText: 'GIVING',
-  joinUsText: 'JOIN US ONLINE',
+  joinUs: {
+    name: 'JOIN US ONLINE',
+    hasDropdown: true,
+    dropdownOptions: [
+      { name: 'Facebook', href: 'www.facebook.com' },
+      { name: 'YouTube', href: 'www.youtube.com' },
+    ],
+  },
 };
 
 const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [navbarDropdownOpen, setNavbarDropdownOpen] = useState(false);
+  const [joinUsDropdownOpen, setJoinUsDropdownOpen] = useState(false);
+
+  const toggleNavbarDropdown = () => {
+    setNavbarDropdownOpen(prev => !prev);
+    setJoinUsDropdownOpen(false);
+  };
+
+  const toggleJoinUsDropdown = () => {
+    setJoinUsDropdownOpen(prev => !prev);
+    setNavbarDropdownOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,10 +63,6 @@ const Navbar: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const toggleDropdown = () => {
-    setDropdownOpen(prev => !prev);
-  };
 
   const handleGivingClick = () => {
     router.push('/giving');
@@ -91,7 +97,9 @@ const Navbar: React.FC = () => {
                 <div key={index} className="relative">
                   <a
                     href={link.href}
-                    onClick={link.hasDropdown ? toggleDropdown : undefined}
+                    onClick={
+                      link.hasDropdown ? toggleNavbarDropdown : undefined
+                    }
                     className={`${
                       isScrolled
                         ? 'text-[black] hover:text-purple-50'
@@ -103,7 +111,7 @@ const Navbar: React.FC = () => {
                       <ChevronDown className="ml-1 size-4" />
                     )}
                   </a>
-                  {link.hasDropdown && dropdownOpen && (
+                  {link.hasDropdown && navbarDropdownOpen && (
                     <div className="absolute top-full mt-2 w-40 bg-white shadow-lg rounded-md overflow-hidden">
                       {link.dropdownOptions?.map((option, idx) => (
                         <a
@@ -130,11 +138,27 @@ const Navbar: React.FC = () => {
               >
                 {navbarData.givingText}
               </button>
-              <button
-                className="bg-purple-50 border-purple-50 text-white hover:font-bold py-2 px-4 flexCenter gap-2 relative rounded-lg"
-              >
-                {navbarData.joinUsText}
-                <ChevronDown className="size-4" />
+              <button className="bg-purple-50 border-purple-50 text-white py-2 px-4 gap-2 relative rounded-lg">
+                <a
+                  onClick={toggleJoinUsDropdown}
+                  className="hover:font-bold font-medium flex items-center"
+                >
+                  {navbarData.joinUs.name}
+                  <ChevronDown className="size-4" />
+                </a>
+                {navbarData.joinUs.hasDropdown && joinUsDropdownOpen && (
+                  <div className="absolute py-1 top-full mt-2 w-40 bg-white shadow-lg rounded-md overflow-hidden">
+                    {navbarData.joinUs.dropdownOptions?.map((option, idx) => (
+                      <a
+                        key={idx}
+                        href={option.href}
+                        className="block px-4 py-2 text-black-50 hover:text-purple-50 hover:bg-gray-20 hover:font-medium"
+                      >
+                        {option.name}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </button>
             </div>
           </div>
