@@ -1,10 +1,13 @@
 'use client';
-import { ArrowRight, Clock, Search } from 'lucide-react';
-import React, { useEffect } from 'react';
-import Heading from './Heading';
-import { events } from '@/app/(pages)/events/components/constants';
+
 import Link from 'next/link';
-import { useParams, usePathname } from 'next/navigation';
+import Heading from './Heading';
+import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { ArrowRight, Clock, Search } from 'lucide-react';
+import { events } from '@/app/(pages)/events/components/constants';
+import Modal from './Modal';
+import EventForm from './forms/event';
 
 export interface Event {
   id: string;
@@ -19,6 +22,16 @@ export interface Event {
 export const UpcomingEvents = () => {
   const event = events[0];
   const pathname = usePathname();
+
+  let [style, setStyle] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+    setStyle(
+      'md:mx-auto right-0 left-0 md:w-1/2 rounded-xl m-4 px-4 py-6 md:px-6 bg-gray-100'
+    );
+  };
 
   return (
     <section className="py-16 padding-container max-container">
@@ -51,7 +64,10 @@ export const UpcomingEvents = () => {
               <span>{event.channel}</span>
             </div>
           </div>
-          <button className="w-full bg-[#1E1E1E] text-white flexCenter gap-3 py-2 rounded-lg mt-8 mb-3 hover:bg-purple-50 transition">
+          <button
+            onClick={toggleModal}
+            className="w-full bg-[#1E1E1E] text-white flexCenter gap-3 py-2 rounded-lg mt-8 mb-3 hover:bg-purple-50 transition"
+          >
             Register Now
             <ArrowRight
               absoluteStrokeWidth
@@ -82,6 +98,10 @@ export const UpcomingEvents = () => {
           />
         </div>
       </div>
+      {/* Modal */}
+      <Modal isOpen={isOpen} style={style} toggleModal={toggleModal}>
+        <EventForm toggleModal={toggleModal} />
+      </Modal>
     </section>
   );
 };

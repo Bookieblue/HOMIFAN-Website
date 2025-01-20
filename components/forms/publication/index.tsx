@@ -1,22 +1,23 @@
-'use client';
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, XCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
-  contactSchema,
-  contactFormElement,
-  contactValues as initialValues,
+  publicationFormElement,
+  publicationSchema,
+  publicationValues as initialValues,
 } from './constant';
 
-const ContactForm: React.FC = () => {
+const PublicationForm: React.FC<{
+  toggleModal: () => void;
+}> = ({ toggleModal }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: initialValues,
-    resolver: yupResolver(contactSchema),
+    resolver: yupResolver(publicationSchema),
   });
 
   const onSubmit = (data: any) => {
@@ -25,10 +26,20 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-      <h2 className="text-lg font-bold mb-6">FILL OUR CONTACT FORM</h2>
-      <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4">
-        {contactFormElement.map(field => (
+    <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+      <div className="grid gap-1">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl md:text-3xl uppercase font-bold">
+            Fill Publication Form
+          </h2>
+          <div className="cursor-pointer" onClick={toggleModal}>
+            <XCircle size={24} />
+          </div>
+        </div>
+        <p>Get the publication in any format you need.</p>
+      </div>
+      <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4 md:gap-y-6">
+        {publicationFormElement.map(field => (
           <div
             key={field.htmlFor}
             className={`grid gap-1.5 ${
@@ -37,7 +48,7 @@ const ContactForm: React.FC = () => {
                 : ''
             }`}
           >
-            <label className="text-black-50/80" htmlFor={field.htmlFor}>
+            <label className="text-black-50" htmlFor={field.htmlFor}>
               {field.label}
             </label>
             {field.type ? (
@@ -53,11 +64,7 @@ const ContactForm: React.FC = () => {
                 className="w-full bg-transparent border-black-50 border rounded-xl indent-4 py-2.5"
               >
                 {field.choices?.map(choice => (
-                  <option
-                    key={choice.value}
-                    value={choice.value}
-                    disabled={choice.disabled}
-                  >
+                  <option key={choice.value} value={choice.value}>
                     {choice.label}
                   </option>
                 ))}
@@ -72,7 +79,7 @@ const ContactForm: React.FC = () => {
         ))}
       </div>
       <div>
-        <label className="text-black-50/80" htmlFor="message">
+        <label className="text-black-50" htmlFor="message">
           Message
         </label>
         <textarea
@@ -83,13 +90,13 @@ const ContactForm: React.FC = () => {
       </div>
       <button
         type="submit"
-        className="w-full uppercase flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-semibold p-3 rounded-md transition"
+        className="md:px-12 max-md:w-full uppercase flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-medium p-3 rounded-md transition"
       >
-        Submit Message
+        Buy Now
         <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
       </button>
     </form>
   );
 };
 
-export default ContactForm;
+export default PublicationForm;

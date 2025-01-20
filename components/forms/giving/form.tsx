@@ -55,7 +55,7 @@ const GivingForm: React.FC = () => {
         className="w-full mt-5 flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-semibold p-3 rounded-md transition"
       >
         Make Payment Now
-        <ArrowRight absoluteStrokeWidth strokeWidth={3} className="size-4" />
+        <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
       </button>
     </form>
   );
