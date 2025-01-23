@@ -103,7 +103,7 @@ const FooterSection: React.FC<FooterProps> = ({
       </div>
 
       {/* Footer Bottom */}
-      <div className="border-t border-gray-500 mt-8 padding-container text-white pt-6 flex flex-col md:flex-row items-center justify-between text-center text-sm">
+      <div className="border-t border-gray-500 mt-8 padding-container max-container text-white pt-6 flex flex-col md:flex-row items-center justify-between text-center text-sm">
         <p>{copyright}</p>
         <div className="flex justify-center space-x-6 mt-4 md:mt-0">
           <a href="#" className="hover:underline">
