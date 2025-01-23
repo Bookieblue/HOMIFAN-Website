@@ -13,7 +13,7 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Redirect from '@/components/Redirect';
 import Heading from '@/components/Heading';
-import BtnDropdown from './BtnDropdown';
+import BtnDropdown from './PublicationModal';
 
 const Publication: React.FC = () => {
   const { id } = useParams();

@@ -86,7 +86,7 @@ const MembershipForm: React.FC = () => {
         className="w-full flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-semibold p-3 rounded-md transition"
       >
         Submit Form
-        <ArrowRight absoluteStrokeWidth strokeWidth={3} className="size-4" />
+        <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
       </button>
     </form>
   );
