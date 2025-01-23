@@ -25,6 +25,7 @@ model Member {
   areaOfInterest  String  @map("area_of_interest")
   methodOfContact String  @map("method_of_contact")
   prayerRequest   String? @map("prayer_request")
+  replied         Boolean @default(false)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -35,10 +36,13 @@ model Member {
 model Article {
   id String @id @default(uuid())
 
-  title       String
-  content     String
-  attachments String[]
-  author      String
+  title    String
+  content  String
+  imageUrl String @map("image_url")
+  status   Status @default(unpublish)
+  language String
+  author   String
+  datePublished DateTime? @map("date_published")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -46,32 +50,42 @@ model Article {
   @@map("articles")
 }
 
-model Publication {
+model Book {
   id String @id @default(uuid())
 
   title       String
   description String
-  coverUrl    String @default("") @map("cover_url")
-  price       Float  @default(0)
-  rating      Int    @default(0)
+  coverImage  String  @default("cover_image")
+  price       Float   @default(0)
+  rating      Int     @default(0)
+  status      Status  @default(unpublish)
+  language    String?
+  bookType    String? @default("book_type")
+  pages       Int
+  dimension   String?
+  authorName  String  @map("author_name")
+  authorBio   String? @map("author_bio")
+  authorImage String? @map("author_image")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("publications")
+  @@map("books")
 }
+
 
 model PrayerRequest {
   id String @id @default(uuid())
 
-  firstName       String @map("first_name")
-  lastName        String @map("last_name")
-  phoneNumber     String @map("phone_number")
+  firstName       String  @map("first_name")
+  lastName        String  @map("last_name")
+  phoneNumber     String  @map("phone_number")
   email           String
   country         String
-  cityAndState    String @map("city_state")
-  methodOfContact String @map("method_of_contact")
-  prayerRequest   String @map("prayer_request")
+  cityAndState    String  @map("city_state")
+  methodOfContact String  @map("method_of_contact")
+  prayerRequest   String  @map("prayer_request")
+  replied         Boolean @default(false)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -99,7 +113,7 @@ model Donation {
   @@map("donations")
 }
 
-model Event {
+model EventForm {
   id String @id @default(uuid())
 
   firstName       String @map("first_name")
@@ -113,5 +127,63 @@ model Event {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@map("event_form")
+}
+
+model Event {
+  id String @id @default(uuid())
+
+  title       String
+  description String?
+  date        DateTime
+  time        String
+  location    String
+  meetingLink String   @map("meeting_link")
+  eventImage  String?  @map("event_image")
+  status      Status   @default(unpublish)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
   @@map("events")
+}
+
+model Contact {
+  id String @id @default(uuid())
+
+  firstName       String  @map("first_name")
+  lastName        String  @map("last_name")
+  phoneNumber     String  @map("phone_number")
+  email           String
+  country         String
+  cityAndState    String  @map("city_state")
+  methodOfContact String  @map("method_of_contact")
+  message         String
+  replied         Boolean @default(false)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("contacts")
+}
+
+model Sermon {
+  id String @id @default(uuid())
+
+  title       String
+  description String
+  preacher    String
+  date        DateTime?
+  link        String
+  thumbnail   String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("sermons")
+}
+
+enum Status {
+  publish
+  unpublish
 }
