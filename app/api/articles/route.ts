@@ -20,30 +20,31 @@ export async function GET(request: NextRequest) {
         const search = searchParams.get("search") as string;
 
         const result = await paginateQuery({
-            where: search
-                ? {
-                      OR: [
-                          {
-                              title: {
-                                  contains: search,
-                                  mode: "insensitive",
+            where:
+                search !== null
+                    ? {
+                          OR: [
+                              {
+                                  title: {
+                                      contains: search,
+                                      mode: "insensitive",
+                                  },
                               },
-                          },
-                          {
-                              content: {
-                                  contains: search,
-                                  mode: "insensitive",
+                              {
+                                  content: {
+                                      contains: search,
+                                      mode: "insensitive",
+                                  },
                               },
-                          },
-                          {
-                              author: {
-                                  contains: search,
-                                  mode: "insensitive",
+                              {
+                                  author: {
+                                      contains: search,
+                                      mode: "insensitive",
+                                  },
                               },
-                          },
-                      ],
-                  }
-                : {},
+                          ],
+                      }
+                    : {},
             model: prisma.article,
             options: { page, limit },
         });
