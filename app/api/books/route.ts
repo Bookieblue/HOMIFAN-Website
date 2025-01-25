@@ -100,19 +100,36 @@ export async function GET(request: NextRequest) {
         const { searchParams } = new URL(request.url);
         const page = Number((searchParams.get("page") as string) || 1);
         const limit = Number((searchParams.get("limit") as string) || 20);
+        const text = searchParams.get("search") as string;
 
         const result = await paginateQuery({
+            where: text
+                ? {
+                      OR: [
+                          {
+                              title: {
+                                  contains: text,
+                              },
+                          },
+                          {
+                              description: {
+                                  contains: text,
+                              },
+                          },
+                      ],
+                  }
+                : {},
             model: prisma.book,
             options: {
                 page,
                 limit,
             },
         });
-        const { data: publications, ...metadata } = result;
+        const { data: books, ...metadata } = result;
         return sendSuccessResponse(
             NextResponse,
-            { publications, ...metadata },
-            "Publications retrieved successfully"
+            { books, ...metadata },
+            "Books retrieved successfully"
         );
     } catch (error) {
         throw error;
