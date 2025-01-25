@@ -29,7 +29,7 @@ export const UpcomingEvents = () => {
   const toggleModal = () => {
     setIsOpen(!isOpen);
     setStyle(
-      'md:mx-auto right-0 left-0 md:w-1/2 rounded-xl m-4 px-4 py-6 md:px-6 bg-gray-100'
+      'md:mx-auto right-0 left-0 md:w-1/2 rounded-xl m-4 p-6 bg-gray-100'
     );
   };
 

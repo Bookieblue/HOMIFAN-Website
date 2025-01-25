@@ -90,7 +90,7 @@ const EventForm: React.FC<{
       </div>
       <button
         type="submit"
-        className="md:px-12 max-md:w-full uppercase flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-medium p-3 rounded-md transition"
+        className="md:px-4 max-md:w-full uppercase flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-medium p-3 rounded-md transition"
       >
         Submit Form
         <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />

@@ -21,7 +21,7 @@ const JoinUsSection: React.FC = () => {
           </p>
           <a
             href="/join-us"
-            className=" w-fit bg-purple-50 flexCenter gap-3 text-white-50 font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-yellow-500 transition-colors duration-300"
+            className="w-fit bg-purple-50 flexCenter gap-3 text-white-50 font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-yellow-500 transition-colors duration-300"
           >
             JOIN US HERE <ArrowRight className="size-4" />
           </a>
