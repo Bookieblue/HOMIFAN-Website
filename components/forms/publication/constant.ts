@@ -9,25 +9,24 @@ import {
 export const publicationValues = {
   ...initialValues,
   message: '',
-  contactMethod: 'whatsApp',
+  pubType: 'printBook',
 };
 
 export const publicationSchema = sharedSchema.concat(
   yup.object().shape({
     message: yup.string(),
-    contactMethod: yup.string(),
+    pubType: yup.string().required(),
   })
 );
 
 export const publicationFormElement: Array<FormField> = [
   ...sharedFormElements,
   {
-    htmlFor: 'contactMethod',
-    label: 'Preferred method of contact',
+    htmlFor: 'pubType',
+    label: 'Publication Type',
     choices: [
-      { label: 'WhatsApp', value: 'whatsApp' },
-      { label: 'Email', value: 'email' },
-      { label: 'Phone Call', value: 'phone' },
+      { label: 'Printed Book', value: 'printBook' },
+      { label: 'Electronic Book (ebook)', value: 'eBook' },
     ],
   },
 ];

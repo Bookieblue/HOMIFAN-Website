@@ -2,16 +2,9 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { initialValues } from '../constants';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  FormField,
-  sharedSchema,
-  initialValues,
-  sharedFormElements,
-} from '../constants';
-
-const givingSchema = sharedSchema;
-const givingFormElement: Array<FormField> = [...sharedFormElements];
+import { givingFormElement, givingSchema } from './constant';
 
 const GivingForm: React.FC = () => {
   const {
@@ -20,7 +13,7 @@ const GivingForm: React.FC = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(givingSchema),
-    defaultValues: initialValues,
+    defaultValues: { ...initialValues, amount: 0 },
   });
 
   const onSubmit = (data: any) => {
@@ -32,7 +25,14 @@ const GivingForm: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid sm:grid-cols-2 pb-1 gap-x-3 gap-y-5">
         {givingFormElement.map(field => (
-          <div key={field.htmlFor} className="grid gap-1.5">
+          <div
+            key={field.htmlFor}
+            className={`grid gap-1.5 ${
+              field.htmlFor === 'amount'
+                ? 'sm:col-span-2 md:col-span-1 lg:col-span-2'
+                : ''
+            }`}
+          >
             <label className="text-black-50/80" htmlFor={field.htmlFor}>
               {field.label}
             </label>

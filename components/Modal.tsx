@@ -1,4 +1,4 @@
-import React, { cloneElement, useMemo } from 'react';
+import React, { cloneElement, useEffect, useMemo } from 'react';
 
 interface ModalProps {
   style?: string;
@@ -13,6 +13,20 @@ const Modal: React.FC<ModalProps> = ({
   children,
   toggleModal,
 }) => {
+  // Manage body scroll behavior
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'; // Disable scrolling on the body
+    } else {
+      document.body.style.overflow = ''; // Re-enable scrolling
+    }
+
+    // Cleanup when the modal is unmounted
+    return () => {
+      document.body.style.overflow = ''; // Re-enable scrolling
+    };
+  }, [isOpen]);
+
   // Memoize the cloned children for performance
   const modalChildren = useMemo(() => {
     // Only pass `toggleModal` if `children` expects it
