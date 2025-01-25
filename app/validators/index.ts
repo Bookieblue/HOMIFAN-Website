@@ -18,6 +18,7 @@ export const articleSchema = z.object({
     content: z.string(),
     author: z.string(),
     status: z.enum([Status.publish, Status.unpublish]),
+    language: z.string(),
 });
 
 export const bookSchema = z.object({
