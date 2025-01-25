@@ -8,7 +8,7 @@ const icons = [
   },
   {
     icon: <Facebook key={2} strokeWidth={2} size={24} absoluteStrokeWidth />,
-    url: 'https://www.facebook.com/',
+    url: 'https://web.facebook.com/watch/hopmifans/',
   },
   {
     icon: <X key={3} strokeWidth={2} size={24} absoluteStrokeWidth />,
@@ -16,7 +16,7 @@ const icons = [
   },
   {
     icon: <Youtube key={4} strokeWidth={2} size={24} absoluteStrokeWidth />,
-    url: 'https://www.youtube.com/',
+    url: 'https://www.youtube.com/@houseofprayerministriesfor5802',
   },
 ];
 
@@ -24,7 +24,7 @@ export const SocialIcons = () => {
   return (
     <div className="flex gap-4 mb-6 *:border *:rounded-xl *:border-black-50/80 *:p-1.5">
       {icons.map(item => (
-        <Link className="hover:shadow-md" key={item.url} href={item.url}>
+        <Link className="hover:shadow-md" key={item.url} href={item.url} target='blank'>
           {item.icon}
         </Link>
       ))}

@@ -113,10 +113,12 @@ const Testimonials = () => {
               key={index}
               className="md:basis-1/2 lg:basis-1/3"
             >
-              <div className="bg-white border p-6 rounded-lg shadow-md">
-                <p className="text-lg font-light text-gray-700 mb-4">
+              <div className="bg-white border p-6 rounded-lg shadow-md h-[300px] flex flex-col justify-between">
+                <div>
+                <p className="text-sm lg:text-lg font-light text-gray-700 mb-4">
                   &quot;{testimonial.text}&quot;
                 </p>
+                </div>
                 <div className="flex items-center">
                   <img
                     src={testimonial.imageUrl}

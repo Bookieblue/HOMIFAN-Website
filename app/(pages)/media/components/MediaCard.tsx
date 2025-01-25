@@ -16,7 +16,7 @@ export const MediaCard: React.FC<MediaCardProps> = ({
   videoType,
 }) => {
   return (
-    <div className="border border-black-50 rounded-xl">
+    <div className="border border-black-50 rounded-xl ">
       <Link href={`/media/${id}`}>
         <VideoDisplay />
       </Link>
