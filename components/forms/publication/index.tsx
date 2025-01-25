@@ -43,7 +43,7 @@ const PublicationForm: React.FC<{
           <div
             key={field.htmlFor}
             className={`grid gap-1.5 ${
-              field.htmlFor === 'contactMethod'
+              field.htmlFor === 'pubType'
                 ? 'sm:col-span-2 md:col-span-1 lg:col-span-2'
                 : ''
             }`}
@@ -80,12 +80,12 @@ const PublicationForm: React.FC<{
       </div>
       <div>
         <label className="text-black-50" htmlFor="message">
-          Message
+          Additional Information
         </label>
         <textarea
           placeholder="Drop your message"
           {...register('message')}
-          className="w-full bg-transparent border-black-50 border rounded-xl indent-4 py-2.5"
+          className="w-full bg-transparent outline-none border-black-50 border rounded-xl indent-4 py-2.5"
         />
       </div>
       <button
