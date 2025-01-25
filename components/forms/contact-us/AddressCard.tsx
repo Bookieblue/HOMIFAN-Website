@@ -26,8 +26,8 @@ export const AddressCard: React.FC<{
     <h3>{title}</h3>
     <p className="text-main-50 text-[24px] font-bold">{address}</p>
     <p className="text-lg">Phone number: {phone}</p>
-    <p>
-      <span className="font-bold">Email:</span> {email}
+    <p className="break-all">
+      <span className="font-bold break-all">Email:</span> {email}
     </p>
   </div>
 );

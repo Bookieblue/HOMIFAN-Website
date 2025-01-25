@@ -2,6 +2,7 @@ import { ArrowRight, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 
+
 interface ServiceProps {
   title: string;
   time: string;
@@ -72,6 +73,7 @@ const ChurchSection: React.FC = () => {
                 </li>
               ))}
             </ul>
+            
             <button className="bg-black-50 gap-3  text-white-50 font-semibold mt-6 px-4 py-2 w-fit rounded-lg flex items-center">
               LEARN MORE <ArrowRight className="size-4" />
             </button>

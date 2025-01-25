@@ -4,8 +4,8 @@ import GivingForm from './form';
 const Giving: React.FC = () => {
   return (
     <div className="padding-container max-container">
-      <div className="flex flex-col items-center py-10 px-4 my-10 text-main-50">
-        <div className="text-center mb-8 w-1/2">
+      <div className="flex flex-col lg:items-center py-10 px-4 my-10 text-main-50">
+        <div className="lg:text-center mb-8 lg:w-1/2">
           <h4 className=" uppercase tracking-widest ">Why We Give</h4>
           <h1 className="text-4xl font-bold uppercase">
             Importance of Giving Generously and Cheerfully
@@ -17,9 +17,9 @@ const Giving: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 w-full text-main-50 rounded-lg bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:p-4 w-full text-main-50 rounded-lg bg-white">
           {/* Left Section - Bank Transfer Information */}
-          <div className="bg-white rounded-lg p-6">
+          <div className="bg-white rounded-lg p-2 lg:p-6">
             <h2 className="text-3xl font-semibold mb-4 uppercase">
               Give to Church of God
             </h2>
@@ -35,7 +35,7 @@ const Giving: React.FC = () => {
                   Do the Payment via Bank Transfer
                 </h3>
                 <p className="mb-4">For offering, Tithe, Family Fest.</p>
-                <div className="flex items-center gap-10">
+                <div className="flex flex-col lg:flex-row items-center gap-10">
                   <div>
                     <p className="uppercase font-semibold">Naira Account</p>
                     <p>Bank name: First Bank of Nigeria</p>
@@ -58,7 +58,7 @@ const Giving: React.FC = () => {
                   For Church growth support, Branch Development Fund, Donation
                   to Missionaries.
                 </p>
-                <div className="flex items-center gap-6">
+                <div className="flex flex-col lg:flex-row items-center gap-6">
                   <div>
                     <p className="uppercase font-semibold">Naira Account</p>
                     <p>Bank name: First Bank of Nigeria</p>
@@ -76,7 +76,7 @@ const Giving: React.FC = () => {
             </div>
           </div>
           {/* Right Section - Online Payment Form */}
-          <div className="m-4 bg-gray-100 rounded-lg p-6">
+          <div className="m-4 bg-gray-100 rounded-lg p-3 lg:p-6">
             <div>
               <h2 className="text-lg uppercase font-semibold mb-4">
                 Do the Payment Online via Card

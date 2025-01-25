@@ -5,7 +5,7 @@ import { AddressCardData, AddressCard } from './AddressCard';
 const Contact: React.FC = () => {
   return (
     <div className="padding-container max-conatiner">
-      <div className="flex flex-col md:flex-row gap-8 p-8 my-10 rounded-lg bg-white  ">
+      <div className="flex flex-col md:flex-row gap-8 p-4 lg:p-8 my-10 rounded-lg bg-white  ">
         {/* Left Section */}
         <div className="flex-1 bg-white">
           <h2 className="font-bold text-3xl mb-2">
@@ -27,7 +27,7 @@ const Contact: React.FC = () => {
         </div>
 
         {/* Right Section - Contact Form */}
-        <div className="flex-1 bg-gray-100  rounded-lg p-8">
+        <div className="flex-1 bg-gray-100  rounded-lg p-3 lg:p-8">
           <ContactForm />
         </div>
       </div>
