@@ -33,4 +33,12 @@ export const bookSchema = z.object({
     authorBio: z.string(),
 });
 
-export const eventSchema = z.object({});
+export const eventSchema = z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.date(),
+    time: z.string(),
+    location: z.string(),
+    meetingLink: z.string(),
+    status: z.enum([Status.unpublish, Status.publish]),
+});
