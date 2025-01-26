@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { Status } from "../api/enum";
-import { IBook } from "../interface";
 
 export const memberSchema = z.object({
     firstName: z.string(),
@@ -37,8 +36,8 @@ export const bookSchema = z.object({
 export const eventSchema = z.object({
     title: z.string(),
     description: z.string(),
-    date: z.date(),
-    time: z.string(),
+    date: z.string().datetime(),
+    time: z.string().time(),
     location: z.string(),
     meetingLink: z.string(),
     status: z.enum([Status.unpublish, Status.publish]),
