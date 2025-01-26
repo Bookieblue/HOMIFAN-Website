@@ -32,7 +32,7 @@ const VideoDisplay = ({
       )}
       {/* Video Container */}
       <div className="relative w-full min-h-[500px] border border-black-50 rounded-lg overflow-hidden">
-        <video src='' />
+        <video src='z' />
         {/* Background Image */}
         <Image
           src={imageUrl}
