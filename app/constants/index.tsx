@@ -181,6 +181,7 @@ export const givingData = {
 };
 
 export const videoDisplayData = {
+  videoUrl: '/video/Video.mp4',
   subHeading: 'WITNESS OUR SERVICE',
   heading: 'EXPERIENCE THE LIFE AT HOUSE OF PRAYER MINISTRIES',
 };

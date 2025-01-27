@@ -1,23 +1,27 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/NavBar';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import FooterSection from '@/components/Footer';
 import { HeroSection } from '@/components/Hero';
 import JoinUsSection from '@/components/JoinUs';
 import ArticleCard from '../components/ArticleCard';
 import BackToTopButton from '@/components/BackToTop';
 import { footerProps } from '@/app/constants';
-import Redirect from '@/components/Redirect';
 import Image from 'next/image';
 import { articlesData } from '../components/constants';
 
 const Article: React.FC = () => {
+  const router = useRouter();
   const { id } = useParams();
   const article = articlesData.find(article => article.id === id);
 
-  Redirect(article, '/articles');
+  useEffect(() => {
+    if (article === undefined) {
+      router.push('/articles');
+    }
+  }, [article, router]);
 
   const moreArticles =
     articlesData.length > 3 ? articlesData.slice(0, 3) : articlesData;

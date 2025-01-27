@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { footerProps, publications } from '@/app/constants';
 import AuthorHighlight from '@/components/Author';
 import BackToTopButton from '@/components/BackToTop';
@@ -9,17 +9,21 @@ import { HeroSection } from '@/components/Hero';
 import Navbar from '@/components/NavBar';
 import PublicationCard from '@/components/PublicationCard';
 import WhyBuyBooks from '@/components/WhyBuyBooks';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Redirect from '@/components/Redirect';
 import Heading from '@/components/Heading';
 import BtnDropdown from './PublicationModal';
 
 const Publication: React.FC = () => {
+  const router = useRouter();
   const { id } = useParams();
   const publication = publications.find(publication => publication.id == id);
 
-  Redirect(publication, '/publications');
+  useEffect(() => {
+    if (publication === undefined) {
+      router.push('/publications');
+    }
+  }, [publication, router]);
 
   const morePublications =
     publications.length > 4 ? publications.slice(0, 4) : publications;
