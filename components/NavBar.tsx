@@ -11,7 +11,7 @@ interface NavbarLink {
 }
 
 const navbarData = {
-  logo: '/logo.svg',
+  logo: '/logo.png',
   links: [
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about-us' },

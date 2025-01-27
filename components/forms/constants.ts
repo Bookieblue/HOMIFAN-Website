@@ -29,7 +29,7 @@ export const sharedSchema = yup.object().shape({
     .required('Email is required')
     .email('Invalid email format'),
   country: yup.string().required('Country is required'),
-  cityState: yup.string().required('City & State are required'),
+  cityState: yup.string().required('City & State is required'),
 });
 
 export const sharedFormElements: Array<FormField> = [

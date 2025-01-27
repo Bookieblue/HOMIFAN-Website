@@ -90,7 +90,7 @@ export const publications = [
 ];
 
 export const footerProps = {
-  logoSrc: '/logo.svg',
+  logoSrc: '/logo.png',
   navigationLinks: [
     { name: 'About Us', href: '#' },
     { name: 'Giving', href: '#' },
@@ -146,7 +146,7 @@ export const aboutFounderCardProps = {
   title: 'MEET OUR FOUNDER',
   name: 'PROPHET MICHAEL SEGUN ADEWUNMI OLUWAYOMI',
   description:
-    'A servant of God with a heart for ministry and a passion for seeing lives transformed by the power of Jesus Christ. With over three decades of ministry experience, he leads our church with wisdom and dedication. Pastor Oluwayomi, along with our ministry team, welcomes you to experience the love, grace, and transformative power of God through our services and community.',
+    'A servant of God with a heart for ministry and a passion for seeing lives transformed by the power of Jesus Christ. With over three decades of ministry experience, he leads our church with wisdom and dedication. Prophet Segun Adewumi, along with our ministry team, welcomes you to experience the love, grace, and transformative power of God through our services and community.',
   missionTitle: 'FAVOURITE QUOTES',
   missionTexts: [
     'I don’t see what God can’t do, you only have to come to this presence and witness him.',

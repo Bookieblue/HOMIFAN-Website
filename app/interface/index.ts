@@ -15,12 +15,12 @@ export interface IMember {
 }
 
 export interface IArticle {
-    id: string;
     title: string;
     content: string;
     imageUrl: string;
     status: Status;
     author: string;
+    language: string;
 }
 
 export interface IBook {

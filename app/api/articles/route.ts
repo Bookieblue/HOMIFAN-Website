@@ -72,12 +72,15 @@ export async function POST(request: NextRequest) {
         const content = formData.get("content") as string;
         const author = formData.get("author") as string;
         const status = formData.get("status") as Status;
+        const language = formData.get("language") as string;
 
         const payload: Partial<IArticle> = {
             title,
             content,
             author,
             status,
+            imageUrl: "",
+            language,
         };
 
         // Validate payload with Zod schema

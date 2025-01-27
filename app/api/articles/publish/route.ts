@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
         },
         data: {
             status: Status.publish,
+            datePublished: new Date(Date.now()),
         },
     });
 
