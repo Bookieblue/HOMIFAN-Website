@@ -20,6 +20,7 @@ import { HeroContent } from '@/components/HeroContent';
 import VideoDisplay from '@/components/VideoDisplay';
 
 export default function Home() {
+  const { subHeading, heading, videoUrl } = videoDisplayData;
   return (
     <>
       <Navbar />
@@ -28,7 +29,15 @@ export default function Home() {
       </HeroSection>
       <FounderGreeting {...founderCardProps} />
       <div className="flex flex-col items-center py-20 px-4 padding-container max-container">
-        <VideoDisplay {...videoDisplayData} />
+        <div className="text-center mb-8 mx-auto grid gap-2 md:w-1/2">
+          <h4 className="uppercase max-md:text-sm tracking-widest">
+            {subHeading}
+          </h4>
+          <h1 className="md:text-4xl lg:text-5xl text-3xl text-balance font-bold uppercase">
+            {heading}
+          </h1>
+        </div>
+        <VideoDisplay videoUrl={videoUrl} />
       </div>
       <ChurchSection />
       <StayUpToDateSection />

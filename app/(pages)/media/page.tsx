@@ -11,15 +11,22 @@ import { videoDisplayData } from '.';
 import MediaList from './components/MediaList';
 
 const Media: React.FC = () => {
+  const { heading, text, videoUrl } = videoDisplayData;
   return (
     <>
       <Navbar />
-      <HeroSection className='80svh'>
+      <HeroSection className="80svh">
         <HeroContent {...mediaData} />
       </HeroSection>
       <div className="padding-container max-container">
         <div className="py-10 px-4 my-10">
-          <VideoDisplay {...videoDisplayData} />
+          <div className="text-center mb-8 md:w-1/2 mx-auto grid gap-2">
+            <h1 className="md:text-4xl lg:text-5xl text-3xl text-balance font-bold uppercase">
+              {heading}
+            </h1>
+            <p className="text-base md:text-lg mt-2">{text}</p>
+          </div>
+          <VideoDisplay videoUrl={videoUrl} />
         </div>
         <MediaList />
       </div>
