@@ -8,6 +8,9 @@ import {
   membershipFormElement,
   membershipValues as initialValues,
 } from './constants';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const MembershipForm: React.FC = () => {
   const {
@@ -19,15 +22,33 @@ const MembershipForm: React.FC = () => {
     resolver: yupResolver(membershipSchema),
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     console.log('Form submitted:', data);
-    // Add any form submission logic here, e.g., API call
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/members`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      const result = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(result.message || "Something went wrong");
+      }
+  
+      toast.success("Membership request submitted successfully!");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to submit request");
+    }
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full lg:w-1/2 space-y-4 p-6 bg-gray-100 rounded-md"
+      className="w-full lg:w-1/2 space-y-4 p-3 lg:p-6 bg-gray-100 rounded-md"
     >
       <h2 className="text-3xl uppercase font-semibold">Become a Member</h2>
       <p className="text-gray-600">
@@ -71,7 +92,7 @@ const MembershipForm: React.FC = () => {
           </div>
         ))}
       </div>
-      <div>
+      {/* <div>
         <label className="text-black-50/80" htmlFor="prayerRequest">
           Prayer Requests
         </label>
@@ -80,7 +101,7 @@ const MembershipForm: React.FC = () => {
           {...register('prayerRequest')}
           className="w-full bg-transparent border-black-50 border rounded-xl indent-4 py-2.5"
         />
-      </div>
+      </div> */}
       <button
         type="submit"
         className="w-full flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-semibold p-3 rounded-md transition"
@@ -88,6 +109,7 @@ const MembershipForm: React.FC = () => {
         Submit Form
         <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
       </button>
+      <ToastContainer position="top-right" autoClose={3000} />
     </form>
   );
 };

@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     if (member) {
       return sendErrorResponse(
         NextResponse,
-        "Oops...Email alredy registered",
+        "Oops...Email is already registered",
         409
       );
     }

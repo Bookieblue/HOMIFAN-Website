@@ -2,32 +2,50 @@
 import { PlayIcon } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 
-const VideoDisplay = ({ videoUrl }: { videoUrl: string }) => {
-  const [isPlaying, setPlaying] = useState(false);
+interface VideoDisplayProps {
+  videoUrl: string;
+  autoPlay?: boolean;
+  loop?: boolean;
+  showControls?: boolean;
+}
+
+const VideoDisplay: React.FC<VideoDisplayProps> = ({
+  videoUrl,
+  autoPlay = false,
+  loop = false,
+  showControls = true, // Default to true
+}) => {
+  const [isPlaying, setPlaying] = useState(autoPlay);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handlePlay = () => {
-    setPlaying(true);
-    videoRef.current?.play();
+    if (videoRef.current && videoRef.current.paused) {
+      videoRef.current.play().catch(error => console.error('Play failed:', error));
+      setPlaying(true);
+    }
   };
 
   const handlePause = () => {
-    setPlaying(false);
     videoRef.current?.pause();
+    setPlaying(false);
   };
 
   return (
     <div className="relative w-full border border-black-50 rounded-lg overflow-hidden">
       <video
-        controls
         ref={videoRef}
         src={videoUrl}
-        onPlay={handlePlay}
-        onPause={handlePause}
+        controls={showControls}
+        muted={autoPlay} // Autoplay requires muted
+        autoPlay={autoPlay}
+        loop={loop}
+        onCanPlay={autoPlay ? handlePlay : undefined}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
         className="p-3 w-full h-full object-cover rounded-2xl"
       />
 
-      {!isPlaying && (
+      {!isPlaying && !autoPlay && (
         <>
           {/* Dark Overlay */}
           <div className="m-3 absolute inset-0 bg-[black] bg-opacity-40"></div>

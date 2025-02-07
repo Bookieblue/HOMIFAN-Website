@@ -26,7 +26,7 @@ const Media: React.FC = () => {
             </h1>
             <p className="text-base md:text-lg mt-2">{text}</p>
           </div>
-          <VideoDisplay videoUrl={videoUrl} />
+          <VideoDisplay videoUrl={videoUrl} autoPlay loop showControls={false}/>
         </div>
         <MediaList />
       </div>

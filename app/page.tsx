@@ -1,3 +1,4 @@
+'use client'
 import FooterSection from '@/components/Footer';
 import {
   footerProps,
@@ -18,9 +19,37 @@ import { HeroSection } from '@/components/Hero';
 import BackToTopButton from '@/components/BackToTop';
 import { HeroContent } from '@/components/HeroContent';
 import VideoDisplay from '@/components/VideoDisplay';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const { subHeading, heading, videoUrl } = videoDisplayData;
+  const [events, setEvents] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/events?page=1&limit=1`);
+        if (!response.ok) throw new Error('Failed to fetch events');
+
+        const data = await response.json();
+        let sortedEvents = data?.data?.events ?? [];
+
+        // Sort events by date (oldest to newest)
+        sortedEvents = sortedEvents.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+        setEvents(sortedEvents);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -43,7 +72,10 @@ export default function Home() {
       <StayUpToDateSection />
       <DonateSection />
       <MomentsGallery />
-      <UpcomingEvents />
+
+      {/* Pass the first event if available, otherwise don't render */}
+      {events.length > 0 && <UpcomingEvents event={events[0]} />}
+
       <Testimonials />
       <JoinUsSection />
       <FooterSection {...footerProps} />
