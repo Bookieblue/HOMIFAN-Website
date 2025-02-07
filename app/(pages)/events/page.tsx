@@ -11,12 +11,12 @@ import React, { useEffect, useState } from 'react';
 import Events from './components/Events';
 
 const Page = () => {
-  const [events, setEvents] = useState<any[]>([]);
+ const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchEvents = async () => {
+     const fetchEvents = async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/events?page=1&limit=20`);
         if (!response.ok) throw new Error('Failed to fetch events');
