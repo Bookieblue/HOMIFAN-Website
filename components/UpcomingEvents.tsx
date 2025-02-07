@@ -5,7 +5,6 @@ import Heading from './Heading';
 import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ArrowRight, Clock, Search } from 'lucide-react';
-import { events } from '@/app/(pages)/events/components/constants';
 import Modal from './Modal';
 import EventForm from './forms/event';
 
@@ -16,15 +15,18 @@ export interface Event {
   month: string;
   title: string;
   channel: string;
+  eventImage: string
   description: string;
 }
 
-export const UpcomingEvents = () => {
-  const event = events[0];
-  const pathname = usePathname();
+interface UpcomingEventsProps {
+  event: Event; // Updated to accept a single event instead of an array
+}
 
-  let [style, setStyle] = useState('');
+export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ event }) => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [style, setStyle] = useState('');
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -52,7 +54,7 @@ export const UpcomingEvents = () => {
             <p className="purple-gradient capitalize">{event.channel}</p>
           </div>
           <h3 className="text-2xl font-bold mb-4">{event.title}</h3>
-          <p className=" mb-6">{event.description}</p>
+          <p className="mb-6">{event.description}</p>
 
           <div className="grid gap-2">
             <div className="flex gap-3 items-center">
@@ -69,11 +71,7 @@ export const UpcomingEvents = () => {
             className="w-full bg-[#1E1E1E] text-white flexCenter gap-3 py-2 rounded-lg mt-8 mb-3 hover:bg-purple-50 transition"
           >
             Register Now
-            <ArrowRight
-              absoluteStrokeWidth
-              strokeWidth={3}
-              className="size-4"
-            />
+            <ArrowRight absoluteStrokeWidth strokeWidth={3} className="size-4" />
           </button>
           <Link href="/giving">
             <button className="w-full border bg-white border-black-50 flexCenter gap-3 text-main-50 py-2 rounded-lg hover:bg-gray-100 transition">
@@ -82,7 +80,7 @@ export const UpcomingEvents = () => {
           </Link>
           {!pathname.includes('events') && (
             <Link href="/events">
-              <button className=" mt-4  text-main-50 text-sm p-1 border-b w-fit flex items-center gap-3 border-black-50 transition">
+              <button className="mt-4 text-main-50 text-sm p-1 border-b w-fit flex items-center gap-3 border-black-50 transition">
                 View Upcoming Events <ArrowRight className="size-4" />
               </button>
             </Link>
@@ -90,9 +88,9 @@ export const UpcomingEvents = () => {
         </div>
 
         {/* Right Section: Event Image */}
-        <div className="lg:w-[70%] mt-8 md:mt-0 ">
+        <div className="lg:w-[70%] mt-8 md:mt-0">
           <img
-            src="/event-bg.svg"
+            src={event.eventImage}
             alt="Church Event"
             className="object-cover w-full h-full"
           />

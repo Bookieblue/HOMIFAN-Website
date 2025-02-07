@@ -17,7 +17,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="absolute inset-0 bg-black-50 bg-opacity-50"></div>
+      <div className='max-w-[1440px]'>
       {children}
+      </div>
+
     </div>
   );
 };

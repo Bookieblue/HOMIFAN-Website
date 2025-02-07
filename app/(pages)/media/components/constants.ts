@@ -1,7 +1,7 @@
 export const videoDisplayData = {
   text: "If you can't make it to church, don't worry! You can watch our services live every Sunday or catch up on previous sermons anytime. Stay connected to the word of God, no matter where you are.",
   heading: 'catch up on OUR previous sermons anytime',
-  videoUrl: '/video/Video.mp4',
+  videoUrl: '/video/media-hero.mp4',
 };
 
 export const mediaCardData = [

@@ -3,14 +3,14 @@ export const AddressCardData = [
     title: 'OUR HEADQUARTER ADDRESS',
     address:
       'Opposite CAC Grammar School, Behind Damilak Filling Station, Ondo Road, Akure.',
-    phone: '0803 942 5631',
+    phone: '0803 858 3154',
     email: 'info@houseofprayerministries.org',
   },
   {
     title: 'LAGOS BRANCH ADDRESS',
     address:
       '91B, Isawo Road, Agric Owutu, Opposite Mechanic Village, Ikorodu, Lagos.',
-    phone: '0803 942 5631',
+    phone: '0803 389 8727',
     email: 'info@houseofprayerministries.org',
   },
 ];
