@@ -92,17 +92,17 @@ export const publications = [
 export const footerProps = {
   logoSrc: '/logo.png',
   navigationLinks: [
-    { name: 'About Us', href: '#' },
-    { name: 'Giving', href: '#' },
-    { name: 'Publications', href: '#' },
-    { name: 'Articles', href: '#' },
-    { name: 'Sermons', href: '#' },
-    { name: 'Contact Us', href: '#' },
+    { name: 'About Us', href: '/about-us' },
+    { name: 'Giving', href: '/giving' },
+    { name: 'Publications', href: '/publications' },
+    { name: 'Articles', href: '/articles' },
+    { name: 'Sermons', href: '/media' },
+    { name: 'Contact Us', href: '/contact-us' },
   ],
   socialMediaLinks: [
-    { platform: 'Facebook', href: '#' },
+    { platform: 'Facebook', href: 'https://web.facebook.com/watch/hopmifans/' },
     { platform: 'Instagram', href: '#' },
-    { platform: 'YouTube', href: '#' },
+    { platform: 'YouTube', href: 'https://www.youtube.com/@houseofprayerministriesfor5802' },
     { platform: 'Tiktok', href: '#' },
     { platform: 'Twitter (X)', href: '#' },
   ],
@@ -111,16 +111,16 @@ export const footerProps = {
     address:
       'Opposite CAC Grammar School, Behind Damilak Filling Station, Ondo Road, Akure.',
     email: 'support@houseofprayer.com',
-    phone: '+234803 942 5631',
+    phone: '+234803 858 3154',
   },
   lagosBranch: {
     location: 'Lagos Branch',
     address:
       '91B, Isawo Road, Agric Owutu, Opposite Mechanic Village, Ikorodu, Lagos.',
     email: 'support@houseofprayer.com',
-    phone: '+234803 942 5631',
+    phone: '+234803 389 8727',
   },
-  copyright: '© 2023 House Of Prayer All Rights Reserved.',
+  copyright: '© 2025 House Of Prayer All Rights Reserved.',
 };
 
 export const founderCardProps = {

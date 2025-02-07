@@ -8,24 +8,22 @@ import {
 
 export const membershipValues = {
   ...initialValues,
-  interestArea: '',
-  contactMethod: '',
-  prayerRequest: '',
+  areaOfInterest: '',
+  methodOfContact: '',
 };
 
 export const membershipSchema = sharedSchema.concat(
   yup.object().shape({
-    interestArea: yup.string().required('Area of interest is required'),
-    contactMethod: yup
+    areaOfInterest: yup.string().required('Area of interest is required'),
+    methodOfContact: yup
       .string()
       .required('Preferred contact method is required'),
-    prayerRequest: yup.string(),
   })
 );
 
 const membershipSpecificElements: Array<FormField> = [
   {
-    htmlFor: 'interestArea',
+    htmlFor: 'areaOfInterest',
     label: 'Areas of Interest',
     choices: [
       { label: 'Areas of Interest', value: '', disabled: true },
@@ -34,7 +32,7 @@ const membershipSpecificElements: Array<FormField> = [
     ],
   },
   {
-    htmlFor: 'contactMethod',
+    htmlFor: 'methodOfContact',
     label: 'Preferred method of contact',
     choices: [
       { label: 'Preferred Contact Method', value: '', disabled: true },

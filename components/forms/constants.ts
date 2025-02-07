@@ -12,7 +12,7 @@ export const initialValues = {
   email: '',
   country: '',
   lastName: '',
-  cityState: '',
+  cityAndState: '',
   firstName: '',
   phoneNumber: '',
 };
@@ -29,7 +29,7 @@ export const sharedSchema = yup.object().shape({
     .required('Email is required')
     .email('Invalid email format'),
   country: yup.string().required('Country is required'),
-  cityState: yup.string().required('City & State is required'),
+  cityAndState: yup.string().required('City & State is required'),
 });
 
 export const sharedFormElements: Array<FormField> = [
@@ -65,7 +65,7 @@ export const sharedFormElements: Array<FormField> = [
   },
   {
     type: 'text',
-    htmlFor: 'cityState',
+    htmlFor: 'cityAndState',
     label: 'City & State',
     placeholder: 'eg. Akure, Ondo state',
   },
