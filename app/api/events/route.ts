@@ -39,6 +39,9 @@ export async function GET(request: NextRequest) {
                 page,
                 limit,
             },
+            orderBy: {
+                date: 'desc'
+            }
         });
         const { data: events, ...metadata } = result;
         return sendSuccessResponse(

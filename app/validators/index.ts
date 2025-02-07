@@ -42,3 +42,16 @@ export const eventSchema = z.object({
     meetingLink: z.string(),
     status: z.enum([Status.unpublish, Status.publish]),
 });
+
+
+export const prayerRequestSchema = z.object({
+    firstName: z.string(),
+    lastName: z.string(),
+    email: z.string().email(),
+    phoneNumber: z.string(),
+    country: z.string(),
+    cityAndState: z.string(),
+    methodOfContact: z.string(),
+    prayerRequest:z.string()
+
+})
