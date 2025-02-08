@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
         if (!coverImage || !(coverImage instanceof Blob)) {
             return sendErrorResponse(
                 NextResponse,
-                "Cover Image is required",
+                "coverImage field is required",
                 400
             );
         }

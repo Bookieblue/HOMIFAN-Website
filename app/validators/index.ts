@@ -64,3 +64,14 @@ export const contactUsSchema = z.object({
     methodOfContact: z.string(),
     message: z.string(),
 });
+
+export const eventRegistrationSchema = z.object({
+    firstName: z.string(),
+    lastName: z.string(),
+    email: z.string().email(),
+    phoneNumber: z.string(),
+    country: z.string(),
+    cityAndState: z.string(),
+    methodOfContact: z.string(),
+    eventId: z.string().uuid(),
+});

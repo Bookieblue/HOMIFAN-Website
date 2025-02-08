@@ -36,12 +36,12 @@ model Member {
 model Article {
   id String @id @default(uuid())
 
-  title    String
-  content  String
-  imageUrl String @map("image_url")
-  status   Status @default(unpublish)
-  language String
-  author   String
+  title         String
+  content       String
+  imageUrl      String    @map("image_url")
+  status        Status    @default(unpublish)
+  language      String
+  author        String
   datePublished DateTime? @map("date_published")
 
   createdAt DateTime @default(now()) @map("created_at")
@@ -72,7 +72,6 @@ model Book {
 
   @@map("books")
 }
-
 
 model PrayerRequest {
   id String @id @default(uuid())
@@ -124,6 +123,9 @@ model EventForm {
   cityAndState    String @map("city_state")
   methodOfContact String @map("method_of_contact")
 
+  eventId String @map("event_id")
+  event   Event? @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -144,6 +146,8 @@ model Event {
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  event_registrations EventForm[]
 
   @@map("events")
 }

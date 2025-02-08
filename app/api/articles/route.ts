@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
         if (!file || !(file instanceof Blob)) {
             return sendErrorResponse(
                 NextResponse,
-                "Oops...Article image is required",
+                "Oops...articleImage field is required",
                 409
             );
         }

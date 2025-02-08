@@ -87,6 +87,7 @@ export interface IEventForm {
     country: string;
     cityAndState: string;
     methodOfContact: string;
+    eventId: string;
 }
 
 export interface IEvent {
