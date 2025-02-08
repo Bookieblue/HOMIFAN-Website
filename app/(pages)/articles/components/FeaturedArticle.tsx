@@ -1,20 +1,14 @@
 import Link from 'next/link';
 import React from 'react';
-
-export interface Article {
-  id: string;
-  date: string;
-  title: string;
-  excerpt: string;
-  author: string;
-  imageUrl: string;
-}
+import { Article } from '@/app/providers/articles/type';
+import { formatDate } from '@/app/providers/articles/util';
+import Image from 'next/image';
 
 const FeaturedArticle: React.FC<Article> = ({
   id,
-  date,
+  createdAt,
   title,
-  excerpt,
+  content,
   author,
   imageUrl,
 }) => (
@@ -23,12 +17,14 @@ const FeaturedArticle: React.FC<Article> = ({
     <h2 className="text-center text-3xl font-bold mt-2 uppercase">
       Our Featured Article
     </h2>
-    <div className="flex flex-col lg:flex-row bg-white rounded-lg shadow-md p-8 items-center mt-6 space-y-4 lg:space-y-0 lg:space-x-8">
-      <img src={imageUrl} alt={title} className="w-full lg:w-1/2 rounded-md" />
+    <div className="flex flex-col lg:flex-row bg-white rounded-lg shadow-md p-8 mt-6 space-y-4 lg:space-y-0 lg:space-x-8">
+      <div className="w-full lg:w-1/2 ">
+        <img alt={title} src={imageUrl} className="object-cover h-full rounded-md" />
+      </div>
       <div className="lg:w-1/2 space-y-4">
-        <p className="text-sm text-gray-500">{date}</p>
+        <p className="text-sm text-gray-500">{formatDate(createdAt)}</p>
         <h3 className="text-2xl font-bold">{title}</h3>
-        <p className="text-gray-600">{excerpt}</p>
+        <p className="text-gray-600">{content}</p>
         <p className="text-sm text-gray-500">By {author}</p>
         <Link href={`/articles/${id}`}>
           <button className="bg-purple-50 text-white py-2 px-4 rounded-md mt-4 hover:bg-purple-700">

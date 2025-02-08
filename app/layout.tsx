@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
-
+import './globals.css';
+import type { Metadata } from 'next';
+import QueryProvider from './providers';
 
 export const metadata: Metadata = {
-  title: "House of Prayer Ministries"
+  title: 'House of Prayer Ministries',
 };
 
 export default function RootLayout({
@@ -13,7 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }

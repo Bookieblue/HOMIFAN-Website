@@ -1,21 +1,24 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import Image from 'next/image';
 import Navbar from '@/components/NavBar';
-import { useParams, useRouter } from 'next/navigation';
+import { footerProps } from '@/app/constants';
 import FooterSection from '@/components/Footer';
 import { HeroSection } from '@/components/Hero';
 import JoinUsSection from '@/components/JoinUs';
+import React, { useEffect, useMemo } from 'react';
 import ArticleCard from '../components/ArticleCard';
 import BackToTopButton from '@/components/BackToTop';
-import { footerProps } from '@/app/constants';
-import Image from 'next/image';
-import { articlesData } from '../components/constants';
+import { useArticle } from '@/app/providers/articles';
+import { useParams, useRouter } from 'next/navigation';
 
 const Article: React.FC = () => {
   const router = useRouter();
   const { id } = useParams();
-  const article = articlesData.find(article => article.id === id);
+
+  const { data, isLoading, error } = useArticle();
+  const articles = useMemo(() => data?.articles || [], [data?.articles]);
+  const article = articles.find(article => article.id === id);
 
   useEffect(() => {
     if (article === undefined) {
@@ -23,8 +26,7 @@ const Article: React.FC = () => {
     }
   }, [article, router]);
 
-  const moreArticles =
-    articlesData.length > 3 ? articlesData.slice(0, 3) : articlesData;
+  const moreArticles = articles.length > 3 ? articles.slice(0, 3) : articles;
 
   return (
     article !== undefined && (
