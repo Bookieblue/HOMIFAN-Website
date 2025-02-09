@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 
 interface PaginationProps {
-  data: Array<any>;
-  noOfContent: number;
+  totalPages: number;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
-  data,
-  noOfContent,
+  totalPages,
   currentPage,
   setCurrentPage,
 }) => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-  const totalPages = Math.ceil(data?.length / noOfContent);
 
   const renderPageNumbers = () => {
     const pages = [];

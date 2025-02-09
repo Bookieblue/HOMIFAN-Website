@@ -1,10 +1,10 @@
 'use client';
 import SearchBar from './SearchBar';
-import React, { useEffect, useMemo, useState } from 'react';
+import ArticleCard from './ArticleCard';
+import React, { useMemo, useState } from 'react';
 import FeaturedArticle from './FeaturedArticle';
 import Pagination from '@/components/Pagination';
 import { useArticle } from '@/app/providers/articles';
-import ArticleCard from './ArticleCard';
 
 export const ArticlePage: React.FC = () => {
   const { data, isLoading, error } = useArticle();
@@ -22,10 +22,6 @@ export const ArticlePage: React.FC = () => {
       article.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [searchQuery, articles]);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   // Paginated Article
   const paginatedArticle = useMemo(() => {
@@ -61,10 +57,9 @@ export const ArticlePage: React.FC = () => {
                   ))}
                 </div>
                 <Pagination
-                  data={filteredArticle}
                   currentPage={currentPage}
-                  noOfContent={articlesPerPage}
                   setCurrentPage={setCurrentPage}
+                  totalPages={data?.totalPages || 1}
                 />
               </>
             )}
