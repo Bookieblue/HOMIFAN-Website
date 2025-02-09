@@ -57,9 +57,10 @@ export const ArticlePage: React.FC = () => {
                   ))}
                 </div>
                 <Pagination
+                  data={filteredArticle}
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}
-                  totalPages={data?.totalPages || 1}
+                  noOfContent={articlesPerPage}
                 />
               </>
             )}
