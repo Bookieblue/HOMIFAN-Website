@@ -11,7 +11,7 @@ export const ArticlePage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const articlesPerPage = data?.perPage || 10;
+  const articlesPerPage = 9;
   const articles = useMemo(() => data?.articles || [], [data?.articles]);
 
   const featuredArticle = articles[0];
@@ -46,11 +46,11 @@ export const ArticlePage: React.FC = () => {
             <h2 className="text-center text-3xl font-bold">
               View All Articles
             </h2>
+            <SearchBar onSearch={setSearchQuery} />
             {filteredArticle.length === 0 ? (
-              <p className="text-center">No article found.</p>
+              <p className="text-center py-8 text-2xl font-bold">No article found!</p>
             ) : (
               <>
-                <SearchBar onSearch={setSearchQuery} />
                 <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
                   {paginatedArticle.map((article, index) => (
                     <ArticleCard key={index} {...article} />
