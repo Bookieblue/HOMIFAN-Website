@@ -9,13 +9,13 @@ import {
 export const contactValues = {
   ...initialValues,
   message: '',
-  contactMethod: '',
+  methodOfContact: '',
 };
 
 export const contactSchema = sharedSchema.concat(
   yup.object().shape({
-    message: yup.string(),
-    contactMethod: yup
+    message: yup.string().required('Message is required'),
+    methodOfContact: yup
       .string()
       .required('Preferred contact method is required'),
   })
@@ -24,7 +24,7 @@ export const contactSchema = sharedSchema.concat(
 export const contactFormElement: Array<FormField> = [
   ...sharedFormElements,
   {
-    htmlFor: 'contactMethod',
+    htmlFor: 'methodOfContact',
     label: 'Preferred method of contact',
     choices: [
       { label: 'Preferred Contact Method', value: '', disabled: true },

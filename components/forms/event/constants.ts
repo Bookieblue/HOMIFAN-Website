@@ -9,20 +9,20 @@ import {
 export const eventValues = {
   ...initialValues,
   message: '',
-  contactMethod: 'whatsApp',
+  methodOfContact: 'whatsApp',
 };
 
 export const eventSchema = sharedSchema.concat(
   yup.object().shape({
     message: yup.string(),
-    contactMethod: yup.string(),
+    methodOfContact: yup.string(),
   })
 );
 
 export const eventFormElement: Array<FormField> = [
   ...sharedFormElements,
   {
-    htmlFor: 'contactMethod',
+    htmlFor: 'methodOfContact',
     label: 'Preferred method of contact',
     choices: [
       { label: 'WhatsApp', value: 'whatsApp' },

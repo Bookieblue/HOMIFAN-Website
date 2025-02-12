@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import { ArrowRight, XCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,10 +8,10 @@ import {
   eventSchema,
   eventValues as initialValues,
 } from './constants';
-
-const EventForm: React.FC<{
-  toggleModal: () => void;
-}> = ({ toggleModal }) => {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const EventForm: React.FC<{ toggleModal: () => void; eventId: string | null }> = ({ toggleModal, eventId }) => {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -20,10 +21,34 @@ const EventForm: React.FC<{
     resolver: yupResolver(eventSchema),
   });
 
-  const onSubmit = (data: any) => {
-    console.log('Form submitted:', data);
-    // Add any form submission logic here, e.g., API call
+  const onSubmit = async (data: any) => {
+    if (!eventId) {
+      toast.error("No event selected!");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/events/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...data, eventId }), // Include eventId in the payload
+      });
+
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Something went wrong");
+
+      toast.success("Event registration successful!");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to register for event");
+    } finally {
+      setLoading(false);
+    }
   };
+
+
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -43,7 +68,7 @@ const EventForm: React.FC<{
           <div
             key={field.htmlFor}
             className={`grid gap-1.5 ${
-              field.htmlFor === 'contactMethod'
+              field.htmlFor === 'methodOfContact'
                 ? 'sm:col-span-2 md:col-span-1 lg:col-span-2'
                 : ''
             }`}
@@ -90,11 +115,13 @@ const EventForm: React.FC<{
       </div>
       <button
         type="submit"
-        className="md:px-4 max-md:w-full uppercase flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-medium p-3 rounded-md transition"
+        disabled={loading}
+          className="md:px-4 max-md:w-full uppercase flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-medium p-3 rounded-md transition"
       >
-        Submit Form
-        <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
+        {loading ? "Submitting..." : "Register Now"}
+        {!loading && <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />}
       </button>
+      <ToastContainer position="top-right" autoClose={3000} />
     </form>
   );
 };
