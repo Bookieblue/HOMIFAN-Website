@@ -24,7 +24,7 @@ const Page = () => {
         if (!response.ok) throw new Error('Failed to fetch events');
 
         const data = await response.json();
-        let sortedEvents = data.events ?? [];
+        let sortedEvents = data?.data?.events ?? [];
 
         // Ensure the upcoming event is first (assuming events have a `date` field)
         sortedEvents = sortedEvents.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
@@ -46,7 +46,7 @@ const Page = () => {
       <HeroSection>
         <HeroContent {...eventsData} />
       </HeroSection>
-      {events.length > 0 && <UpcomingEvents event={events[0]} />} {/* Passing the first event */}
+      {events.length > 0 && <UpcomingEvents event={events[0]} eventId={events[0].id} />} {/* Passing the first event */}
       <Events events={events} loading={loading} error={error} />
       <JoinUsSection />
       <FooterSection {...footerProps} />

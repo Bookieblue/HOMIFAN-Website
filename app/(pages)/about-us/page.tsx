@@ -17,6 +17,7 @@ import React from "react";
 import Navbar from "@/components/NavBar";
 import BackToTopButton from "@/components/BackToTop";
 import { HeroContent } from "@/components/HeroContent";
+import Biography from "@/components/Biography";
 
 const page = () => {
   return (
@@ -29,6 +30,8 @@ const page = () => {
       <History {...historyData} />
       <MissionVision {...missionVisionData} />
       <Leadership {...leadershipData} />
+
+      <Biography />
       <JoinUsSection />
       <FooterSection {...footerProps} />
       <BackToTopButton />

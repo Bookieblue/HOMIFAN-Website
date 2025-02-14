@@ -3,13 +3,13 @@ import { FormField, initialValues, sharedFormElements, sharedSchema } from '../c
 
 export const prayerValues = {
   ...initialValues,
-  contactMethod: '',
+  methodOfContact: '',
   prayerRequest: '',
 };
 
 export const prayerSchema = sharedSchema.concat(
   yup.object().shape({
-    contactMethod: yup
+    methodOfContact: yup
       .string()
       .required('Preferred contact method is required'),
     prayerRequest: yup.string(),
@@ -19,7 +19,7 @@ export const prayerSchema = sharedSchema.concat(
 export const prayerFormElement: Array<FormField> = [
   ...sharedFormElements,
   {
-    htmlFor: 'contactMethod',
+    htmlFor: 'methodOfContact',
     label: 'Preferred method of contact',
     choices: [
       { label: 'Preferred Contact Method', value: '', disabled: true },

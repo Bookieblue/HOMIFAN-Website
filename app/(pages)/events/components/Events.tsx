@@ -22,6 +22,7 @@ interface EventsProps {
 
 const Events: React.FC<EventsProps> = ({ events, loading, error }) => {
   
+  console.log('events', events)
 
   return (
     <div className="py-6 max-container padding-container pb-20">
@@ -37,7 +38,7 @@ const Events: React.FC<EventsProps> = ({ events, loading, error }) => {
       ) : Array.isArray(events) && events.length > 0 ? ( // ✅ Ensure `events` is an array
         <div className="grid gap-x-4 gap-y-16 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {events.map((event, index) => (
-            <EventCard key={event.id} index={index} {...event} />
+            <EventCard location={''} key={event.id} index={index} {...event} />
           ))}
         </div>
       ) : (

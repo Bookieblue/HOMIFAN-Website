@@ -79,7 +79,7 @@ export default function Home() {
       <MomentsGallery />
 
       {/* Pass the first event if available, otherwise don't render */}
-      {events.length > 0 && <UpcomingEvents event={events[0]} />}
+      {events.length > 0 && <UpcomingEvents eventId={events[0].id} event={events[0]} />}
 
       <Testimonials />
       <JoinUsSection />

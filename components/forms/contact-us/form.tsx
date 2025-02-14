@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,8 +8,11 @@ import {
   contactFormElement,
   contactValues as initialValues,
 } from './constant';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactForm: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -19,9 +22,29 @@ const ContactForm: React.FC = () => {
     resolver: yupResolver(contactSchema),
   });
 
-  const onSubmit = (data: any) => {
-    console.log('Form submitted:', data);
-    // Add any form submission logic here, e.g., API call
+  const onSubmit = async (data: any) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/contact-us`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      const result = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(result.message || "Something went wrong");
+      }
+  
+      toast.success("Message submitted successfully!");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to submit message");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -32,7 +55,7 @@ const ContactForm: React.FC = () => {
           <div
             key={field.htmlFor}
             className={`grid gap-1.5 ${
-              field.htmlFor === 'contactMethod'
+              field.htmlFor === 'methodOfContact'
                 ? 'sm:col-span-2 md:col-span-1 lg:col-span-2'
                 : ''
             }`}
@@ -83,11 +106,13 @@ const ContactForm: React.FC = () => {
       </div>
       <button
         type="submit"
-        className="w-full uppercase flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-semibold p-3 rounded-md transition"
+        disabled={loading}
+         className="md:px-4 max-md:w-full uppercase flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-medium p-3 rounded-md transition"
       >
-        Submit Message
-        <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
+        {loading ? "Submitting..." : "Submit Message"}
+        {!loading && <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />}
       </button>
+      <ToastContainer position="top-right" autoClose={3000} />
     </form>
   );
 };
