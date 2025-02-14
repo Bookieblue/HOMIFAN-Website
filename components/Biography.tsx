@@ -137,8 +137,7 @@ const Biography: React.FC = () => {
               Some years later, the church translated fully into a Pentecostal
               Assembly. For well over thirty years, I was hotly chased by the
               dogs. The plot was to seize the letter that I held in the dream.
-              Just as it happened in the dream, I have finally submitted the
-              letter to the appropriate person.{" "}
+              Just as it happened in the dream, {" "}
               <button
                 onClick={() => setShowMandate(false)}
                 className="text-blue-600 font-medium"
