@@ -13,13 +13,13 @@ const Biography: React.FC = () => {
       </h1>
 
       {/* Prophet's Image */}
-      <div className="flex justify-center">
+      <div className="flex justify-center lg:w-[40%] mx-auto">
         <Image
-          src="/GO.svg"
+          src="/GO3.jpg"
           alt="Prophet Segun Adewumi"
-          width={40}
-          height={40}
-          className="w-40 h-40 rounded-full object-cover"
+          width={500} // Set a larger width
+          height={500} // Set a larger height
+          className="rounded-lg shadow-lg object-cover"
         />
       </div>
 
@@ -115,13 +115,26 @@ const Biography: React.FC = () => {
         <div className="text-gray-700 mt-3">
           The mandate of the ministry is demonstrated and outlined in the dream
           that I explained earlier. The dream became actualized when I started
-          the white garment church in 1989.{" "}
-
-          <p className="my-5"> Some years later, the church translated fully into a Pentecostal
-              Assembly. For well over thirty years, I was hotly chased by the
-              dogs. The plot was to seize the letter that I held in the dream.
-              Just as it happened in the dream, I have finally submitted the
-              letter to the appropriate person.{" "}</p>
+          the white garment church in 1989. Some years later, the church
+          translated fully into a Pentecostal Assembly. For well over thirty
+          years I was hotly chased by the dogs. The plot was to seize the letter
+          that I held in the dream. Just as it happened in the dream, I have
+          finally submitted the letter to the appropriate person. Please
+          remember, that man was a simply dressed, average aged, black man. The
+          house was small and neat. The environment was peaceful. After the
+          dream, I consulted my Bible and was directed to Isaiah 49 verse 3.{" "}
+          <p className="my-5">
+            {" "}
+            Ever since, God has revealed and demystified many contentious
+            biblical issues to me to the extent that I can boldly, but with
+            humility, quote Psalm 119 verse 99. To us, the mystery of the Garden
+            of Eden has been resolved, ditto for the mystery of the Holy
+            Trinity. The early journey of the believer is likened to an egg race
+            with only very few being able to safely reach the end of the race
+            with their egg. That the letter was addressed to the simply dressed
+            black man is also symbolic. The black man has been a slave to two
+            major world religions: Christian and Islam.{" "}
+          </p>
           {!showMandate ? (
             <>
               ...{" "}
@@ -134,10 +147,21 @@ const Biography: React.FC = () => {
             </>
           ) : (
             <>
-              Some years later, the church translated fully into a Pentecostal
-              Assembly. For well over thirty years, I was hotly chased by the
-              dogs. The plot was to seize the letter that I held in the dream.
-              Just as it happened in the dream, {" "}
+              <p>
+                For the fact that Christianity got to the black man through the
+                people from the West, it did become a weapon of physical, mental
+                and spiritual colonization. The culture of the West became the
+                ideal way of life for a typical Christian. His prayer also has
+                to pass through the spiritual space of the West. His inability
+                or refusal to pray directly to God denies him of the real goal
+                of Holy Spirit as the life of God in man. The Holy Spirit
+                liberates man by fully harnessing his physical, mental and
+                spiritual potentials. He has come to set the captives free but
+                the black man would always deny himself the freedom but he had
+                to imitate the Pastors from the west. My letter was a call to
+                the black race to listen to Jesus in Isaiah 61 verse 1.
+              </p>
+
               <button
                 onClick={() => setShowMandate(false)}
                 className="text-blue-600 font-medium"

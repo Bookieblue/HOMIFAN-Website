@@ -152,7 +152,7 @@ export const aboutFounderCardProps = {
     'I don’t see what God can’t do, you only have to come to this presence and witness him.',
     'Faith is believing that God has already done what you are asking for, even when you can’t see it yet.',
   ],
-  imageSrc: '/GO.svg',
+  imageSrc: '/GO3.jpg',
 };
 
 export const aboutUsData = {
@@ -173,6 +173,11 @@ export const eventsData = {
 export const contactData = {
   title: "WE'RE DELIGHTED TO CONNECT WITH YOU!",
   subtitle: 'CONTACT US',
+};
+
+export const biographyData = {
+  title: "PROPHET SEGUN ADEWUMI",
+  subtitle: 'BIOGRAPHY',
 };
 
 export const givingData = {
@@ -254,7 +259,7 @@ export const leadershipData = {
       title: 'General Overseer',
       imageUrl: '/GO.svg',
     },
-    { name: 'Imoh Adewumi', title: 'Mummy GO', imageUrl: '/MummyGO.svg' },
+    { name: 'Imoh Adewumi', title: 'Mummy GO', imageUrl: '/MummyGO.png' },
     {
       name: 'Lawrence Osuntuyi',
       title: 'Superintendent',

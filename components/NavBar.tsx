@@ -2,6 +2,7 @@
 import { ChevronDown, Facebook, LucideFacebook, LucideYoutube, Menu, X, Youtube, } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface NavbarLink {
   name: string;
@@ -93,11 +94,13 @@ const Navbar: React.FC = () => {
           } flex justify-between items-center`}
         >
           <div className="flex-shrink-0">
+            <Link href='/'>
             <img
               src={navbarData.logo}
               alt="Logo"
               className={`${isScrolled ? 'w-10 lg:w-14' : 'w-10 lg:w-20'}`}
             />
+            </Link>
           </div>
           <div
             className={`${

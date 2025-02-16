@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 interface HeroCardProps {
@@ -26,7 +27,14 @@ export const FounderGreeting: React.FC<HeroCardProps> = ({
           <h4 className="uppercase text-sm text-gray-500">{title}</h4>
           <h2 className="text-xl lg:text-3xl font-bold my-4">{name}</h2>
           <p className="text-gray-600 mb-6">{description}</p>
+          <div>
+          <Link href={'/prophet-segun-adewumi-biography'}>
+             <p  className='text-sm underline text-purple-50 font-bold'>Read Biography</p>
+          </Link>
         </div>
+        </div>
+
+       
 
         {/* Center Section: Image */}
         <div className="lg:w-[40%]">
