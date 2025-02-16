@@ -1,16 +1,15 @@
-'use client';
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+"use client";
+import React from "react";
+import { ArrowRight } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   membershipSchema,
   membershipFormElement,
   membershipValues as initialValues,
-} from './constants';
+} from "./constants";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 const MembershipForm: React.FC = () => {
   const {
@@ -22,23 +21,24 @@ const MembershipForm: React.FC = () => {
     resolver: yupResolver(membershipSchema),
   });
 
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+
   const onSubmit = async (data: any) => {
-    console.log('Form submitted:', data);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/members`, {
+      const response = await fetch(`${API_BASE_URL}/api/members`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
-  
+
       const result = await response.json();
-  
+
       if (!response.ok) {
         throw new Error(result.message || "Something went wrong");
       }
-  
+
       toast.success("Membership request submitted successfully!");
     } catch (error: any) {
       toast.error(error.message || "Failed to submit request");
@@ -56,7 +56,7 @@ const MembershipForm: React.FC = () => {
         church family? Fill out this form to express your interest!
       </p>
       <div className="grid sm:grid-cols-2 pb-1 gap-x-3 gap-y-5">
-        {membershipFormElement.map(field => (
+        {membershipFormElement.map((field) => (
           <div key={field.htmlFor} className="grid gap-1.5">
             <label className="text-black-50/80" htmlFor={field.htmlFor}>
               {field.label}
@@ -73,7 +73,7 @@ const MembershipForm: React.FC = () => {
                 {...register(field.htmlFor as keyof typeof initialValues)}
                 className="w-full bg-transparent border-black-50 border rounded-xl indent-4 py-2.5"
               >
-                {field.choices?.map(choice => (
+                {field.choices?.map((choice) => (
                   <option
                     key={choice.value}
                     value={choice.value}

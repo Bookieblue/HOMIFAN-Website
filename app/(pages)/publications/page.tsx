@@ -10,6 +10,8 @@ import WhyBuyBooks from '@/components/WhyBuyBooks';
 import React from 'react';
 
 const Publications: React.FC = () => {
+
+  
   return (
     <>
       <Navbar />

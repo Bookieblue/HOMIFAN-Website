@@ -21,25 +21,27 @@ const EventForm: React.FC<{ toggleModal: () => void; eventId: string | null }> =
     resolver: yupResolver(eventSchema),
   });
 
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+
   const onSubmit = async (data: any) => {
     if (!eventId) {
       toast.error("No event selected!");
       return;
     }
-
+  
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/events/register`, {
+      const response = await fetch(`${API_BASE_URL}/api/events/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ ...data, eventId }), // Include eventId in the payload
       });
-
+  
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || "Something went wrong");
-
+  
       toast.success("Event registration successful!");
     } catch (error: any) {
       toast.error(error.message || "Failed to register for event");
@@ -47,6 +49,7 @@ const EventForm: React.FC<{ toggleModal: () => void; eventId: string | null }> =
       setLoading(false);
     }
   };
+  
 
 
 

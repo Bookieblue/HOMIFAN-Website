@@ -22,30 +22,33 @@ const ContactForm: React.FC = () => {
     resolver: yupResolver(contactSchema),
   });
 
-  const onSubmit = async (data: any) => {
-    setLoading(true);
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/contact-us`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-  
-      const result = await response.json();
-  
-      if (!response.ok) {
-        throw new Error(result.message || "Something went wrong");
-      }
-  
-      toast.success("Message submitted successfully!");
-    } catch (error: any) {
-      toast.error(error.message || "Failed to submit message");
-    } finally {
-      setLoading(false);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+
+const onSubmit = async (data: any) => {
+  setLoading(true);
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/contact-us`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Something went wrong");
     }
-  };
+
+    toast.success("Message submitted successfully!");
+  } catch (error: any) {
+    toast.error(error.message || "Failed to submit message");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
