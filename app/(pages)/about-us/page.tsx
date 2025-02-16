@@ -30,8 +30,6 @@ const page = () => {
       <History {...historyData} />
       <MissionVision {...missionVisionData} />
       <Leadership {...leadershipData} />
-
-      <Biography />
       <JoinUsSection />
       <FooterSection {...footerProps} />
       <BackToTopButton />
