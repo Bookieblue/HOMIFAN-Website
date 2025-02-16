@@ -1,7 +1,6 @@
-import { ArrowRight, ChevronRight } from 'lucide-react';
-import Image from 'next/image';
-import React from 'react';
-
+import { ArrowRight, ChevronRight, Link } from "lucide-react";
+import Image from "next/image";
+import React from "react";
 
 interface ServiceProps {
   title: string;
@@ -17,33 +16,33 @@ interface BranchProps {
 
 const servicesData: ServiceProps[] = [
   {
-    title: 'Sunday Service',
-    time: 'Every Sunday, 07:30 AM to 01:00 AM',
+    title: "Sunday Service",
+    time: "Every Sunday, 07:30 AM to 12:00 pm",
   },
   {
-    title: 'Bible Study',
-    time: 'Every Wednesday, 04:30 PM to 05:30 PM',
+    title: "Bible Study",
+    time: "Every Wednesday, 04:30 PM to 05:30 PM",
   },
   {
-    title: 'Prayer Meetings',
-    time: 'Every Friday, 02:00 PM to 04:00 PM',
+    title: "Prayer Meetings",
+    time: "Every Friday, 02:00 PM to 04:00 PM",
   },
 ];
 
 const branchData: BranchProps[] = [
   {
-    title: 'HEADQUARTER IN ONDO STATE',
+    title: "HEADQUARTER IN ONDO STATE",
     address:
-      'Opposite CAC Grammar School, Behind Damilak Filling Station, Ondo Road, Akure.',
-    contactNumber: '0803 942 5631',
-    buttonText: 'Whatsapp Us',
+      "Opposite CAC Grammar School, Behind Damilak Filling Station, Ondo Road, Akure.",
+    contactNumber: "0803 942 5631",
+    buttonText: "Whatsapp Us",
   },
   {
-    title: 'LAGOS BRANCH - IKORODU',
+    title: "LAGOS BRANCH - IKORODU",
     address:
-      '91B, Isawo Road, Agric Owutu, Opposite Mechanic Village, Ikorodu, Lagos.',
-    contactNumber: '0803 942 5631',
-    buttonText: 'Whatsapp Us',
+      "91B, Isawo Road, Agric Owutu, Opposite Mechanic Village, Ikorodu, Lagos.",
+    contactNumber: "0803 942 5631",
+    buttonText: "Whatsapp Us",
   },
 ];
 
@@ -57,7 +56,7 @@ const ChurchSection: React.FC = () => {
             <h3 className="text-lg text-purple-50 font-semibold mb-4">
               OUR SERVICES
             </h3>
-            <ul className='text-main-50'>
+            <ul className="text-main-50">
               {servicesData.map((service, index) => (
                 <li key={index} className="mb-6">
                   <h4 className="text-lg font-bold flex gap-3">
@@ -73,10 +72,12 @@ const ChurchSection: React.FC = () => {
                 </li>
               ))}
             </ul>
-            
-            <button className="bg-black-50 gap-3  text-white-50 font-semibold mt-6 px-4 py-2 w-fit rounded-lg flex items-center">
-              LEARN MORE <ArrowRight className="size-4" />
-            </button>
+
+            <Link href="/join-us">
+              <button className="bg-black-50 gap-3 text-white-50 font-semibold mt-6 px-4 py-2 w-fit rounded-lg flex items-center">
+                LEARN MORE <ArrowRight className="size-4" />
+              </button>
+            </Link>
             <Image
               src="/quote2.svg"
               width={30}
@@ -119,7 +120,7 @@ const ChurchSection: React.FC = () => {
                           width={20}
                           height={10}
                           alt="chevron"
-                        />{' '}
+                        />{" "}
                         {branch.buttonText}
                       </button>
                     </div>

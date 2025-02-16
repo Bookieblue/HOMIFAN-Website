@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
-import { ArrowRight } from "lucide-react";
+import React, { useState } from "react";
+import { ArrowRight, Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
@@ -21,9 +21,11 @@ const MembershipForm: React.FC = () => {
     resolver: yupResolver(membershipSchema),
   });
 
+  const [loading, setLoading] = useState(false);
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
   const onSubmit = async (data: any) => {
+    setLoading(true);
     try {
       const response = await fetch(`${API_BASE_URL}/api/members`, {
         method: "POST",
@@ -42,6 +44,8 @@ const MembershipForm: React.FC = () => {
       toast.success("Membership request submitted successfully!");
     } catch (error: any) {
       toast.error(error.message || "Failed to submit request");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,23 +96,25 @@ const MembershipForm: React.FC = () => {
           </div>
         ))}
       </div>
-      {/* <div>
-        <label className="text-black-50/80" htmlFor="prayerRequest">
-          Prayer Requests
-        </label>
-        <textarea
-          placeholder="Drop prayer request"
-          {...register('prayerRequest')}
-          className="w-full bg-transparent border-black-50 border rounded-xl indent-4 py-2.5"
-        />
-      </div> */}
+      
       <button
         type="submit"
-        className="w-full flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-semibold p-3 rounded-md transition"
+        className="w-full flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-semibold p-3 rounded-md transition disabled:opacity-50"
+        disabled={loading}
       >
-        Submit Form
-        <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
+        {loading ? (
+          <>
+            <Loader className="size-4 animate-spin" />
+            Submitting...
+          </>
+        ) : (
+          <>
+            Submit Form
+            <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
+          </>
+        )}
       </button>
+      
       <ToastContainer position="top-right" autoClose={3000} />
     </form>
   );

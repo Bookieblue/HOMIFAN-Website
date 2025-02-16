@@ -4,7 +4,7 @@ import { AddressCardData, AddressCard } from './AddressCard';
 
 const Contact: React.FC = () => {
   return (
-    <div className="padding-container max-conatiner">
+    <div className="padding-container max-container">
       <div className="flex flex-col md:flex-row gap-8 p-4 lg:p-8 my-10 rounded-lg bg-white  ">
         {/* Left Section */}
         <div className="flex-1 bg-white">
