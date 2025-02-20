@@ -1,4 +1,8 @@
 import prisma from "@/app/lib/prisma";
+import {
+  sendErrorResponse,
+  sendSuccessResponse,
+} from "@/app/utils/apiResponse";
 import { formatZodError } from "@/app/utils/formatter";
 import { NextResponse } from "next/server";
 import { z } from "zod";
@@ -15,9 +19,10 @@ export const GET = async (
     const validation = referenceSchema.safeParse(reference);
 
     if (!validation.success) {
-      return NextResponse.json(
-        { message: formatZodError(validation.error) },
-        { status: 400 }
+      return sendErrorResponse(
+        NextResponse,
+        formatZodError(validation.error),
+        400
       );
     }
 
@@ -26,25 +31,22 @@ export const GET = async (
     });
 
     if (!donation) {
-      return NextResponse.json(
-        { message: "Oops...Donation not found!" },
-        { status: 404 }
-      );
+      return sendErrorResponse(NextResponse, "Oops...Donation not found!", 404);
     }
 
-    return NextResponse.json(
-      {
-        data: donation,
-        message: "Donation retrieved successfully",
-      },
-      { status: 200 }
+    const updatedRecord = await prisma.donation.update({
+      where: { id: donation.id },
+      data: { paymentStatus: "completed" },
+    });
+
+    return sendSuccessResponse(
+      NextResponse,
+      updatedRecord,
+      "Donation completed successfully"
     );
   } catch (error) {
     console.error("Error retrieving member:", error);
 
-    return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
-    );
+    throw error;
   }
 };

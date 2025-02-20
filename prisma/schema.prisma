@@ -102,7 +102,7 @@ model Donation {
   phoneNumber   String  @map("phone_number")
   email         String
   country       String
-  state         String
+  cityAndState         String
   paymentStatus String  @default("pending") @map("payment_status")
   trxfReference String? @map("trxf_reference")
 
