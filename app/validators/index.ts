@@ -86,3 +86,13 @@ export const donationSchema = z.object({
   donationType: z.string(),
   amount: z.number().gt(100, "Oops...Amount must be greater than 100 Naira"),
 });
+
+export const sermonSchema = z.object({
+  title: z.string(),
+  preacher: z.string(),
+  description: z.string(),
+  publishedDate: z.string().datetime(),
+  link: z.string(),
+  thumbnail: z.string(),
+  status: z.enum([Status.unpublish, Status.publish]),
+});

@@ -34,13 +34,10 @@ export async function GET(request: NextRequest) {
             ],
           }
         : {},
-      model: prisma.event,
+      model: prisma.sermon,
       options: {
         page,
         limit,
-      },
-      orderBy: {
-        date: "desc",
       },
     });
     const { data: events, ...metadata } = result;

@@ -177,10 +177,11 @@ model Sermon {
   title       String
   description String
   preacher    String
-  date        DateTime?
+  publishedDate        DateTime?
   link        String
   thumbnail   String
-
+  status  Status  @default(unpublish)
+  
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

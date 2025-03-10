@@ -93,7 +93,7 @@ export interface IEventForm {
 export interface IEvent {
   id: string;
   title: string;
-  description?: string;
+  description?: string | undefined;
   date: Date;
   time: string;
   location: string;
@@ -120,7 +120,7 @@ export interface ISermon {
   title: string;
   description: string;
   preacher: string;
-  date?: Date;
+  publishedDate?: Date;
   link: string;
   thumbnail: string;
 }
