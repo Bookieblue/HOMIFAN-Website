@@ -10,7 +10,7 @@ import { uploadFile } from "@/app/utils/file";
 
 // GET: Fetch event by ID
 export const GET = async (
-  _req: Request,
+  _req: NextRequest,
   { params }: { params: Promise<{ event_id: string }> }
 ) => {
   const eventId = (await params).event_id;
