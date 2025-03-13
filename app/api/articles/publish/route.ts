@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     }
 
     const articles = await prisma.article.findMany({
-        where: {
+        where:  {
             id: {
                 in: articleIds,
             },
@@ -49,12 +49,12 @@ export async function POST(request: NextRequest) {
             id: {
                 in: articleIds,
             },
-        },
+        } as any,
         data: {
             status: Status.publish,
             datePublished: new Date(Date.now()),
-        },
-    });
+        }, 
+    }); 
 
     return sendSuccessResponse(
         NextResponse,
