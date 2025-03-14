@@ -1,7 +1,14 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import GivingForm from './form';
 
 const Giving: React.FC = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  
   return (
     <div className="padding-container max-container">
       <div className="flex flex-col lg:items-center py-10 px-4 my-10 text-main-50">
@@ -91,7 +98,7 @@ const Giving: React.FC = () => {
               <h2 className="text-lg uppercase font-semibold mb-4">
                 Personal Info
               </h2>
-              <GivingForm />
+              {isClient ? <GivingForm /> : <p>Loading...</p>}  
             </div>
           </div>
         </div>

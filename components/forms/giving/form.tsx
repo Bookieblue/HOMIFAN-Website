@@ -5,9 +5,10 @@ import { useForm } from "react-hook-form";
 import { initialValues } from "../constants";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { givingFormElement, givingSchema } from "./constant";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 // @ts-ignore
 import PaystackPop from "@paystack/inline-js";
+
 
 const GivingForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
