@@ -115,7 +115,6 @@ const onSubmit = async (data: any) => {
         {loading ? "Submitting..." : "Submit Message"}
         {!loading && <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />}
       </button>
-      <ToastContainer position="top-right" autoClose={3000} />
     </form>
   );
 };

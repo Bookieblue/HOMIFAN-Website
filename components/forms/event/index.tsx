@@ -114,7 +114,7 @@ const EventForm: React.FC<{ toggleModal: () => void; eventId: string | null }> =
         {loading ? "Submitting..." : "Register Now"}
         {!loading && <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />}
       </button>
-      <ToastContainer position="top-right" autoClose={3000} />
+    
     </form>
   );
 };

@@ -114,7 +114,6 @@ const PrayerForm: React.FC = () => {
           <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
         )}
       </button>
-      <ToastContainer position="top-right" autoClose={3000} />
     </form>
   );
 };

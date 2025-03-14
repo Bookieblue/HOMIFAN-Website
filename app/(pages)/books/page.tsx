@@ -22,11 +22,14 @@ const Publications: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
+
+
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         const response = await fetch(
-          "https://homifan-website.vercel.app/api/books"
+          `${API_BASE_URL}/api/books`
         );
         const data = await response.json();
         if (data.success) {

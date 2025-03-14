@@ -15,8 +15,9 @@ import Heading from '@/components/Heading';
 import BtnDropdown from './PublicationModal';
 
 interface Publication {
-  description: ReactNode;
-  coverImage: string | StaticImport;
+  description: string;
+  coverImage: string;
+  pages:string;
   id: string;
   title: string;
   desc: string;
@@ -36,6 +37,9 @@ const Publication: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+
   useEffect(() => {
     if (!id) return;
 
@@ -43,10 +47,12 @@ const Publication: React.FC = () => {
       try {
         setLoading(true);
         setError(false);
-        const response = await fetch(`https://homifan-website.vercel.app/api/books/${id}`);
+        const response = await fetch(`${API_BASE_URL}/api/books/${id}`);
         if (!response.ok) throw new Error('Failed to fetch publication');
-
-        const data: Publication = await response.json();
+    
+        const jsonResponse = await response.json();
+        const data = jsonResponse.data; // Extract the `data` field
+    
         setPublication(data);
       } catch (error) {
         console.error('Error fetching publication:', error);
@@ -55,16 +61,14 @@ const Publication: React.FC = () => {
         setLoading(false);
       }
     };
+    
 
     fetchPublication();
   }, [id]);
 
 
-  console.log("pub", publication)
+  
 
-  if (loading) return <p className="text-center text-gray-600">Loading publication...</p>;
-  if (error) return <p className="text-center text-red-500">Error loading publication. Try again later.</p>;
-  if (!publication) return <p className="text-center text-gray-600">Publication not found.</p>;
 
   return (
     <>
@@ -72,34 +76,76 @@ const Publication: React.FC = () => {
       <HeroSection className="h-[50svh]" backgroundImage="/pub_hero_img.jpg" />
       <div className="max-container text-main-50 padding-container px-6 relative -top-14">
         <div className="bg-gray-100 py-3 rounded-t-[12px]"></div>
-        <div className="bg-white flex *:w-full gap-x-6 gap-y-3 p-4 md:p-6 lg:px-8 lg:py-10">
-          <div className="max-lg:hidden relative w-full min-h-[500px]">
-            <div className="relative w-full h-full">
-              <Image
-                fill
-                className="object-fill"
-                src={publication.coverImage}
-                alt={publication.title}
-              />
+        
+        <div className="bg-white flex flex-col lg:flex-row *:w-full gap-x-6 gap-y-3 p-4 md:p-6 lg:px-8 lg:py-10">
+          {loading ? (
+            // Cool Loading Effect
+            <div className="w-full flex justify-center items-center min-h-[400px]">
+              <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
             </div>
-          </div>
-          <div className="flex flex-col gap-y-6">
-            <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-              {publication.title}
-            </h2>
-            <h3 className="text-lg md:text-xl font-semibold lg:text-2xl">
-              NGN {publication.price}
-            </h3>
-            <p>{publication.description}</p>
-            <BtnDropdown />
-          </div>
+          ) : error ? (
+            <p className="text-center text-red-500">Error loading publication. Try again later.</p>
+          ) : !publication ? (
+            <p className="text-center text-gray-600">Publication not found.</p>
+          ) : (
+            <>
+              {/* Image Section */}
+              <div className="relative w-full lg:min-h-[500px]">
+                <div className="relative w-full h-full">
+                  <Image
+                    fill
+                    className="object-fill !relative"
+                    src={publication.coverImage}
+                    alt={publication.title}
+                  />
+                </div>
+              </div>
+              {/* Details Section */}
+              <div className="flex flex-col gap-y-6">
+                <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                  {publication.title}
+                </h2>
+                <h3 className="text-lg md:text-xl font-semibold lg:text-2xl">
+                  NGN {publication.price}
+                </h3>
+                <p>{publication.description}</p>
+
+                <div className="flex flex-col max-lg:flex-col-reverse gap-y-6">
+                  <BtnDropdown />
+                  <div>
+                    <p className="uppercase grid gap-y-2.5 font-semibold text-base lg:text-lg">
+                      Feature of the book
+                    </p>
+                    <ul className="*:pt-2">
+                      <li>
+                        <span className="font-bold">Book Type: </span>
+                        <span>{publication.bookType}</span>
+                      </li>
+                      <li>
+                        <span className="font-bold">Language: </span>
+                        <span>{publication.language}</span>
+                      </li>
+                      <li>
+                        <span className="font-bold">Pages: </span>
+                        <span>{publication.pages}</span>
+                      </li>
+                      <li>
+                        <span className="font-bold">Dimension: </span>
+                        <span>{publication.dimension}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
       <AuthorHighlight />
       <div className="max-container padding-container p-6">
         <Heading heading="Explore our other publications" subHeading="Our books" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* {morePublications.map((pub, index) => (
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {morePublications.map((pub, index) => (
             <PublicationCard
               key={index}
               id={pub.id}
@@ -108,8 +154,8 @@ const Publication: React.FC = () => {
               price={pub.price}
               imageUrl={pub.imageUrl}
             />
-          ))} */}
-        </div>
+          ))}
+        </div> */}
       </div>
       <WhyBuyBooks />
       <FooterSection {...footerProps} />
