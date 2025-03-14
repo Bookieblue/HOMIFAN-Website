@@ -1,16 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { initialValues } from "../constants";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { givingFormElement, givingSchema } from "./constant";
 import { toast} from "react-toastify";
-// @ts-ignore
-import PaystackPop from "@paystack/inline-js";
+const PaystackPop = require("@paystack/inline-js");
 
 
 const GivingForm: React.FC = () => {
+
+
+  
   const [loading, setLoading] = useState(false);
   const {
     register,
