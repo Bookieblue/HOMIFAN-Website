@@ -4,7 +4,7 @@ import {
   sendSuccessResponse,
 } from "@/app/utils/apiResponse";
 import { formatZodError } from "@/app/utils/formatter";
-import { eventSchema } from "@/app/validators";
+import { eventSchema, sermonSchema } from "@/app/validators";
 import { NextRequest, NextResponse } from "next/server";
 import { Status } from "../enum";
 import { ISermon } from "@/app/interface";
@@ -58,20 +58,17 @@ export async function POST(request: NextRequest) {
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
     const preacher = formData.get("preacher") as string;
-    const publishedDate = formData.get("publishedDate") as any;
     const link = formData.get("link") as string;
-    const status = formData.get("status") as Status;
 
     const payload: Partial<ISermon> = {
       title,
-      publishedDate,
       description,
       link,
       preacher,
-      status,
+      status: Status.unpublish,
     };
 
-    const validation = eventSchema.safeParse(payload);
+    const validation = sermonSchema.safeParse(payload);
 
     if (!validation.success) {
       return sendErrorResponse(
@@ -93,10 +90,15 @@ export async function POST(request: NextRequest) {
     }
 
     const thumbnail = formData.get("thumbnail") as File | null;
-    if (thumbnail) {
-      const result = await uploadFile(thumbnail, "sermons");
-      payload.thumbnail = result.secure_url;
+    if (!thumbnail || !(thumbnail instanceof Blob)) {
+      return sendErrorResponse(
+        NextResponse,
+        "thumbnail field is required as a File",
+        400
+      );
     }
+    const result = await uploadFile(thumbnail, "sermons");
+    payload.thumbnail = result.secure_url;
 
     const newSermon = await prisma.sermon.create({
       data: payload as any,
