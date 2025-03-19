@@ -5,12 +5,20 @@ import SearchBar from './SearchBar';
 import ArticlesList from './ArticleList';
 import { articlesData } from './constants';
 
-export const ArticlePage: React.FC = () => {
-  const [articles, setArticles] = useState(articlesData);
+
+interface ArticleProps {
+  article: any; 
+}
+export const ArticlePage: React.FC<ArticleProps> = (article) => {
+  const [articles, setArticles] = useState(article.article);
   const featuredArticle = articles[articles.length - 1];
+console.log(articles);
+
+const getRandomObject = (arr: any) => arr[Math.floor(Math.random() * arr.length)];
+const featured = getRandomObject(articles)
 
   const handleSearch = (query: string) => {
-    const filteredArticles = articlesData.filter(article =>
+    const filteredArticles = articles.filter((article: any) =>
       article.title.toLowerCase().includes(query.toLowerCase())
     );
     setArticles(filteredArticles);
@@ -18,7 +26,7 @@ export const ArticlePage: React.FC = () => {
 
   return (
     <>
-      <FeaturedArticle {...featuredArticle} />
+      <FeaturedArticle {...featured} />
       <h2 className="text-center text-3xl font-bold my-6">View All Articles</h2>
       <SearchBar onSearch={handleSearch} />
       <ArticlesList articles={articles} />

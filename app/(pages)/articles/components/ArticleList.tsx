@@ -11,6 +11,7 @@ const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => {
   const articlesPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
+
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
   const currentArticles = articles.slice(

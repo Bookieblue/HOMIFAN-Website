@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/NavBar';
 import { useParams, useRouter } from 'next/navigation';
 import FooterSection from '@/components/Footer';
@@ -11,14 +11,46 @@ import BackToTopButton from '@/components/BackToTop';
 import { footerProps } from '@/app/constants';
 import Image from 'next/image';
 import { articlesData } from '../components/constants';
+import { Article as ArticleProps } from '../components/FeaturedArticle';
 
-const Article: React.FC = () => {
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
+const Article: React.FC<any> = (singleArticle) => {
   const router = useRouter();
   const { id } = useParams();
-  const article = articlesData.find(article => article.id === id);
+  const [isLoading, setIsLoading] = useState(false)
+  const [articles, setArticles] = useState([])
+  const article = articles.find((article: any) => article?.id === id);
+    const [error, setError] = useState<string | null>(null);
+
+
+  const getArticles = async() => {
+      try {
+        setIsLoading(true)
+        const response = await fetch(`${API_BASE_URL}/api/articles`);
+        const data = await response.json();
+        setArticles(data?.data?.articles)
+        setIsLoading(false)
+      } catch (error: any) {
+        setError(error?.message || 'Failed to fetch articles')
+        setIsLoading(false)
+      }
+    }
+  
+    useEffect(() => {
+      getArticles();
+    }, [])
+
+    console.log(article);
+    
+
+  // useEffect(() => {
+  //   if (article === undefined) {
+  //     router.push('/articles');
+  //   }
+  // }, [article, router]);
 
   useEffect(() => {
-    if (article === undefined) {
+    if (!singleArticle?.singleArticle) {
       router.push('/articles');
     }
   }, [article, router]);
@@ -101,9 +133,9 @@ const Article: React.FC = () => {
             </h2>
           </div>
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-            {moreArticles.map((article, index) => (
+            {/* {moreArticles.map((article, index) => (
               <ArticleCard key={index} {...article} />
-            ))}
+            ))} */}
           </div>
         </div>
         <JoinUsSection />
