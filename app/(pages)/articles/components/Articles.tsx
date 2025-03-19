@@ -10,9 +10,10 @@ interface ArticleProps {
   article: any; 
 }
 export const ArticlePage: React.FC<ArticleProps> = (article) => {
-  const [articles, setArticles] = useState(article.article);
+  const articleArray = article?.article
+  const [articles, setArticles] = useState(articleArray);
   const featuredArticle = articles[articles.length - 1];
-console.log(articles);
+
 
 const getRandomObject = (arr: any) => arr[Math.floor(Math.random() * arr.length)];
 const featured = getRandomObject(articles)

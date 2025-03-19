@@ -21,27 +21,7 @@ const Article: React.FC<any> = (singleArticle) => {
   const [articles, setArticles] = useState([])
   const article = articles.find((article: any) => article?.id === id);
     const [error, setError] = useState<string | null>(null);
-
-
-  const getArticles = async() => {
-      try {
-        setIsLoading(true)
-        const response = await fetch(`${API_BASE_URL}/api/articles`);
-        const data = await response.json();
-        setArticles(data?.data?.articles)
-        setIsLoading(false)
-      } catch (error: any) {
-        setError(error?.message || 'Failed to fetch articles')
-        setIsLoading(false)
-      }
-    }
-  
-    useEffect(() => {
-      getArticles();
-    }, [])
-
-    console.log(article);
-    
+   
 
   // useEffect(() => {
   //   if (article === undefined) {

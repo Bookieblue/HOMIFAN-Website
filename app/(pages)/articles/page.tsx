@@ -23,7 +23,8 @@ const Page = () => {
       setIsLoading(true)
       const response = await fetch(`${API_BASE_URL}/api/articles`);
       const data = await response.json();
-      setArticles(data?.data?.articles)
+      const responseData = data?.data?.articles
+      setArticles(responseData)
       setIsLoading(false)
     } catch (error: any) {
       setError(error?.message || 'Failed to fetch articles')
@@ -34,16 +35,17 @@ const Page = () => {
   useEffect(() => {
     getArticles();
   }, [])
+  
   return (
     <div>
       <Navbar />
       <HeroSection>
         <HeroContent {...articlesData} />
       </HeroSection>
-      {/* {
+      {
         articles && articles?.length > 0 &&   <ArticlePage article={articles}/>
-      } */}
-    <ArticlePage article={articles}/>
+      }
+    {/* <ArticlePage article={articles}/> */}
       <JoinUsSection />
       <FooterSection {...footerProps} />
       <BackToTopButton />
