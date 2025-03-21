@@ -22,7 +22,7 @@ const navbarData = {
       name: 'Media Resources',
       hasDropdown: true,
       dropdownOptions: [
-        { name: 'Publication Store', href: '/publications' },
+        { name: 'Publication Store', href: '/books' },
         { name: 'HOPMIFAN TV', href: '/media' },
       ],
     },

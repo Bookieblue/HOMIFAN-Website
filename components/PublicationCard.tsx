@@ -18,7 +18,7 @@ const PublicationCard: React.FC<PublicationCardProps> = ({
   imageUrl,
 }) => {
   return (
-    <Link href={`/publications/${id}`}>
+    <Link href={`/books/${id}`}>
       <div className="flex flex-col rounded-lg shadow-md overflow-hidden hover:shadow-lg">
         <img src={imageUrl} alt={title} className="h-40 w-full object-cover" />
         <div className="p-4 bg-white">

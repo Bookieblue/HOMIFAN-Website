@@ -1,12 +1,23 @@
-'use client';
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { initialValues } from '../constants';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { givingFormElement, givingSchema } from './constant';
+"use client";
+import React, { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { initialValues } from "../constants";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { givingFormElement, givingSchema } from "./constant";
+import { toast } from "react-toastify";
 
 const GivingForm: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const [PaystackPop, setPaystackPop] = useState<any>(null);
+
+  useEffect(() => {
+    import("@paystack/inline-js").then((module) => {
+      setPaystackPop(() => module.default); // Set it as a function
+    });
+  }, []);
+
+
   const {
     register,
     handleSubmit,
@@ -16,23 +27,69 @@ const GivingForm: React.FC = () => {
     defaultValues: { ...initialValues, amount: 0 },
   });
 
-  const onSubmit = (data: any) => {
-    console.log('Form submitted:', data);
-    // Add any form submission logic here, e.g., API call
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+  const PAYSTACK_PUBLIC_KEY = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || "";
+
+  const onSubmit = async (data: any) => {
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/donations`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        if (result.error && Array.isArray(result.error)) {
+          result.error.forEach((err: { field: string; message: string }) => {
+            toast.error(`${err.field}: ${err.message}`);
+          });
+        } else {
+          throw new Error(result.message || "Payment processing failed");
+        }
+        return;
+      }
+
+      toast.success("Proceeding to payment...");
+
+      if (!PaystackPop) {
+        toast.error("Payment SDK not loaded");
+        return;
+      }
+
+      // ✅ Automatically trigger Paystack payment
+      const paystack = new PaystackPop();
+      paystack.newTransaction({
+        key: PAYSTACK_PUBLIC_KEY,
+        amount: result.data.amount * 100, // Convert to kobo
+        email: result.data.email,
+        reference: result.data.trxfReference,
+        firstName: result.data.firstName,
+        lastName: result.data.lastName,
+        phone: result.data.phoneNumber,
+        onSuccess: (trx: any) => {
+          toast.success("Payment successful!");
+          console.log("Transaction:", trx);
+        },
+        onCancel: () => {
+          toast.error("Payment cancelled!");
+        },
+      });
+    } catch (error: any) {
+      toast.error(error.message || "Failed to process payment");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid sm:grid-cols-2 pb-1 gap-x-3 gap-y-5">
-        {givingFormElement.map(field => (
-          <div
-            key={field.htmlFor}
-            className={`grid gap-1.5 ${
-              field.htmlFor === 'amount'
-                ? 'sm:col-span-2 md:col-span-1 lg:col-span-2'
-                : ''
-            }`}
-          >
+        {givingFormElement.map((field) => (
+          <div key={field.htmlFor} className="grid gap-1.5">
             <label className="text-black-50/80" htmlFor={field.htmlFor}>
               {field.label}
             </label>
@@ -50,12 +107,16 @@ const GivingForm: React.FC = () => {
           </div>
         ))}
       </div>
+
       <button
         type="submit"
-        className="w-full mt-5 flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-semibold p-3 rounded-md transition"
+        disabled={loading}
+        className="md:px-4 max-md:w-full mt-5 uppercase flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-medium p-3 rounded-md transition"
       >
-        Make Payment Now
-        <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
+        {loading ? "Processing..." : "Make Payment Now"}
+        {!loading && (
+          <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
+        )}
       </button>
     </form>
   );

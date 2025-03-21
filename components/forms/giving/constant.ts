@@ -3,6 +3,7 @@ import { FormField, sharedSchema, sharedFormElements } from '../constants';
 
 export const givingSchema = sharedSchema.concat(
   yup.object().shape({
+    donationType: yup.string().required("donation type is required"),
     amount: yup
       .number()
       .typeError('Amount must be a number') // Ensures value is a number
@@ -16,8 +17,15 @@ export const givingFormElement: Array<FormField> = [
   ...sharedFormElements,
   {
     type: 'text',
+    label: 'Purpose',
+    htmlFor: 'donationType',
+    placeholder: 'Offering',
+  },
+  {
+    type: 'text',
     label: 'Amount',
     htmlFor: 'amount',
     placeholder: '10000',
   },
+
 ];

@@ -106,16 +106,6 @@ const EventForm: React.FC<{ toggleModal: () => void; eventId: string | null }> =
           </div>
         ))}
       </div>
-      <div>
-        <label className="text-black-50" htmlFor="message">
-          Message
-        </label>
-        <textarea
-          placeholder="Drop your message"
-          {...register('message')}
-          className="w-full bg-transparent border-black-50 border rounded-xl indent-4 py-2.5"
-        />
-      </div>
       <button
         type="submit"
         disabled={loading}
@@ -124,7 +114,7 @@ const EventForm: React.FC<{ toggleModal: () => void; eventId: string | null }> =
         {loading ? "Submitting..." : "Register Now"}
         {!loading && <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />}
       </button>
-      <ToastContainer position="top-right" autoClose={3000} />
+    
     </form>
   );
 };
