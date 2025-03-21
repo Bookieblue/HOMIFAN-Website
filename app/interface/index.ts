@@ -123,4 +123,5 @@ export interface ISermon {
   publishedDate?: Date;
   link: string;
   thumbnail: string;
+  status: Status;
 }

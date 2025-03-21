@@ -91,8 +91,6 @@ export const sermonSchema = z.object({
   title: z.string(),
   preacher: z.string(),
   description: z.string(),
-  publishedDate: z.string().datetime(),
-  link: z.string(),
-  thumbnail: z.string(),
+  link: z.string().url(),
   status: z.enum([Status.unpublish, Status.publish]),
 });

@@ -32,8 +32,15 @@ export async function GET(request: NextRequest) {
                 },
               },
             ],
+            date: {
+              gte: new Date(),
+            },
           }
-        : {},
+        : {
+            date: {
+              gte: new Date(),
+            },
+          },
       model: prisma.event,
       options: {
         page,

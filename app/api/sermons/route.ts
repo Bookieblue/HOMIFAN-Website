@@ -4,10 +4,10 @@ import {
   sendSuccessResponse,
 } from "@/app/utils/apiResponse";
 import { formatZodError } from "@/app/utils/formatter";
-import { eventSchema } from "@/app/validators";
+import { eventSchema, sermonSchema } from "@/app/validators";
 import { NextRequest, NextResponse } from "next/server";
 import { Status } from "../enum";
-import { IEvent } from "@/app/interface";
+import { ISermon } from "@/app/interface";
 import { uploadFile } from "@/app/utils/file";
 import { paginateQuery } from "@/app/utils/paginate";
 
@@ -40,11 +40,11 @@ export async function GET(request: NextRequest) {
         limit,
       },
     });
-    const { data: events, ...metadata } = result;
+    const { data: sermons, ...metadata } = result;
     return sendSuccessResponse(
       NextResponse,
-      { events, ...metadata },
-      "Events retrieved successfully"
+      { sermons, ...metadata },
+      "Sermons retrieved successfully"
     );
   } catch (error) {
     throw error;
@@ -57,23 +57,18 @@ export async function POST(request: NextRequest) {
 
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
-    const location = formData.get("location") as string;
-    const date = formData.get("date") as any;
-    const time = formData.get("time") as string;
-    const meetingLink = formData.get("meetingLink") as string;
-    const status = formData.get("status") as Status;
+    const preacher = formData.get("preacher") as string;
+    const link = formData.get("link") as string;
 
-    const payload: Partial<IEvent> = {
+    const payload: Partial<ISermon> = {
       title,
-      date,
       description,
-      time,
-      meetingLink,
-      location,
-      status,
+      link,
+      preacher,
+      status: Status.unpublish,
     };
 
-    const validation = eventSchema.safeParse(payload);
+    const validation = sermonSchema.safeParse(payload);
 
     if (!validation.success) {
       return sendErrorResponse(
@@ -82,34 +77,37 @@ export async function POST(request: NextRequest) {
         400
       );
     }
-    const event = await prisma.event.findFirst({
+    const sermon = await prisma.sermon.findFirst({
       where: {
         title,
         description,
-        date,
-        location,
-        time,
+        preacher,
       },
     });
 
-    if (event) {
-      return sendErrorResponse(NextResponse, "Oops..Event already exist", 409);
+    if (sermon) {
+      return sendErrorResponse(NextResponse, "Oops..Sermon already exist", 409);
     }
 
-    const eventImage = formData.get("eventImage") as File | null;
-    if (eventImage) {
-      const result = await uploadFile(eventImage, "events");
-      payload.eventImage = result.secure_url;
+    const thumbnail = formData.get("thumbnail") as File | null;
+    if (!thumbnail || !(thumbnail instanceof Blob)) {
+      return sendErrorResponse(
+        NextResponse,
+        "thumbnail field is required as a File",
+        400
+      );
     }
+    const result = await uploadFile(thumbnail, "sermons");
+    payload.thumbnail = result.secure_url;
 
-    const newEvent = await prisma.event.create({
+    const newSermon = await prisma.sermon.create({
       data: payload as any,
     });
 
     return sendSuccessResponse(
       NextResponse,
-      newEvent,
-      "Event added successfully",
+      newSermon,
+      "Sermon added successfully",
       201
     );
   } catch (error) {

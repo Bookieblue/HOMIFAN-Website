@@ -8,16 +8,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { Status } from "../../enum";
 
-const articleIdsSchema = z.object({
-  articleIds: z.array(z.string().uuid()),
+const sermonIdsSchema = z.object({
+  sermonIds: z.array(z.string().uuid()),
 });
 
 export async function POST(request: NextRequest) {
   const payload = await request.json();
 
-  const articleIds = payload.articleIds as string[];
+  const sermonIds = payload.sermonIds as string[];
 
-  const validation = articleIdsSchema.safeParse(payload);
+  const validation = sermonIdsSchema.safeParse(payload);
 
   if (!validation.success) {
     return sendErrorResponse(
@@ -27,40 +27,38 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const articles = await prisma.article.findMany({
+  const sermons = await prisma.sermon.findMany({
     where: {
       id: {
-        in: articleIds,
+        in: sermonIds,
       },
       status: Status.unpublish,
     },
   });
 
-
-  if (articles.length !== articleIds.length) {
+  if (sermons.length !== sermonIds.length) {
     return sendErrorResponse(
       NextResponse,
-      "Oops...An article is missing or already published",
+      "Oops...An sermon is missing or already published",
       404
     );
   }
 
-  const publishedArticles = await prisma.article.updateMany({
+  const publishedSermons = await prisma.sermon.updateMany({
     where: {
       id: {
-        in: articleIds,
+        in: sermonIds,
       },
     },
     data: {
       status: Status.publish,
-      datePublished: new Date(Date.now()),
+      publishedDate: new Date(),
     },
   });
 
-
   return sendSuccessResponse(
     NextResponse,
-    publishedArticles,
-    "Articles published successfully"
+    publishedSermons,
+    "Sermons published successfully"
   );
 }
