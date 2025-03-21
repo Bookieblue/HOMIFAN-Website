@@ -5,15 +5,19 @@ import { useForm } from "react-hook-form";
 import { initialValues } from "../constants";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { givingFormElement, givingSchema } from "./constant";
-import { toast} from "react-toastify";
-const PaystackPop = require("@paystack/inline-js");
-
+import { toast } from "react-toastify";
 
 const GivingForm: React.FC = () => {
-
-
-  
   const [loading, setLoading] = useState(false);
+  const [PaystackPop, setPaystackPop] = useState<any>(null);
+
+  useEffect(() => {
+    import("@paystack/inline-js").then((module) => {
+      setPaystackPop(() => module.default); // Set it as a function
+    });
+  }, []);
+
+
   const {
     register,
     handleSubmit,
@@ -40,7 +44,6 @@ const GivingForm: React.FC = () => {
 
       if (!response.ok) {
         if (result.error && Array.isArray(result.error)) {
-          // ✅ Display all error messages from the API
           result.error.forEach((err: { field: string; message: string }) => {
             toast.error(`${err.field}: ${err.message}`);
           });
@@ -51,6 +54,11 @@ const GivingForm: React.FC = () => {
       }
 
       toast.success("Proceeding to payment...");
+
+      if (!PaystackPop) {
+        toast.error("Payment SDK not loaded");
+        return;
+      }
 
       // ✅ Automatically trigger Paystack payment
       const paystack = new PaystackPop();
@@ -65,7 +73,6 @@ const GivingForm: React.FC = () => {
         onSuccess: (trx: any) => {
           toast.success("Payment successful!");
           console.log("Transaction:", trx);
-          // You can call your backend here to confirm the transaction
         },
         onCancel: () => {
           toast.error("Payment cancelled!");
@@ -110,7 +117,7 @@ const GivingForm: React.FC = () => {
         {!loading && (
           <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
         )}
-      </button> 
+      </button>
     </form>
   );
 };
