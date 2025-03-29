@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
     },
   });
 
+
   if (articles.length !== articleIds.length) {
     return sendErrorResponse(
       NextResponse,
@@ -55,6 +56,7 @@ export async function POST(request: NextRequest) {
       datePublished: new Date(Date.now()),
     },
   });
+
 
   return sendSuccessResponse(
     NextResponse,

@@ -8,13 +8,11 @@ import {
 
 export const eventValues = {
   ...initialValues,
-  message: '',
   methodOfContact: 'whatsApp',
 };
 
 export const eventSchema = sharedSchema.concat(
   yup.object().shape({
-    message: yup.string(),
     methodOfContact: yup.string(),
   })
 );

@@ -115,7 +115,7 @@ const MembershipForm: React.FC = () => {
         )}
       </button>
       
-      <ToastContainer position="top-right" autoClose={3000} />
+
     </form>
   );
 };
