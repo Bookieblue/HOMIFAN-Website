@@ -94,9 +94,9 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const page = Number((searchParams.get("page") as string) || 1);
-    const limit = Number((searchParams.get("limit") as string) || 20);
-    const text = searchParams.get("search") as string;
+    const page = Number(searchParams.get("page") || 1);
+    const limit = Number(searchParams.get("limit") || 20);
+    const text = searchParams.get("search") || "";
 
     const result = await paginateQuery({
       where: text
@@ -105,11 +105,13 @@ export async function GET(request: NextRequest) {
               {
                 title: {
                   contains: text,
+                  mode: "insensitive",
                 },
               },
               {
                 description: {
                   contains: text,
+                  mode: "insensitive",
                 },
               },
             ],

@@ -68,9 +68,9 @@ export async function POST(request: NextRequest) {
 
 export const GET = async (request: NextRequest) => {
   const { searchParams } = new URL(request.url);
-  const page = Number((searchParams.get("page") as string) || 1);
-  const limit = Number((searchParams.get("limit") as string) || 20);
-  const text = searchParams.get("search") as string;
+  const page = Number(searchParams.get("page") || 1);
+  const limit = Number(searchParams.get("limit") || 20);
+  const text = searchParams.get("search") || "";
   try {
     const result = await paginateQuery({
       where: text
@@ -79,11 +79,13 @@ export const GET = async (request: NextRequest) => {
               {
                 firstName: {
                   contains: text,
+                  mode: "insensitive",
                 },
               },
               {
                 lastName: {
                   contains: text,
+                  mode: "insensitive",
                 },
               },
             ],

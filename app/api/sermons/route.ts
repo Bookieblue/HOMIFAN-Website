@@ -13,9 +13,9 @@ import { paginateQuery } from "@/app/utils/paginate";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const page = Number((searchParams.get("page") as string) || 1);
-  const limit = Number((searchParams.get("limit") as string) || 20);
-  const text = searchParams.get("search") as string | null;
+  const page = Number(searchParams.get("page") || 1);
+  const limit = Number(searchParams.get("limit") || 20);
+  const text = searchParams.get("search") || "";
   try {
     const result = await paginateQuery({
       where: text
@@ -24,11 +24,13 @@ export async function GET(request: NextRequest) {
               {
                 title: {
                   contains: text,
+                  mode: "insensitive",
                 },
               },
               {
                 description: {
                   contains: text,
+                  mode: "insensitive",
                 },
               },
             ],

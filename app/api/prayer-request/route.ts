@@ -54,36 +54,35 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
   try {
-    const page = Number((searchParams.get("page") as string) || 1);
-    const limit = Number((searchParams.get("limit") as string) || 20);
-    const search = searchParams.get("search") as string;
+    const page = Number(searchParams.get("page") || 1);
+    const limit = Number(searchParams.get("limit") || 20);
+    const search = searchParams.get("search") || "";
 
     const result = await paginateQuery({
-      where:
-        search !== null
-          ? {
-              OR: [
-                {
-                  firstName: {
-                    contains: search,
-                    mode: "insensitive",
-                  },
+      where: search
+        ? {
+            OR: [
+              {
+                firstName: {
+                  contains: search,
+                  mode: "insensitive",
                 },
-                {
-                  lastName: {
-                    contains: search,
-                    mode: "insensitive",
-                  },
+              },
+              {
+                lastName: {
+                  contains: search,
+                  mode: "insensitive",
                 },
-                {
-                  email: {
-                    contains: search,
-                    mode: "insensitive",
-                  },
+              },
+              {
+                email: {
+                  contains: search,
+                  mode: "insensitive",
                 },
-              ],
-            }
-          : {},
+              },
+            ],
+          }
+        : {},
       model: prisma.prayerRequest,
       options: { page, limit },
     });
