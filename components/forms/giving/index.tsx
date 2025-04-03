@@ -41,16 +41,16 @@ const Giving: React.FC = () => {
                 <div className="flex flex-col lg:flex-row items-center gap-10">
                   <div>
                     <p className="uppercase font-semibold">Naira Account</p>
-                    <p>Bank name: First Bank of Nigeria</p>
-                    <p>Account number: 3099727513</p>
-                    <p>Account name: House of Prayer</p>
+                    <p>Bank name: United Bank of Africa</p>
+                    <p>Account number: 2154939025</p>
+                    <p>Account name: House of Prayer Ministries For All Nations</p>
                   </div>
-                  <div>
+                  {/* <div>
                     <p className="uppercase font-semibold">Dollar Account</p>
                     <p>Bank name: Zenith Bank of Nigeria</p>
                     <p>Account number: 3099727513</p>
                     <p>Account name: House of Prayer</p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="border border-main-50 rounded-lg p-4">
@@ -62,18 +62,18 @@ const Giving: React.FC = () => {
                   to Missionaries.
                 </p>
                 <div className="flex flex-col lg:flex-row items-center gap-6">
-                  <div>
+                 <div>
                     <p className="uppercase font-semibold">Naira Account</p>
-                    <p>Bank name: First Bank of Nigeria</p>
-                    <p>Account number: 3099727513</p>
-                    <p>Account name: House of Prayer</p>
+                    <p>Bank name: United Bank of Africa</p>
+                    <p>Account number: 2154939025</p>
+                    <p>Account name: House of Prayer Ministries For All Nations</p>
                   </div>
-                  <div>
+                  {/* <div>
                     <p className="uppercase font-semibold">Dollar Account</p>
                     <p>Bank name: Zenith Bank of Nigeria</p>
                     <p>Account number: 3099727513</p>
                     <p>Account name: House of Prayer</p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

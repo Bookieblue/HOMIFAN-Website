@@ -18,7 +18,7 @@ const Biography: React.FC = () => {
           src="/GO3.jpg"
           alt="Prophet Segun Adewumi"
           width={500} // Set a larger width
-          height={500} // Set a larger height
+          height={500} //
           className="rounded-lg shadow-lg object-cover"
         />
       </div>
