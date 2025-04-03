@@ -71,6 +71,7 @@ model Book {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("books")
+  payments Payment[]
 }
 
 model PrayerRequest {
@@ -103,13 +104,14 @@ model Donation {
   email         String
   country       String
   cityAndState         String
-  paymentStatus String  @default("pending") @map("payment_status")
+  paymentStatus PaymentStatus  @default(initiated) @map("payment_status")
   trxfReference String? @map("trxf_reference")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("donations")
+  payments Payment[]
 }
 
 model EventForm {
@@ -188,7 +190,36 @@ model Sermon {
   @@map("sermons")
 }
 
+model Payment {
+  id String @id @default(uuid())
+
+  customer String
+  amount       Float
+  paymentType String @map("payment_type")
+  paymentDate DateTime? @map("payment_date")
+  reference String @unique
+  method String
+  paymentStatus PaymentStatus @default(initiated) @map("payment_status")
+
+  bookId String? @map("book_id")
+  book Book? @relation(fields: [bookId], references: [id], onDelete: NoAction)
+
+  donationId String? @map("donation_id")
+  donation Donation? @relation(fields: [donationId], references: [id], onDelete: NoAction)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("payments")
+}
+
 enum Status {
   publish
   unpublish
+}
+
+enum PaymentStatus {
+  initiated
+  failed
+  success
 }

@@ -1,4 +1,4 @@
-import { PaymentStatus, Status } from "../api/enum";
+import { PaymentMethod, PaymentStatus, PaymentType, Status } from "../api/enum";
 
 export interface IMember {
   id: string;
@@ -76,6 +76,7 @@ export interface IDonation {
   cityAndState: string;
   paymentStatus: PaymentStatus;
   trxfReference?: string;
+  paymentMethod?: PaymentMethod;
 }
 
 export interface IEventForm {

@@ -9,10 +9,7 @@ import { formatZodError } from "@/app/utils/formatter";
 import { paginateQuery } from "@/app/utils/paginate";
 import { donationSchema } from "@/app/validators";
 import { NextRequest, NextResponse } from "next/server";
-import paystack from "paystack";
-
-const secretKey = process.env.PAYSTACK_SECRET_KEY!;
-const paystackClient = paystack(secretKey);
+import { PaymentStatus, PaymentType } from "../enum";
 
 export async function POST(request: NextRequest) {
   const payload: IDonation = await request.json();
@@ -33,7 +30,7 @@ export async function POST(request: NextRequest) {
     let donation: any;
 
     const pendingDonation = await prisma.donation.findFirst({
-      where: { ...payload, paymentStatus: "pending" },
+      where: { ...payload, paymentStatus: PaymentStatus.initiated },
     });
 
     if (pendingDonation) {
@@ -51,11 +48,22 @@ export async function POST(request: NextRequest) {
           phoneNumber: payload.phoneNumber,
           country: payload.country,
           cityAndState: payload.cityAndState,
-          paymentStatus: "pending",
+          paymentStatus: PaymentStatus.initiated,
           trxfReference: trxRef,
         },
       });
     }
+
+    await prisma.payment.create({
+      data: {
+        amount,
+        customer: donation.firstName + " " + donation.lastName,
+        paymentType: PaymentType.DONATION,
+        reference: donation.trxfReference,
+        method: payload.paymentMethod as string,
+        donationId: donation.id,
+      },
+    });
     return sendSuccessResponse(
       NextResponse,
       donation,

@@ -7,6 +7,7 @@ import { formatZodError } from "@/app/utils/formatter";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import axios, { AxiosResponse } from "axios";
+import { PaymentStatus, PaymentType } from "@/app/api/enum";
 
 const referenceSchema = z.string();
 
@@ -66,7 +67,7 @@ export const GET = async (
   { params }: { params: Promise<{ reference: string }> }
 ) => {
   const reference = (await params).reference;
-
+  let donation: any;
   try {
     const validation = referenceSchema.safeParse(reference);
 
@@ -77,15 +78,25 @@ export const GET = async (
         400
       );
     }
+    const payment = await prisma.payment.findUnique({ where: { reference } });
 
-    const donation = await prisma.donation.findFirst({
-      where: { trxfReference: reference },
-    });
-
-    if (!donation) {
-      return sendErrorResponse(NextResponse, "Oops...Donation not found!", 404);
+    if (!payment) {
+      return sendErrorResponse(NextResponse, "Payment record not found", 404);
     }
 
+    if (payment?.paymentType == PaymentType.DONATION) {
+      donation = await prisma.donation.findFirst({
+        where: { trxfReference: reference },
+      });
+
+      if (!donation) {
+        return sendErrorResponse(
+          NextResponse,
+          "Oops...Donation not found!",
+          404
+        );
+      }
+    }
     const response = await verifyPaystackPayment(
       process.env.PAYSTACK_SECRET_KEY!,
       reference
@@ -98,16 +109,26 @@ export const GET = async (
         400
       );
     }
-
-    const updatedRecord = await prisma.donation.update({
-      where: { id: donation.id },
-      data: { paymentStatus: response.data.status },
-    });
-
+    let updatedRecord: any;
+    if (payment?.paymentType) {
+      await prisma.donation.update({
+        where: { id: donation.id },
+        data: { paymentStatus: "success" },
+      });
+      updatedRecord = await prisma.payment.update({
+        where: { donationId: payment.id, id: payment.id },
+        data: { paymentDate: new Date(), paymentStatus: "success" },
+      });
+    } else {
+      updatedRecord = await prisma.payment.update({
+        where: { id: payment.id },
+        data: { paymentDate: new Date(), paymentStatus: "success" },
+      });
+    }
     return sendSuccessResponse(
       NextResponse,
       updatedRecord,
-      "Donation completed successfully"
+      "Payment completed successfully"
     );
   } catch (error) {
     console.error("Error retrieving member:", error);
