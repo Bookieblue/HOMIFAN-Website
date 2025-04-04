@@ -54,6 +54,27 @@ export async function POST(request: NextRequest) {
     }
 
     const reference = generateTransRef();
+    const pendingPayment = await prisma.payment.findFirst({
+      where: {
+        bookId: book.id,
+        paymentStatus: "initiated",
+      },
+    });
+    if (pendingPayment) {
+      if (pendingPayment.method !== payload.paymentMethod) {
+        await prisma.payment.update({
+          where: { id: pendingPayment.id },
+          data: {
+            method: payload.paymentMethod,
+          },
+        });
+      }
+      return sendSuccessResponse(
+        NextResponse,
+        { ...pendingPayment },
+        "Book purchase already initiated"
+      );
+    }
 
     const payment = await prisma.payment.create({
       data: {
@@ -61,7 +82,8 @@ export async function POST(request: NextRequest) {
         customer: payload.customerName,
         paymentType: PaymentType.ORDER_BOOK,
         reference,
-        method: payload.paymentMethod, // Fixed: Use the validated paymentMethod
+        method: payload.paymentMethod,
+        bookId: book.id,
       },
     });
 

@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
   try {
     const email = payload.email;
     const amount = payload.amount;
-
+    const paymentMethod = payload.paymentMethod;
     const validation = donationSchema.safeParse(payload);
 
     if (!validation.success) {
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       );
     }
     let donation: any;
-
+    delete payload.paymentMethod;
     const pendingDonation = await prisma.donation.findFirst({
       where: { ...payload, paymentStatus: PaymentStatus.initiated },
     });
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
         customer: donation.firstName + " " + donation.lastName,
         paymentType: PaymentType.DONATION,
         reference: donation.trxfReference,
-        method: payload.paymentMethod as string,
+        method: paymentMethod as string,
         donationId: donation.id,
       },
     });
