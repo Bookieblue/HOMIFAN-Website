@@ -101,23 +101,23 @@ export const footerProps = {
   ],
   socialMediaLinks: [
     { platform: 'Facebook', href: 'https://web.facebook.com/watch/hopmifans/' },
-    { platform: 'Instagram', href: '#' },
+    { platform: 'Instagram', href: 'https://www.instagram.com/hopmifans/' },
     { platform: 'YouTube', href: 'https://www.youtube.com/@houseofprayerministriesfor5802' },
-    { platform: 'Tiktok', href: '#' },
-    { platform: 'Twitter (X)', href: '#' },
+    // { platform: 'Tiktok', href: '#' },
+    // { platform: 'Twitter (X)', href: '#' },
   ],
   headquarters: {
     location: 'Headquarters',
     address:
       'Opposite CAC Grammar School, Behind Damilak Filling Station, Ondo Road, Akure.',
-    email: 'support@houseofprayer.com',
+    email: ' info@houseofprayerministries.org',
     phone: '+234803 858 3154',
   },
   lagosBranch: {
     location: 'Lagos Branch',
     address:
       '91B, Isawo Road, Agric Owutu, Opposite Mechanic Village, Ikorodu, Lagos.',
-    email: 'support@houseofprayer.com',
+    email: ' info@houseofprayerministries.org',
     phone: '+234803 389 8727',
   },
   copyright: '© 2025 House Of Prayer All Rights Reserved.',

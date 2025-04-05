@@ -65,7 +65,7 @@ const Publications: React.FC = () => {
         ) : books.length === 0 ? (
           <div className="flex flex-col items-center justify-center mt-10">
             <img
-              src="/empty-state.svg"
+              src="/book-empty.svg"
               alt="No books available"
               className="w-64 h-64"
             />

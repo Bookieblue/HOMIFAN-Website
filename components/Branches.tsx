@@ -1,5 +1,6 @@
-import { ArrowRight, ChevronRight, Link } from "lucide-react";
+import { ArrowRight, ChevronRight, } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 interface ServiceProps {
