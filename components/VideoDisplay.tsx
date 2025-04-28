@@ -3,14 +3,14 @@ import { PlayIcon } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 
 interface VideoDisplayProps {
-  videoUrl: string;
+  link: string;
   autoPlay?: boolean;
   loop?: boolean;
   showControls?: boolean;
 }
 
 const VideoDisplay: React.FC<VideoDisplayProps> = ({
-  videoUrl,
+  link,
   autoPlay = false,
   loop = false,
   showControls = true, // Default to true
@@ -20,23 +20,41 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
 
   const handlePlay = () => {
     if (videoRef.current && videoRef.current.paused) {
-      videoRef.current.play().catch(error => console.error('Play failed:', error));
-      setPlaying(true);
+      videoRef.current.play()
+        .then(() => {
+          setPlaying(true);
+        })
+        .catch(error => {
+          console.error('Play failed:', error);
+        });
     }
   };
+  
 
   const handlePause = () => {
     videoRef.current?.pause();
     setPlaying(false);
   };
 
+  const isYouTubeLink = link?.includes("youtube.com") || link?.includes("youtu.be");
+
+
   return (
     <div className="relative w-full border border-black-50 rounded-lg overflow-hidden">
+      {isYouTubeLink ? (
+      <iframe
+        src={link.replace("watch?v=", "embed/").replace("youtu.be/", "youtube.com/embed/")}
+        className="w-full h-[360px] rounded-2xl"
+        title="YouTube video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    ) : (
       <video
         ref={videoRef}
-        src={videoUrl}
+        src={link}
         controls={showControls}
-        muted={autoPlay} // Autoplay requires muted
+        muted={autoPlay}
         autoPlay={autoPlay}
         loop={loop}
         onCanPlay={autoPlay ? handlePlay : undefined}
@@ -44,6 +62,7 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
         onPause={() => setPlaying(false)}
         className="p-3 w-full h-full object-cover rounded-2xl"
       />
+    )}
 
       {!isPlaying && !autoPlay && (
         <>
