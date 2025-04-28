@@ -76,7 +76,6 @@ export interface IDonation {
   cityAndState: string;
   paymentStatus: PaymentStatus;
   trxfReference?: string;
-  paymentMethod?: PaymentMethod;
 }
 
 export interface IEventForm {

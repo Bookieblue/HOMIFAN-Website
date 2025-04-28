@@ -19,6 +19,7 @@ interface PaystackVerificationResponse {
     amount: number;
     status: string;
     reference: string;
+    channel: string;
     customer: {
       email: string;
       name: string;
@@ -84,7 +85,7 @@ export const GET = async (
       return sendErrorResponse(NextResponse, "Payment record not found", 404);
     }
 
-    if (payment?.paymentType == PaymentType.DONATION) {
+    if (payment?.paymentType === PaymentType.DONATION) {
       donation = await prisma.donation.findFirst({
         where: { trxfReference: reference },
       });
@@ -110,19 +111,27 @@ export const GET = async (
       );
     }
     let updatedRecord: any;
-    if (payment?.paymentType) {
+    if (payment?.paymentType === PaymentType.DONATION) {
       await prisma.donation.update({
         where: { id: donation.id },
         data: { paymentStatus: "success" },
       });
       updatedRecord = await prisma.payment.update({
-        where: { donationId: payment.id, id: payment.id },
-        data: { paymentDate: new Date(), paymentStatus: "success" },
+        where: { donationId: donation.id, id: payment.id },
+        data: {
+          paymentDate: new Date(),
+          paymentStatus: "success",
+          method: response.data.channel,
+        },
       });
     } else {
       updatedRecord = await prisma.payment.update({
         where: { id: payment.id },
-        data: { paymentDate: new Date(), paymentStatus: "success" },
+        data: {
+          paymentDate: new Date(),
+          paymentStatus: "success",
+          method: response.data.channel,
+        },
       });
     }
     return sendSuccessResponse(
