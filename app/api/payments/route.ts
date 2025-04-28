@@ -14,8 +14,16 @@ export async function GET(request: NextRequest) {
         ? {
             OR: [
               {
-                customer: {
-                  contains: text,
+                metadata: {
+                  path: ["firstName"],
+                  string_contains: text,
+                  mode: "insensitive",
+                },
+              },
+              {
+                metadata: {
+                  path: ["lastName"],
+                  string_contains: text,
                   mode: "insensitive",
                 },
               },
