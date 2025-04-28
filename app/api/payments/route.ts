@@ -14,20 +14,6 @@ export async function GET(request: NextRequest) {
         ? {
             OR: [
               {
-                metadata: {
-                  path: ["firstName"],
-                  string_contains: text,
-                  mode: "insensitive",
-                },
-              },
-              {
-                metadata: {
-                  path: ["lastName"],
-                  string_contains: text,
-                  mode: "insensitive",
-                },
-              },
-              {
                 reference: {
                   contains: text,
                   mode: "insensitive",
