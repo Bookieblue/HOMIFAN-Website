@@ -71,7 +71,7 @@ export default function Home() {
             {heading}
           </h1>
         </div>
-        <VideoDisplay videoUrl={videoUrl} />
+        <VideoDisplay link={videoUrl} />
       </div>
       <ChurchSection />
       <StayUpToDateSection />
