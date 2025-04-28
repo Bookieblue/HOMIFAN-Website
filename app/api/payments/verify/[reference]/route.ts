@@ -79,13 +79,13 @@ export const GET = async (
         400
       );
     }
-    const payment = await prisma.payment.findUnique({ where: { reference } });
+    const payment = await prisma.payment.findFirst({ where: { reference } });
 
     if (!payment) {
       return sendErrorResponse(NextResponse, "Payment record not found", 404);
     }
 
-    if (payment?.paymentType === PaymentType.DONATION) {
+    if (payment.paymentType === PaymentType.DONATION) {
       donation = await prisma.donation.findFirst({
         where: { trxfReference: reference },
       });
@@ -104,11 +104,7 @@ export const GET = async (
     );
 
     if (!response?.status) {
-      return sendErrorResponse(
-        NextResponse,
-        JSON.stringify(response?.data),
-        400
-      );
+      return sendErrorResponse(NextResponse, response?.data as any, 400);
     }
     let updatedRecord: any;
     if (payment?.paymentType === PaymentType.DONATION) {
