@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import { ArrowRight, XCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,10 +9,13 @@ import {
   publicationSchema,
   publicationValues as initialValues,
 } from './constant';
+import { toast } from 'react-toastify';
 
 const PublicationForm: React.FC<{
   toggleModal: () => void;
-}> = ({ toggleModal }) => {
+  bookId: string;
+}> = ({ toggleModal, bookId }) => {
+
   const {
     register,
     handleSubmit,
@@ -20,9 +25,110 @@ const PublicationForm: React.FC<{
     resolver: yupResolver(publicationSchema),
   });
 
-  const onSubmit = (data: any) => {
+  const [loading, setLoading] = useState(false);
+
+  const [PaystackPop, setPaystackPop] = useState<any>(null);
+
+  useEffect(() => {
+    import("@paystack/inline-js").then((module) => {
+      setPaystackPop(() => module.default); // Set it as a function
+    });
+  }, []);
+
+
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+  const PAYSTACK_PUBLIC_KEY = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || "";
+
+  const onSubmit = async (data: any) => {
     console.log('Form submitted:', data);
-    // Add any form submission logic here, e.g., API call
+    setLoading(true);
+
+    try {
+      const payload = {
+        ...data,
+        publicationType: data.pubType,
+        bookId: '2eb4a54a-f491-492a-bedd-99bbbf5a9c79',
+      }
+      const response = await fetch(`${API_BASE_URL}/books/buy`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        if (result.error && Array.isArray(result.error)) {
+          result.error.forEach((err: { field: string; message: string }) => {
+            toast.error(`${err.field}: ${err.message}`);
+          });
+        } else {
+          throw new Error(result.message || "Payment processing failed");
+        }
+        return;
+      }
+
+      toast.success("Proceeding to payment...");
+
+      if (!PaystackPop) {
+        toast.error("Payment SDK not loaded");
+        return;
+      }
+
+      const paystack = new PaystackPop();
+      paystack.newTransaction({
+        key: PAYSTACK_PUBLIC_KEY,
+        amount: result.data.amount * 100, // Convert to kobo
+        email: result.data.metadata.email,
+        reference: result.data.reference,
+        firstName: result.data.metadata.firstName,
+        lastName: result.data.metadata.lastName,
+        phone: result.data.metadata.phoneNumber,
+        onSuccess: async (trx: any) => {
+          toast.success("Payment successful!");
+          console.log("Transaction:", trx);
+
+         
+          try {
+            const response = await fetch(`${API_BASE_URL}/api/verify/${trx}`, {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+      
+            const result = await response.json();
+      
+            if (!response.ok) {
+              if (result.error && Array.isArray(result.error)) {
+                result.error.forEach((err: { field: string; message: string }) => {
+                  toast.error(`${err.field}: ${err.message}`);
+                });
+              } else {
+                throw new Error(result.message || "Could not verify transaction");
+              }
+              setLoading(false);
+              return;
+            }
+            setLoading(false);
+          } catch (error) {
+            toast.error("Could not verify transaction");
+            setLoading(false);
+          }
+        },
+        onCancel: () => {
+          toast.error("Payment cancelled!");
+        },
+      });
+
+      
+      
+     
+      console.log('Response:', result);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -92,7 +198,7 @@ const PublicationForm: React.FC<{
         type="submit"
         className="md:px-6 max-md:w-full uppercase flex gap-2 items-center justify-center outline-none bg-purple-50 text-white font-medium p-3 rounded-md transition"
       >
-        Buy Now
+        {loading ? "Processing..." : "Buy Now"}
         <ArrowRight absoluteStrokeWidth strokeWidth={2} className="size-4" />
       </button>
     </form>
