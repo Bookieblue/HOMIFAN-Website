@@ -85,7 +85,6 @@ export const donationSchema = z.object({
   email: z.string().email(),
   donationType: z.string(),
   amount: z.number().gt(100, "Oops...Amount must be greater than 100 Naira"),
-  paymentMethod: z.nativeEnum(PaymentMethod),
 });
 
 export const sermonSchema = z.object({
