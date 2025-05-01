@@ -47,9 +47,9 @@ const PublicationForm: React.FC<{
       const payload = {
         ...data,
         publicationType: data.pubType,
-        bookId: '2eb4a54a-f491-492a-bedd-99bbbf5a9c79',
+        bookId:'2eb4a54a-f491-492a-bedd-99bbbf5a9c79',
       }
-      const response = await fetch(`${API_BASE_URL}/books/buy`, {
+      const response = await fetch(`${API_BASE_URL}/api/books/buy`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,25 +77,27 @@ const PublicationForm: React.FC<{
         return;
       }
 
+      const trx = result.data.reference;  
+
       const paystack = new PaystackPop();
       paystack.newTransaction({
         key: PAYSTACK_PUBLIC_KEY,
         amount: result.data.amount * 100, // Convert to kobo
         email: result.data.metadata.email,
-        reference: result.data.reference,
+        reference: trx,
         firstName: result.data.metadata.firstName,
         lastName: result.data.metadata.lastName,
         phone: result.data.metadata.phoneNumber,
-        onSuccess: async (trx: any) => {
+
+        onSuccess: async (transaction: any) => {
           toast.success("Payment successful!");
-          console.log("Transaction:", trx);
+          console.log("Transaction object:", transaction);
 
          
           try {
-            const response = await fetch(`${API_BASE_URL}/api/verify/${trx}`, {
+            const response = await fetch(`${API_BASE_URL}/api/payments/verify/${transaction.trxref}`, {
               method: "GET",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
+              headers: { "Content-Type": "application/json" }
             });
       
             const result = await response.json();
@@ -121,13 +123,11 @@ const PublicationForm: React.FC<{
           toast.error("Payment cancelled!");
         },
       });
-
-      
-      
-     
       console.log('Response:', result);
-    } catch (error) {
-      console.error('Error:', error);
+    } catch (error:any) {
+      toast.error(error.message || "Failed to process payment");
+    } finally {
+      setLoading(false);
     }
   };
 

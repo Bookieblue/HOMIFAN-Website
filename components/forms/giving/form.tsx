@@ -70,15 +70,16 @@ const GivingForm: React.FC = () => {
         firstName: result.data.firstName,
         lastName: result.data.lastName,
         phone: result.data.phoneNumber,
-        onSuccess: async (trx: any) => {
+        onSuccess: async (transaction: any) => {
           toast.success("Payment successful!");
-          console.log("Transaction:", trx);
+          console.log("Transaction:", transaction);
+
+          const trx = transaction.trxref
 
           try {
             const response = await fetch(`${API_BASE_URL}/api/verify/${trx}`, {
               method: "GET",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
             });
       
             const result = await response.json();
