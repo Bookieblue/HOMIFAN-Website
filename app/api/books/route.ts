@@ -15,6 +15,18 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
 
+    // Validate required fields first
+    const requiredFields = ["title", "description", "price", "coverImage"];
+    for (const field of requiredFields) {
+      if (!formData.has(field) || !formData.get(field)) {
+        return sendErrorResponse(
+          NextResponse,
+          `Field '${field}' is required`,
+          400
+        );
+      }
+    }
+
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
     const price = formData.get("price") as string;
