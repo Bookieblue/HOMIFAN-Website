@@ -6,7 +6,7 @@ const WeeklySchedule: React.FC = () => {
 
   const schedules = {
     Akure: [
-      { day: "Sunday", time: "7:30 AM - 12:00 PM", program: "SUNDAY SERVICE" },
+      { day: "Sunday", time: "8:00 AM - 12:00 PM", program: "SUNDAY SERVICE" },
       { day: "Monday", time: "10:00 AM - 5:00 PM", program: "COUNSELING" },
       {
         day: "Tuesday",

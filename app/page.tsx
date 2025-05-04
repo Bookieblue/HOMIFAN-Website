@@ -71,7 +71,7 @@ export default function Home() {
             {heading}
           </h1>
         </div>
-        <VideoDisplay link={videoUrl} />
+        <VideoDisplay link={videoUrl} autoPlay loop showControls={false}/>
       </div>
       <ChurchSection />
       <StayUpToDateSection />

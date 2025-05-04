@@ -111,7 +111,7 @@ const Publication: React.FC = () => {
                 <p>{publication.description}</p>
 
                 <div className="flex flex-col max-lg:flex-col-reverse gap-y-6">
-                  <BtnDropdown />
+                  <BtnDropdown bookId={id}/>
                   <div>
                     <p className="uppercase grid gap-y-2.5 font-semibold text-base lg:text-lg">
                       Feature of the book

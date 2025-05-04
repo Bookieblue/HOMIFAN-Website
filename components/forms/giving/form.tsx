@@ -132,9 +132,37 @@ const GivingForm: React.FC = () => {
         firstName: result.data.firstName,
         lastName: result.data.lastName,
         phone: result.data.phoneNumber,
-        onSuccess: () => {
-          // Verify payment on success
-          verifyPayment(paymentReference);
+        onSuccess: async (transaction: any) => {
+          toast.success("Payment successful!");
+          console.log("Transaction:", transaction);
+
+          const trx = transaction.trxref;
+
+          try {
+            const response = await fetch(`${API_BASE_URL}/api/verify/${trx}`, {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+              if (result.error && Array.isArray(result.error)) {
+                result.error.forEach(
+                  (err: { field: string; message: string }) => {
+                    toast.error(`${err.field}: ${err.message}`);
+                  }
+                );
+              } else {
+                throw new Error(
+                  result.message || "Could not verify transaction"
+                );
+              }
+              return;
+            }
+          } catch (error) {
+            toast.error("Could not verify transaction");
+          }
         },
         onCancel: () => {
           toast.warning(

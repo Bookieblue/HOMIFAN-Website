@@ -18,7 +18,7 @@ interface BranchProps {
 const servicesData: ServiceProps[] = [
   {
     title: "Sunday Service",
-    time: "Every Sunday, 07:30 AM to 12:00 pm",
+    time: "Every Sunday, 08:00 AM to 12:00 pm",
   },
   {
     title: "Bible Study",
@@ -35,14 +35,14 @@ const branchData: BranchProps[] = [
     title: "HEADQUARTER IN ONDO STATE",
     address:
       "Opposite CAC Grammar School, Behind Damilak Filling Station, Ondo Road, Akure.",
-    contactNumber: "0803 942 5631",
+    contactNumber: "+234803 858 3154",
     buttonText: "Whatsapp Us",
   },
   {
     title: "LAGOS BRANCH - IKORODU",
     address:
       "91B, Isawo Road, Agric Owutu, Opposite Mechanic Village, Ikorodu, Lagos.",
-    contactNumber: "0803 942 5631",
+    contactNumber: "+234803 389 8727",
     buttonText: "Whatsapp Us",
   },
 ];

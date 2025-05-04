@@ -31,7 +31,7 @@ const ArticlePage: React.FC = () => {
   const [loadingMoreArticles, setLoadingMoreArticles] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
   useEffect(() => {
     if (!id) return;

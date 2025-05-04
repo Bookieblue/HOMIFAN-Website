@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { MediaCard } from "./MediaCard";
 import Pagination from "@/components/Pagination";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
 const MediaList = () => {
   const mediaPerPage = 9;
