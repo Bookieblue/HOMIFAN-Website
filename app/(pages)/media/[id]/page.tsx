@@ -13,7 +13,7 @@ import { HeroContent } from '@/components/HeroContent';
 import { footerProps } from '@/app/constants';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
 const SingleMediaPage: React.FC = () => {
   const { id } = useParams();
