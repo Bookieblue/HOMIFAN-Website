@@ -25,8 +25,8 @@ export const publicationFormElement: Array<FormField> = [
     htmlFor: 'pubType',
     label: 'Publication Type',
     choices: [
-      { label: 'Printed Book', value: 'printBook' },
-      { label: 'Electronic Book (ebook)', value: 'eBook' },
+      // { label: 'Printed Book', value: 'Print' },
+      { label: 'Electronic Book (ebook)', value: 'EBook' },
     ],
   },
 ];
