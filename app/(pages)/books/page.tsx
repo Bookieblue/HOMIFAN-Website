@@ -22,7 +22,7 @@ const Publications: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
 
   useEffect(() => {

@@ -10,7 +10,7 @@ export const ArticlePage: React.FC = () => {
   const [language, setLanguage] = useState<string>('all'); // Default to all languages
   const [originalArticles, setOriginalArticles] = useState<Article[]>([]);
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
   useEffect(() => {
     const fetchArticles = async () => {
