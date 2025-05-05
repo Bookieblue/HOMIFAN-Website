@@ -129,6 +129,17 @@ export const sermonSchema = z.object({
 // Schema for validating IDs
 export const idSchema = z.string().uuid("Invalid ID format");
 
+// Address schema for delivery
+const addressSchema = z
+  .object({
+    street: z.string().min(3, "Street address must be at least 3 characters"),
+    city: z.string().min(2, "City must be at least 2 characters"),
+    state: z.string().min(2, "State must be at least 2 characters"),
+    postalCode: z.string().min(2, "Postal code must be at least 2 characters"),
+    country: z.string().min(2, "Country must be at least 2 characters"),
+  })
+  .optional();
+
 // Schema for book purchase
 export const buyBookSchema = personBaseSchema.extend({
   bookId: z.string().uuid("Invalid book ID format"),
@@ -138,4 +149,8 @@ export const buyBookSchema = personBaseSchema.extend({
     }),
   }),
   additionalInfo: z.string().optional(),
+  // Optional delivery address - only required for print books
+  deliveryAddress: z.union([addressSchema, z.literal(""), z.null()]).optional(),
+  // Flag to indicate if delivery address is same as customer address
+  useCustomerAddress: z.boolean().optional(),
 });
