@@ -1,100 +1,11 @@
-export const publications = [
-  {
-    id: '1',
-    title: 'Become a Better Christian',
-    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-    price: '10,000',
-    bookType: 'Published Book',
-    language: 'English',
-    pagination: '150',
-    dimension: '20.3 x 25.4 x 4.7 cm',
-    imageUrl: '/ebooks.svg', // Replace with actual image URLs
-  },
-  {
-    id: '2',
-    title: 'Become a Better Christian',
-    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-    price: '10,000',
-    bookType: 'Published Book',
-    language: 'English',
-    pagination: '150',
-    dimension: '20.3 x 25.4 x 4.7 cm',
-    imageUrl: '/ebooks.svg', // Replace with actual image URLs
-  },
-  {
-    id: '3',
-    title: 'Become a Better Christian',
-    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-    price: '10,000',
-    bookType: 'Published Book',
-    language: 'English',
-    pagination: '150',
-    dimension: '20.3 x 25.4 x 4.7 cm',
-    imageUrl: '/ebooks.svg', // Replace with actual image URLs
-  },
-  {
-    id: '4',
-    title: 'Become a Better Christian',
-    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-    price: '10,000',
-    bookType: 'Published Book',
-    language: 'English',
-    pagination: '150',
-    dimension: '20.3 x 25.4 x 4.7 cm',
-    imageUrl: '/ebooks.svg', // Replace with actual image URLs
-  },
-  {
-    id: '5',
-    title: 'Become a Better Christian',
-    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-    price: '10,000',
-    bookType: 'Published Book',
-    language: 'English',
-    pagination: '150',
-    dimension: '20.3 x 25.4 x 4.7 cm',
-    imageUrl: '/ebooks.svg', // Replace with actual image URLs
-  },
-  {
-    id: '6',
-    title: 'Become a Better Christian',
-    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-    price: '10,000',
-    bookType: 'Published Book',
-    language: 'English',
-    pagination: '150',
-    dimension: '20.3 x 25.4 x 4.7 cm',
-    imageUrl: '/ebooks.svg', // Replace with actual image URLs
-  },
-  {
-    id: '7',
-    title: 'Become a Better Christian',
-    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-    price: '10,000',
-    bookType: 'Published Book',
-    language: 'English',
-    pagination: '150',
-    dimension: '20.3 x 25.4 x 4.7 cm',
-    imageUrl: '/ebooks.svg', // Replace with actual image URLs
-  },
-  {
-    id: '8',
-    title: 'Become a Better Christian',
-    desc: "It's only natural for you to desire to become a better Christian and grow in your faith in Jesus Christ....",
-    price: '10,000',
-    bookType: 'Published Book',
-    language: 'English',
-    pagination: '150',
-    dimension: '20.3 x 25.4 x 4.7 cm',
-    imageUrl: '/ebooks.svg', // Replace with actual image URLs
-  },
-];
+
 
 export const footerProps = {
   logoSrc: '/logo.png',
   navigationLinks: [
     { name: 'About Us', href: '/about-us' },
     { name: 'Giving', href: '/giving' },
-    { name: 'Publications', href: '/publications' },
+    { name: 'Publications', href: '/books' },
     { name: 'Articles', href: '/articles' },
     { name: 'Sermons', href: '/media' },
     { name: 'Contact Us', href: '/contact-us' },
@@ -152,7 +63,7 @@ export const aboutFounderCardProps = {
     'I don’t see what God can’t do, you only have to come to this presence and witness him.',
     'Faith is believing that God has already done what you are asking for, even when you can’t see it yet.',
   ],
-  imageSrc: '/GO3.jpg',
+  imageSrc: '/Go3.png',
 };
 
 export const aboutUsData = {
@@ -204,6 +115,11 @@ export const prayerData = {
 export const JoinusData = {
   title: 'WELCOME TO OUR FAMILY ',
   subtitle: 'JOIN US',
+};
+
+export const JoinLiveData = {
+  title: 'LIVE STREAM',
+  subtitle: 'CATCH US ONLINE',
 };
 
 export const publicationData = {

@@ -47,7 +47,7 @@ const PublicationForm: React.FC<{
       const payload = {
         ...data,
         publicationType: data.pubType,
-        bookId:'2eb4a54a-f491-492a-bedd-99bbbf5a9c79',
+        bookId
       }
       const response = await fetch(`${API_BASE_URL}/api/books/buy`, {
         method: 'POST',

@@ -6,39 +6,93 @@ import { initialValues } from "../constants";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { givingFormElement, givingSchema } from "./constant";
 import { toast } from "react-toastify";
-
 const GivingForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [PaystackPop, setPaystackPop] = useState<any>(null);
 
+  // Load Paystack SDK
   useEffect(() => {
-    import("@paystack/inline-js").then((module) => {
-      setPaystackPop(() => module.default); // Set it as a function
-    });
+    import("@paystack/inline-js")
+      .then((module) => {
+        setPaystackPop(() => module.default);
+      })
+      .catch((error) => {
+        console.error("Failed to load Paystack SDK:", error);
+        toast.error(
+          "Payment system is currently unavailable. Please try again later."
+        );
+      });
   }, []);
-
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(givingSchema),
-    defaultValues: { ...initialValues, amount: 0 },
+    defaultValues: { ...initialValues, amount: 0, donationType: "Offering" },
   });
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
   const PAYSTACK_PUBLIC_KEY = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || "";
+
+  // Verify payment after completion
+  const verifyPayment = async (reference: string) => {
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/payments/verify/${reference}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Payment verification failed");
+      }
+
+      if (result.data.paymentStatus === "success") {
+        toast.success(
+          "Your donation has been received. Thank you for your generosity!"
+        );
+        reset(); // Reset form after successful payment
+      } else if (result.data.paymentStatus === "failed") {
+        toast.error(
+          "Payment failed. Please try again or use a different payment method."
+        );
+      } else {
+        toast.info(
+          "Payment is being processed. We'll update you once it's complete."
+        );
+      }
+    } catch (error: any) {
+      console.error("Payment verification error:", error);
+      toast.error(error.message || "Failed to verify payment");
+    }
+  };
 
   const onSubmit = async (data: any) => {
     setLoading(true);
     console.log(JSON.stringify(data));
 
     try {
+      // Ensure amount is a number
+      const formData = {
+        ...data,
+        amount:
+          typeof data.amount === "string"
+            ? parseFloat(data.amount)
+            : data.amount,
+      };
+
+      // Initialize donation
       const response = await fetch(`${API_BASE_URL}/api/donations`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
 
       const result = await response.json();
@@ -57,17 +111,25 @@ const GivingForm: React.FC = () => {
       toast.success("Proceeding to payment...");
 
       if (!PaystackPop) {
-        toast.error("Payment SDK not loaded");
+        toast.error("Payment system is not available. Please try again later.");
         return;
       }
 
-      // ✅ Automatically trigger Paystack payment
+      // Get payment reference
+      const paymentReference =
+        result.data.trxfReference || result.data.paymentReference;
+
+      if (!paymentReference) {
+        throw new Error("Payment reference not generated");
+      }
+
+      // Initialize Paystack payment
       const paystack = new PaystackPop();
       paystack.newTransaction({
         key: PAYSTACK_PUBLIC_KEY,
         amount: result.data.amount * 100, // Convert to kobo
         email: result.data.email,
-        reference: result.data.trxfReference,
+        reference: paymentReference,
         firstName: result.data.firstName,
         lastName: result.data.lastName,
         phone: result.data.phoneNumber,
@@ -75,7 +137,7 @@ const GivingForm: React.FC = () => {
           toast.success("Payment successful!");
           console.log("Transaction:", transaction);
 
-          const trx = transaction.trxref
+          const trx = transaction.trxref;
 
 
           try {
@@ -84,20 +146,19 @@ const GivingForm: React.FC = () => {
               headers: { "Content-Type": "application/json" }
             });
 
-            // Check if response is empty
-            const text = await response.text();
-            console.log('Raw response:', text);
-            
-            // Only try to parse if we have content
-            const result = text ? JSON.parse(text) : {};
-      
+            const result = await response.json();
+
             if (!response.ok) {
               if (result.error && Array.isArray(result.error)) {
-                result.error.forEach((err: { field: string; message: string }) => {
-                  toast.error(`${err.field}: ${err.message}`);
-                });
+                result.error.forEach(
+                  (err: { field: string; message: string }) => {
+                    toast.error(`${err.field}: ${err.message}`);
+                  }
+                );
               } else {
-                throw new Error(result.message || "Could not verify transaction");
+                throw new Error(
+                  result.message || "Could not verify transaction"
+                );
               }
               return;
             }
@@ -106,12 +167,13 @@ const GivingForm: React.FC = () => {
           }
         },
         onCancel: () => {
-          toast.error("Payment cancelled!");
+          toast.warning(
+            "Payment was cancelled. You can try again when you're ready."
+          );
         },
       });
-
-
     } catch (error: any) {
+      console.error("Payment error:", error);
       toast.error(error.message || "Failed to process payment");
     } finally {
       setLoading(false);

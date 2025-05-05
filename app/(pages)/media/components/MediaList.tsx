@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { MediaCard } from "./MediaCard";
 import Pagination from "@/components/Pagination";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
 const MediaList = () => {
   const mediaPerPage = 9;
@@ -62,9 +62,8 @@ const MediaList = () => {
 
   return (
     <>
-      <div className="grid gap-4 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
       <h2 className="text-center text-3xl font-bold my-6">View All Sermons</h2>
-
+      <div className="grid gap-4 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {currentMedia.map((data: any) => (
           <MediaCard key={data.id} {...data} />
         ))}
