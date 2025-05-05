@@ -32,6 +32,7 @@ const GivingForm: React.FC = () => {
 
   const onSubmit = async (data: any) => {
     setLoading(true);
+    console.log(JSON.stringify(data));
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/donations`, {
@@ -76,13 +77,19 @@ const GivingForm: React.FC = () => {
 
           const trx = transaction.trxref
 
+
           try {
-            const response = await fetch(`${API_BASE_URL}/api/verify/${trx}`, {
+            const response = await fetch(`${API_BASE_URL}/api/payments/verify/${trx}`, {
               method: "GET",
-              headers: { "Content-Type": "application/json" },
+              headers: { "Content-Type": "application/json" }
             });
-      
-            const result = await response.json();
+
+            // Check if response is empty
+            const text = await response.text();
+            console.log('Raw response:', text);
+            
+            // Only try to parse if we have content
+            const result = text ? JSON.parse(text) : {};
       
             if (!response.ok) {
               if (result.error && Array.isArray(result.error)) {

@@ -91,8 +91,6 @@ const PublicationForm: React.FC<{
 
         onSuccess: async (transaction: any) => {
           toast.success("Payment successful!");
-          console.log("Transaction object:", transaction);
-
          
           try {
             const response = await fetch(`${API_BASE_URL}/api/payments/verify/${transaction.trxref}`, {
@@ -100,7 +98,12 @@ const PublicationForm: React.FC<{
               headers: { "Content-Type": "application/json" }
             });
       
-            const result = await response.json();
+            // Check if response is empty
+            const text = await response.text();
+            console.log('Raw response:', text);
+            
+            // Only try to parse if we have content
+            const result = text ? JSON.parse(text) : {};
       
             if (!response.ok) {
               if (result.error && Array.isArray(result.error)) {
@@ -110,10 +113,12 @@ const PublicationForm: React.FC<{
               } else {
                 throw new Error(result.message || "Could not verify transaction");
               }
-              setLoading(false);
+              
               return;
             }
-            setLoading(false);
+
+            toast.success("Payment verified successfully!");
+            
           } catch (error) {
             toast.error("Could not verify transaction");
             setLoading(false);
