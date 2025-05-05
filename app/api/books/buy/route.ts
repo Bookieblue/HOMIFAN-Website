@@ -6,7 +6,7 @@ import {
 import { formatZodError } from "@/app/utils/formatter";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { BookType, PaymentMethod, PaymentType, Status } from "../../enum";
+import { BookType, PaymentType, Status } from "../../enum";
 import { generateTransRef } from "@/app/utils";
 
 const buyBookSchema = z.object({
@@ -19,6 +19,7 @@ const buyBookSchema = z.object({
   cityAndState: z.string().min(1, "City/State is required"),
   publicationType: z.nativeEnum(BookType),
   additionalInfo: z.string().optional(),
+  delieveryAddress: z.string().optional(),
 });
 
 interface IBuyBookSchema extends z.infer<typeof buyBookSchema> {}
@@ -63,6 +64,7 @@ export async function POST(request: NextRequest) {
       phoneNumber,
       additionalInfo,
       publicationType,
+      delieveryAddress,
     } = payload;
 
     const payment = await prisma.payment.create({
@@ -75,6 +77,7 @@ export async function POST(request: NextRequest) {
           phoneNumber,
           additionalInfo,
           publicationType,
+          delieveryAddress,
         },
         paymentType: PaymentType.ORDER_BOOK,
         reference,
