@@ -10,6 +10,14 @@ interface MediaCardProps {
   description: string;
 }
 
+// Slugify function to make title URL-safe
+const slugify = (text: string) => {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric with hyphens
+    .replace(/(^-|-$)+/g, '');   // Remove leading/trailing hyphens
+};
+
 export const MediaCard: React.FC<MediaCardProps> = ({
   id,
   title,
@@ -17,9 +25,11 @@ export const MediaCard: React.FC<MediaCardProps> = ({
   link,
   description,
 }) => {
+
+  const slug = slugify(title);
   return (
     <div className="border border-black-50 rounded-xl ">
-      <Link href={`/media/${id}`}>
+      <Link href={`/media/${id}/${slug}`}>
         <VideoDisplay link='https://youtu.be/By706Mws8xc' />
       </Link>
       <div className="md:px-4 *:uppercase py-4 px-2.5">

@@ -60,7 +60,7 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
         onCanPlay={autoPlay ? handlePlay : undefined}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
-        className="p-3 w-full h-full object-cover rounded-2xl"
+        className="p-3 w-full h-[300px] lg:h-[500px] object-cover rounded-2xl"
       />
     )}
 
