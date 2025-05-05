@@ -3,6 +3,15 @@ import Link from 'next/link';
 import { Article } from './FeaturedArticle';
 import formatDate from '@/components/DateFormat';
 
+
+// Slugify function to make title URL-safe
+const slugify = (text: string) => {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric with hyphens
+    .replace(/(^-|-$)+/g, '');   // Remove leading/trailing hyphens
+};
+
 const ArticleCard: React.FC<Article> = ({
   id,
   updatedAt,
@@ -17,8 +26,10 @@ const ArticleCard: React.FC<Article> = ({
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
   };
 
+  const slug = slugify(title);
+
   return (
-    <Link href={`/articles/${id}`}>
+    <Link href={`/articles/${id}/${slug}`}>
       <div className="block overflow-hidden rounded-lg shadow-md hover:shadow-xl hover:border-purple-50 hover:border transition-shadow transform hover:scale-[1.04] duration-200 h-full">
         <div className="relative w-full h-48 overflow-hidden">
           <img
