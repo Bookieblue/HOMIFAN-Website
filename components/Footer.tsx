@@ -40,13 +40,13 @@ const FooterSection: React.FC<FooterProps> = ({
 
         {/* Navigation Links */}
         <div className="col-span-1 md:col-span-1 z-10 text-white">
-          <h4 className=" mb-4 border-b-4 border-yellow-50 inline-block pb-1">
+          <h4 className=" mb-4 border-b-4 border-[#FFD0A0] inline-block pb-1">
             Navigation
           </h4>
           <ul>
             {navigationLinks.map(link => (
               <li key={link.name} className="mb-2">
-                <a href={link.href} className="hover:underline">
+                <a href={link.href} className="hover:underline" >
                   {link.name}
                 </a>
               </li>
@@ -56,13 +56,13 @@ const FooterSection: React.FC<FooterProps> = ({
 
         {/* Social Media Links */}
         <div className="col-span-1 md:col-span-1 z-10 text-white">
-          <h4 className=" mb-4 border-b-4 border-yellow-50 inline-block pb-1">
+          <h4 className=" mb-4 border-b-4 border-[#FFD0A0] inline-block pb-1">
             Social Media
           </h4>
           <ul>
             {socialMediaLinks.map(social => (
               <li key={social.platform} className="mb-2">
-                <a href={social.href} className="hover:underline">
+                <a href={social.href} className="hover:underline" target='blank'>
                   {social.platform}
                 </a>
               </li>
@@ -72,15 +72,15 @@ const FooterSection: React.FC<FooterProps> = ({
 
         {/* Contact Information */}
         <div className="col-span-2 md:col-span-2 z-10 text-white">
-          <div className="p-3">
+          <div className="lg:p-3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Headquarters Contact */}
               <div>
-                <h4 className="  mb-4 border-b-4 border-yellow-500 inline-block pb-1">
+                <h4 className="  mb-4 border-b-4 border-[#FFD0A0] inline-block pb-1">
                   Headquarter Contact
                 </h4>
                 <p>{headquarters.address}</p>
-                <a href={`mailto:${headquarters.email}`} className="underline">
+                <a href={`mailto:${headquarters.email}`} className="underline break-all">
                   {headquarters.email}
                 </a>
                 <p className="font-bold mt-2">{headquarters.phone}</p>
@@ -88,7 +88,7 @@ const FooterSection: React.FC<FooterProps> = ({
 
               {/* Lagos Branch Contact */}
               <div>
-                <h4 className=" text-sm mb-4 border-b-4 border-yellow-500 inline-block pb-1">
+                <h4 className=" text-sm mb-4 border-b-4 border-[#FFD0A0] inline-block pb-1">
                   Lagos Branch Contact
                 </h4>
                 <p>{lagosBranch.address}</p>
@@ -103,7 +103,7 @@ const FooterSection: React.FC<FooterProps> = ({
       </div>
 
       {/* Footer Bottom */}
-      <div className="border-t border-gray-500 mt-8 padding-container max-container text-white pt-6 flex flex-col md:flex-row items-center justify-between text-center text-sm">
+      <div className="border-t mb-10 lg:mb-0 border-gray-500 mt-8 padding-container max-container text-white pt-6 flex flex-col md:flex-row items-center justify-between text-center text-sm">
         <p>{copyright}</p>
         <div className="flex justify-center space-x-6 mt-4 md:mt-0">
           <a href="#" className="hover:underline">

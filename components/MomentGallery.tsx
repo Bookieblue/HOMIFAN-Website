@@ -45,7 +45,7 @@ const MomentsGallery = () => {
   ];
 
   // Slice gallery items to show only first 6 on mobile
-  const displayedItems = isMobile ? galleryItems.slice(0, 6) : galleryItems;
+  const displayedItems = isMobile ? galleryItems.slice(0, 10) : galleryItems;
 
   return (
     <section className="py-16 bg-gray-100  padding-container max-container">
