@@ -9,7 +9,7 @@ import JoinUsSection from "@/components/JoinUs";
 import BackToTopButton from "@/components/BackToTop";
 import { footerProps } from "@/app/constants";
 import Image from "next/image";
-import ArticleCard from "../components/ArticleCard";
+import ArticleCard from "../../components/ArticleCard";
 import formatDate from "@/components/DateFormat";
 
 interface Article {
@@ -66,12 +66,12 @@ const ArticlePage: React.FC = () => {
       try {
         const response = await fetch(`${API_BASE_URL}/api/articles`);
         const data = await response.json();
-  
+
         if (data.success && Array.isArray(data.data)) {
           const filteredArticles = data.data.filter(
             (article: Article) => article.id !== id
           );
-  
+
           // Shuffle and pick 3 random articles
           const shuffled = filteredArticles.sort(() => 0.5 - Math.random());
           setMoreArticles(shuffled.slice(0, 3));
@@ -82,7 +82,7 @@ const ArticlePage: React.FC = () => {
         setLoadingMoreArticles(false);
       }
     };
-  
+
     fetchMoreArticles();
   }, [id, API_BASE_URL]);
 

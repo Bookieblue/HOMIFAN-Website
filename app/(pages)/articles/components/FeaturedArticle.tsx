@@ -25,7 +25,7 @@ const FeaturedArticle: React.FC<Article> = ({
     <h2 className="text-center text-3xl font-bold mt-2 uppercase">
       Our Featured Article
     </h2>
-    <div className="flex flex-col lg:flex-row bg-white rounded-lg shadow-md p-8 items-center mt-6 space-y-4 lg:space-y-0 lg:space-x-8">
+    <div className="flex flex-col lg:flex-row bg-white rounded-lg shadow-md p-8 mt-6 space-y-4 lg:space-y-0 lg:space-x-8">
       <img src={imageUrl} alt={title} className="w-full lg:w-1/2 rounded-md border border-gray-300" />
       <div className="lg:w-1/2 space-y-4">
       <p className="text-sm text-gray-500">{formatDate(updatedAt)}</p>
