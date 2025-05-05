@@ -136,10 +136,12 @@ const PublicationForm: React.FC<{
                   result.message || "Could not verify transaction"
                 );
               }
-              setLoading(false);
+              
               return;
             }
-            setLoading(false);
+
+            toast.success("Payment verified successfully!");
+            
           } catch (error) {
             toast.error("Could not verify transaction");
             setLoading(false);

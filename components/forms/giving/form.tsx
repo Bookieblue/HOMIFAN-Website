@@ -76,6 +76,7 @@ const GivingForm: React.FC = () => {
 
   const onSubmit = async (data: any) => {
     setLoading(true);
+    console.log(JSON.stringify(data));
 
     try {
       // Ensure amount is a number
