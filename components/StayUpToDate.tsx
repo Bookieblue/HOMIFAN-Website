@@ -27,7 +27,7 @@ const cardData = [
     buttonText: 'READ ARTICLES',
   },
   {
-    url: '/publications',
+    url: '/books',
     imageSrc: '/books-bg.svg',
     title: 'GET CHRISTIAN SPIRITUAL BOOKS',
     description:
