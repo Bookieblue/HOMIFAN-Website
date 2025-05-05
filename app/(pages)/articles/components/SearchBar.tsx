@@ -22,7 +22,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       />
       <button
         onClick={handleSearch}
-        className="w-full sm:w-auto bg-purple-500 text-white px-4 py-2 rounded-md sm:rounded-l-none sm:rounded-r-md"
+        className="w-full sm:w-auto bg-purple-50 text-white px-4 py-2 rounded-md sm:rounded-l-none sm:rounded-r-md"
       >
         Search Now
       </button>
