@@ -15,7 +15,7 @@ const Biography: React.FC = () => {
       {/* Prophet's Image */}
       <div className="flex justify-center lg:w-[40%] mx-auto">
         <Image
-          src="/Go3.jpg"
+          src="/Go3.png"
           alt="Prophet Segun Adewumi"
           width={500} // Set a larger width
           height={500} //
