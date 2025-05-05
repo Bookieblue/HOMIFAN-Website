@@ -80,7 +80,7 @@ const FooterSection: React.FC<FooterProps> = ({
                   Headquarter Contact
                 </h4>
                 <p>{headquarters.address}</p>
-                <a href={`mailto:${headquarters.email}`} className="underline">
+                <a href={`mailto:${headquarters.email}`} className="underline break-all">
                   {headquarters.email}
                 </a>
                 <p className="font-bold mt-2">{headquarters.phone}</p>
