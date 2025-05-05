@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
       where: {
         email,
         amount,
-        paymentStatus: PaymentStatus.initiated,
+        paymentStatus: "initiated",
       },
     });
 
@@ -74,7 +74,6 @@ export async function POST(request: NextRequest) {
           phoneNumber,
           country,
           cityAndState,
-          paymentStatus: PaymentStatus.initiated,
           trxfReference: trxRef,
         },
       });
