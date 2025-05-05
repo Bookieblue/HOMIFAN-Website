@@ -5,7 +5,7 @@ export const footerProps = {
   navigationLinks: [
     { name: 'About Us', href: '/about-us' },
     { name: 'Giving', href: '/giving' },
-    { name: 'Publications', href: '/publications' },
+    { name: 'Publications', href: '/books' },
     { name: 'Articles', href: '/articles' },
     { name: 'Sermons', href: '/media' },
     { name: 'Contact Us', href: '/contact-us' },

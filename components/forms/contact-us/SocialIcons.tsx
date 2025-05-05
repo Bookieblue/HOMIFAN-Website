@@ -4,16 +4,16 @@ import Link from 'next/link';
 const icons = [
   {
     icon: <Instagram key={1} strokeWidth={2} size={24} absoluteStrokeWidth />,
-    url: 'https://www.instagram.com/',
+    url: 'https://www.instagram.com/hopmifans/',
   },
   {
     icon: <Facebook key={2} strokeWidth={2} size={24} absoluteStrokeWidth />,
     url: 'https://web.facebook.com/watch/hopmifans/',
   },
-  {
-    icon: <X key={3} strokeWidth={2} size={24} absoluteStrokeWidth />,
-    url: 'https://www.x.com/',
-  },
+  // {
+  //   icon: <X key={3} strokeWidth={2} size={24} absoluteStrokeWidth />,
+  //   url: 'https://www.x.com/',
+  // },
   {
     icon: <Youtube key={4} strokeWidth={2} size={24} absoluteStrokeWidth />,
     url: 'https://www.youtube.com/@houseofprayerministriesfor5802',

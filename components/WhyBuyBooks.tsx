@@ -21,7 +21,7 @@ const WhyBuyBooks = () => {
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 leading-tight">
             Grow in Faith. Empower Your Spirit. Transform Your Life.
           </h2>
-          <p className="text-gray-600 leading-relaxed">
+          <p className="text-gray-600 text-left lg:text-center leading-relaxed">
             At House of Prayer Ministries for All Nations, we are committed to
             spreading the Word of God and empowering believers through
             faith-building resources. Our Publication Store is filled with
