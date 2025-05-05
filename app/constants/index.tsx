@@ -152,7 +152,7 @@ export const aboutFounderCardProps = {
     'I don’t see what God can’t do, you only have to come to this presence and witness him.',
     'Faith is believing that God has already done what you are asking for, even when you can’t see it yet.',
   ],
-  imageSrc: '/GO3.jpg',
+  imageSrc: '/Go3.jpg',
 };
 
 export const aboutUsData = {
