@@ -46,7 +46,7 @@ const FooterSection: React.FC<FooterProps> = ({
           <ul>
             {navigationLinks.map(link => (
               <li key={link.name} className="mb-2">
-                <a href={link.href} className="hover:underline">
+                <a href={link.href} className="hover:underline" >
                   {link.name}
                 </a>
               </li>
@@ -62,7 +62,7 @@ const FooterSection: React.FC<FooterProps> = ({
           <ul>
             {socialMediaLinks.map(social => (
               <li key={social.platform} className="mb-2">
-                <a href={social.href} className="hover:underline">
+                <a href={social.href} className="hover:underline" target='blank'>
                   {social.platform}
                 </a>
               </li>
