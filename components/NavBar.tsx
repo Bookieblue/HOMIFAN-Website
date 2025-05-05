@@ -4,6 +4,7 @@ import {
   Facebook,
   LucideFacebook,
   LucideYoutube,
+  Radio,
   Menu,
   X,
   Youtube,
@@ -41,6 +42,11 @@ const navbarData = {
     name: "JOIN US ONLINE",
     hasDropdown: true,
     dropdownOptions: [
+      {
+        name: "Live Broadcast",
+        href: "/live-broadcast", 
+        icon: <Radio size={20} />,
+      },
       {
         name: "Facebook",
         href: "https://web.facebook.com/watch/hopmifans/",

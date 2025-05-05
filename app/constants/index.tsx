@@ -117,6 +117,11 @@ export const JoinusData = {
   subtitle: 'JOIN US',
 };
 
+export const JoinLiveData = {
+  title: 'LIVE STREAM',
+  subtitle: 'CATCH US ONLINE',
+};
+
 export const publicationData = {
   title: 'FIND YOUR NEXT GREAT READ AT OUR ONLINE BOOK STORE',
   subtitle: 'PUBLICATION STORE',
