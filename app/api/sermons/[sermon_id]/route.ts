@@ -26,6 +26,6 @@ export async function GET(
     );
   } catch (error: any) {
     console.error("Error fetching sermon:", error);
-    throw error;
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
 }

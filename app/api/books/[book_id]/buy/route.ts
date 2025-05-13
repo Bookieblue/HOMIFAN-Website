@@ -35,7 +35,7 @@ export async function GET(
       book,
       "Book retrieved successfully"
     );
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
 }
