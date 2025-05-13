@@ -10,7 +10,7 @@ export const publicationValues = {
   ...initialValues,
   message: "",
   pubType: "EBook",
-  useCustomerAddress: true,
+  useCustomerAddress: false,
   // Delivery address fields
   deliveryStreet: "",
   deliveryCity: "",

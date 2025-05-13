@@ -31,7 +31,7 @@ const GivingForm: React.FC = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(givingSchema),
-    defaultValues: { ...initialValues, amount: 0, donationType: "Offering" },
+    defaultValues: { ...initialValues, amount: 0 },
   });
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
@@ -76,7 +76,6 @@ const GivingForm: React.FC = () => {
 
   const onSubmit = async (data: any) => {
     setLoading(true);
-
     try {
       // Ensure amount is a number
       const formData = {
@@ -85,6 +84,9 @@ const GivingForm: React.FC = () => {
           typeof data.amount === "string"
             ? parseFloat(data.amount)
             : data.amount,
+        phoneNumber: data.phoneNumber.startsWith('+234') 
+          ? data.phoneNumber
+          : `+234${data.phoneNumber.replace(/^0+/, '')}`,
       };
 
       // Initialize donation
