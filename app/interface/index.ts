@@ -141,7 +141,6 @@ export interface IAdminLogin {
 
 export interface IAuthToken {
   id: string;
-  username: string;
   email: string;
   role: string;
 }

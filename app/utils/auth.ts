@@ -1,12 +1,11 @@
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { IAdmin, IAuthToken } from "../interface";
-import { NextRequest, NextResponse } from "next/server";
-import { sendErrorResponse } from "./apiResponse";
+import { NextRequest } from "next/server";
 
 // Ensure JWT_SECRET is defined (throw error if missing)
-const JWT_SECRET = process.env.JWT_SECRET;
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1d";
+const JWT_SECRET = process.env.JWT_SECRET!;
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN! || "1d";
 
 if (!JWT_SECRET) {
   throw new Error("JWT_SECRET is not defined in environment variables.");
@@ -22,13 +21,17 @@ export const generateToken = (admin: IAdmin): string => {
   try {
     const payload: IAuthToken = {
       id: admin.id,
-      username: admin.username,
       email: admin.email,
       role: admin.role,
     };
-    return jwt.sign(payload, JWT_SECRET, {
-      expiresIn: JWT_EXPIRES_IN,
-    });
+    const token: string = jwt?.sign(
+      payload,
+      JWT_SECRET as any,
+      {
+        expiresIn: JWT_EXPIRES_IN || "1d",
+      } as any
+    );
+    return token;
   } catch (error) {
     throw new Error("Failed to generate JWT token.");
   }
