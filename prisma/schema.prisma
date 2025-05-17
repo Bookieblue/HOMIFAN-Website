@@ -66,6 +66,7 @@ model Book {
   authorName  String  @map("author_name")
   authorBio   String? @map("author_bio")
   authorImage String? @map("author_image")
+  pdfUrl      String? @map("pdf_url")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -183,7 +184,7 @@ model Sermon {
   link        String
   thumbnail   String
   status  Status  @default(unpublish)
-  
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -222,4 +223,17 @@ enum PaymentStatus {
   initiated
   failed
   success
+}
+
+model Admin {
+  id       String @id @default(uuid())
+  username String @unique
+  email    String @unique
+  password String
+  role     String @default("admin")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("admins")
 }

@@ -1,22 +1,25 @@
 import { IMember } from "@/app/interface";
 import prisma from "@/app/lib/prisma";
-import { sendSuccessResponse } from "@/app/utils/apiResponse";
+import {
+  sendErrorResponse,
+  sendSuccessResponse,
+} from "@/app/utils/apiResponse";
 import { ApiError, withErrorHandler } from "@/app/utils/errorHandler";
 import { NextRequest, NextResponse } from "next/server";
 import { idSchema, memberSchema } from "@/app/validators";
 
 // GET: Fetch member by ID
-export const GET = withErrorHandler(
-  async (
-    _request: Request,
-    { params }: { params: Promise<{ member: string }> }
-  ) => {
-    const memberId = (await params).member;
+export const GET = async (
+  _request: Request,
+  { params }: { params: Promise<{ member: string }> }
+) => {
+  const memberId = (await params).member;
 
+  try {
     // Validate member ID
     const validation = idSchema.safeParse(memberId);
     if (!validation.success) {
-      throw new ApiError("Invalid member ID format", 400);
+      return sendErrorResponse(NextResponse, "Invalid member ID format", 400);
     }
 
     // Find the member
@@ -33,21 +36,23 @@ export const GET = withErrorHandler(
       member,
       "Member retrieved successfully"
     );
+  } catch (error: any) {
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
-);
+};
 
 // PUT: Update member by ID
-export const PUT = withErrorHandler(
-  async (
-    request: NextRequest,
-    { params }: { params: Promise<{ member: string }> }
-  ) => {
-    const memberId = (await params).member;
+export const PUT = async (
+  request: NextRequest,
+  { params }: { params: Promise<{ member: string }> }
+) => {
+  const memberId = (await params).member;
 
+  try {
     // Validate member ID
     const validation = idSchema.safeParse(memberId);
     if (!validation.success) {
-      throw new ApiError("Invalid member ID format", 400);
+      return sendErrorResponse(NextResponse, "Invalid member ID format", 400);
     }
 
     // Parse and sanitize request body
@@ -59,7 +64,7 @@ export const PUT = withErrorHandler(
     });
 
     if (!existingMember) {
-      throw new ApiError("Member not found", 404);
+      return sendErrorResponse(NextResponse, "Member not found", 404);
     }
 
     // Sanitize input fields
@@ -93,7 +98,11 @@ export const PUT = withErrorHandler(
     // Validate with Zod schema
     const schemaValidation = memberSchema.safeParse(payload);
     if (!schemaValidation.success) {
-      throw new ApiError(JSON.stringify(schemaValidation.error.format()), 400);
+      return sendErrorResponse(
+        NextResponse,
+        JSON.stringify(schemaValidation.error.format()),
+        400
+      );
     }
 
     // Check if email or phone number already exists for another member
@@ -112,7 +121,8 @@ export const PUT = withErrorHandler(
       });
 
       if (duplicateMember) {
-        throw new ApiError(
+        return sendErrorResponse(
+          NextResponse,
           "Email or phone number already registered by another member",
           409
         );
@@ -130,21 +140,22 @@ export const PUT = withErrorHandler(
       updatedMember,
       "Member updated successfully"
     );
+  } catch (error: any) {
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
-);
+};
 
 // DELETE: Delete member by ID
-export const DELETE = withErrorHandler(
-  async (
-    _request: Request,
-    { params }: { params: Promise<{ member: string }> }
-  ) => {
-    const memberId = (await params).member;
-
+export const DELETE = async (
+  _request: Request,
+  { params }: { params: Promise<{ member: string }> }
+) => {
+  const memberId = (await params).member;
+  try {
     // Validate member ID
     const validation = idSchema.safeParse(memberId);
     if (!validation.success) {
-      throw new ApiError("Invalid member ID format", 400);
+      return sendErrorResponse(NextResponse, "Invalid member ID format", 400);
     }
 
     // Check if member exists
@@ -153,7 +164,7 @@ export const DELETE = withErrorHandler(
     });
 
     if (!member) {
-      throw new ApiError("Member not found", 404);
+      return sendErrorResponse(NextResponse, "Member not found", 404);
     }
 
     // Delete the member
@@ -166,5 +177,7 @@ export const DELETE = withErrorHandler(
       null,
       "Member deleted successfully"
     );
+  } catch (error: any) {
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
-);
+};

@@ -90,8 +90,8 @@ export async function POST(request: NextRequest) {
       { ...payment },
       "Book purchase initiated successfully" // Fixed: Correct success message
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in POST /api/buy-book:", error);
-    throw error;
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
 }

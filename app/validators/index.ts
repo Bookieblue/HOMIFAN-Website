@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { BookType, PaymentMethod, Status } from "../api/enum";
+import { BookType, Status } from "../api/enum";
 
 // Common validation patterns
 const phoneRegex = /^\+\d{1,3}\d{10}$/; // International format: +[country code][number]
@@ -67,6 +67,7 @@ export const bookSchema = z.object({
   language: z.string().min(2, "Language must be at least 2 characters"),
   authorName: nameValidator("Author name"),
   authorBio: z.string().min(10, "Author bio must be at least 10 characters"),
+  pdfUrl: z.string().url("PDF URL must be a valid URL").optional(),
 });
 
 export const eventSchema = z.object({
@@ -153,4 +154,18 @@ export const buyBookSchema = personBaseSchema.extend({
   deliveryAddress: z.union([addressSchema, z.literal(""), z.null()]).optional(),
   // Flag to indicate if delivery address is same as customer address
   useCustomerAddress: z.boolean().optional(),
+});
+
+// Schema for admin login
+export const adminLoginSchema = z.object({
+  email: z.string().email("Invalid email format"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+// Schema for admin registration
+export const adminSchema = z.object({
+  username: z.string().min(3, "Username must be at least 3 characters"),
+  email: z.string().email("Invalid email format"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  role: z.string().default("admin"),
 });

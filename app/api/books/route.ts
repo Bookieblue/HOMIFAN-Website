@@ -10,9 +10,18 @@ import { paginateQuery } from "@/app/utils/paginate";
 import { bookSchema } from "@/app/validators";
 import { NextRequest, NextResponse } from "next/server";
 import { Status } from "../enum";
+import { extractTokenFromRequest, verifyToken } from "@/app/utils/auth";
 
 export async function POST(request: NextRequest) {
   try {
+    // Extract and verify token
+    const token = extractTokenFromRequest(request);
+    const decodedToken = verifyToken(token);
+    // Now you can use decodedToken.userId or other properties
+    if (decodedToken.role !== "admin") {
+      return sendErrorResponse(NextResponse, "Unauthorized", 401);
+    }
+
     const formData = await request.formData();
 
     // Validate required fields first
@@ -31,6 +40,19 @@ export async function POST(request: NextRequest) {
     const description = formData.get("description") as string;
     const price = formData.get("price") as string;
     const bookType = formData.get("bookType") as string;
+
+    // Check if PDF is required (for EBook type)
+    if (bookType === "EBook") {
+      const pdfFile = formData.get("pdfFile") as File | null;
+      if (!pdfFile || !(pdfFile instanceof Blob)) {
+        return sendErrorResponse(
+          NextResponse,
+          "PDF file is required for EBook type",
+          400
+        );
+      }
+    }
+
     const language = formData.get("language") as string;
     const dimension = formData.get("dimension") as string;
     const pages = formData.get("pages") as string;
@@ -79,13 +101,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Upload PDF file for EBooks
+    if (bookType === "EBook") {
+      const pdfFile = formData.get("pdfFile") as File;
+      const pdfResult = await uploadFile(pdfFile, "ebooks");
+      payload.pdfUrl = pdfResult.secure_url;
+    }
+
     if (authorImage) {
       const result = await uploadFile(authorImage, "authors");
       payload.authorImage = result.secure_url;
     }
 
     const result = await uploadFile(coverImage, "books");
-
     payload.coverImage = result.secure_url;
 
     const newPub = await prisma.book.create({
@@ -98,8 +126,8 @@ export async function POST(request: NextRequest) {
       "Book added successfully",
       201
     );
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
 }
 
@@ -141,7 +169,7 @@ export async function GET(request: NextRequest) {
       { books, ...metadata },
       "Books retrieved successfully"
     );
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
 }

@@ -7,6 +7,7 @@ import {
 import { NextRequest, NextResponse } from "next/server";
 import { Status } from "../../enum";
 import { uploadFile } from "@/app/utils/file";
+import { extractTokenFromRequest, verifyToken } from "@/app/utils/auth";
 
 // GET: Fetch event by ID
 export const GET = async (
@@ -39,6 +40,12 @@ export const PUT = async (
   req: NextRequest,
   { params }: { params: Promise<{ event_id: string }> }
 ) => {
+  const token = extractTokenFromRequest(req);
+  const decodedToken = verifyToken(token);
+  // Now you can use decodedToken.userId or other properties
+  if (decodedToken.role !== "admin") {
+    return sendErrorResponse(NextResponse, "Unauthorized", 401);
+  }
   const eventId = (await params).event_id;
   const formData = await req.formData();
 
@@ -87,6 +94,6 @@ export const PUT = async (
     );
   } catch (error: any) {
     console.error("Error updating event:", error);
-    throw error;
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
 };
