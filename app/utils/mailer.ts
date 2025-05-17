@@ -1,10 +1,8 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 // Configure transporter
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT) || 587,
-  secure: process.env.SMTP_SECURE === 'true',
+  service: "gmail",
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASSWORD,
@@ -13,7 +11,7 @@ const transporter = nodemailer.createTransport({
 
 /**
  * Sends an email with an ebook attachment
- * 
+ *
  * @param to - Recipient email address
  * @param subject - Email subject
  * @param bookTitle - Title of the book
@@ -44,26 +42,28 @@ export async function sendEbookEmail(
     // Fetch the PDF file
     const response = await fetch(pdfUrl);
     const buffer = await response.arrayBuffer();
-    
+
     // Send email with attachment
     const info = await transporter.sendMail({
-      from: `"Book Store" <${process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER}>`,
+      from: `"Book Store" <${
+        process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER
+      }>`,
       to,
       subject,
       html: htmlContent,
       attachments: [
         {
-          filename: `${bookTitle.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
+          filename: `${bookTitle.replace(/[^a-zA-Z0-9]/g, "_")}.pdf`,
           content: Buffer.from(buffer),
-          contentType: 'application/pdf',
+          contentType: "application/pdf",
         },
       ],
     });
-    
-    console.log('Email sent successfully:', info.messageId);
+
+    console.log("Email sent successfully:", info.messageId);
     return info;
   } catch (error) {
-    console.error('Error sending ebook email:', error);
+    console.error("Error sending ebook email:", error);
     throw error;
   }
 }
