@@ -4,15 +4,17 @@ import React from "react";
 interface HistoryProps {
   title: string;
   founding: string;
-  mission: string;
+  goal: string;
   ministry: string;
+  belief: string,
 }
 
 const History: React.FC<HistoryProps> = ({
   title,
   founding,
-  mission,
+  goal,
   ministry,
+  belief,
 }) => {
   return (
     <div className="padding-container max-container py-5 lg:py-10 flex flex-col items-center justify-center ">
@@ -23,8 +25,9 @@ const History: React.FC<HistoryProps> = ({
       <div className="flex flex-col lg:flex-row gap-10">
         <ul className="space-y-4 list-disc text-gray-700 w-[100%] pl-8 lg:pr-32">
           <li><span className="font-bold">Founding:</span> {founding} </li>
-          <li><span className="font-bold">Mission:</span> {mission}   </li>
+          <li><span className="font-bold">Mission:</span> {goal}   </li>
           <li><span className="font-bold">Ministry:</span> {ministry} </li>
+          <li><span className="font-bold">Core Belief:</span> {belief} </li>
         </ul>
         <div className="">
           <Image

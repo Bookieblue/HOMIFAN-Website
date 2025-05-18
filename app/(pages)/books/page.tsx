@@ -48,7 +48,7 @@ const Publications: React.FC = () => {
   return (
     <>
       <Navbar />
-      <HeroSection backgroundImage="/pub_hero_img.jpg">
+      <HeroSection backgroundImage="/join-us-background.svg">
         <HeroContent {...publicationData} />
       </HeroSection>
       <AuthorHighlight />

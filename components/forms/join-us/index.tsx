@@ -9,7 +9,7 @@ const Membership: React.FC = () => {
           <MembershipForm />
           <div className="hidden lg:block w-full lg:w-1/2">
             <img
-              src="/woman-worshipping.svg"
+              src="/woman-worshipping2.svg"
               alt="Person worshipping"
               className="w-full h-full object-cover rounded-md"
             />
