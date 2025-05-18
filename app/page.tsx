@@ -62,8 +62,8 @@ export default function Home() {
         <HeroContent {...heroData} />
       </HeroSection>
       <FounderGreeting {...founderCardProps} />
-      <div className="flex flex-col items-center py-20 px-4 padding-container max-container">
-        <div className="text-center mb-8 mx-auto grid gap-2 md:w-1/2">
+      <div className="flex flex-col items-center pb-20 px-4 padding-container max-container">
+        <div className="text-center mb-8 mx-auto grid gap-2 w-[60%]">
           <h4 className="uppercase max-md:text-sm tracking-widest">
             {subHeading}
           </h4>

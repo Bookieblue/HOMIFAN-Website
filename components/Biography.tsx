@@ -15,7 +15,7 @@ const Biography: React.FC = () => {
       {/* Prophet's Image */}
       <div className="flex justify-center lg:w-[40%] mx-auto">
         <Image
-          src="/Go3.png"
+          src="/Go3.svg"
           alt="Prophet Segun Adewumi"
           width={500} // Set a larger width
           height={500} //
@@ -24,11 +24,11 @@ const Biography: React.FC = () => {
       </div>
 
       <p className="text-gray-700 leading-relaxed text-center mt-4">
-        Prophet Segun Adewumi is a well known servant of God who has
+        Prophet Segun Adewumi is a well-known servant of God who has
         distinguished himself with his unwavering desire and deep commitment to
         the will of God. Prophet Segun Adewumi is happily married with children.
         His life is a sweet testament to the ability and the love of God and in
-        the life of his servant
+        the life of his servant.
       </p>
 
       {/* Early Life Section */}
@@ -38,17 +38,14 @@ const Biography: React.FC = () => {
         </h2>
 
         <div className="text-gray-700 mt-3">
-          Prophet Segun Adewumi attended Eyemote Comprehensive High School, Iyin
-          Ekiti after which he acquired professional training in Accounting and
-          Administration. His last place of work was Wusasse Hospital, Zaria
-          where he left salaried job as Accountant Secretary in 1981. Prophet
-          Adewumi was born into the family of committed servants of God. After
-          the untimely demise of his father in 1949, he lived with his uncle who
-          was a Prophet of The Aladura Church. As early as he was ten years old,
-          he began to exhibit the ability to recite important Bible lines
-          especially the Psalms. He could close his eyes and read out almost
-          half of the Psalms and the hymns of the church very accurately.{" "}
-          {!showEarlyLife ? (
+          Prophet Adewumi was born into a family of committed servants of God.
+          After the untimely demise of his father in 1949, he lived with his
+          uncle who was a Prophet of The Aladura Church. Prophet Segun Adewumi
+          attended Eyemote Comprehensive High School, Iyin Ekiti after which he
+          acquired professional training in Accounting and Administration. His
+          last place of work was Wusasse Hospital, Zaria. He left salaried job
+          as Accountant Secretary in 1981.{" "}
+          {/* {!showEarlyLife ? (
             <>
               ...{" "}
               <button
@@ -103,7 +100,7 @@ const Biography: React.FC = () => {
                 Read less
               </button>
             </>
-          )}
+          )} */}
         </div>
       </section>
 
@@ -113,27 +110,20 @@ const Biography: React.FC = () => {
           Divine Mandate
         </h2>
         <div className="text-gray-700 mt-3">
-          The mandate of the ministry is demonstrated and outlined in the dream
-          that I explained earlier. The dream became actualized when I started
-          the white garment church in 1989. Some years later, the church
-          translated fully into a Pentecostal Assembly. For well over thirty
-          years I was hotly chased by the dogs. The plot was to seize the letter
-          that I held in the dream. Just as it happened in the dream, I have
-          finally submitted the letter to the appropriate person. Please
-          remember, that man was a simply dressed, average aged, black man. The
-          house was small and neat. The environment was peaceful. After the
-          dream, I consulted my Bible and was directed to Isaiah 49 verse 3.{" "}
+          From an early age, it became evident that Prophet Segun Adewumi’s path
+          was divinely orchestrated. Much like the prophets of old, he began to
+          exhibit an uncommon ability to comprehend and recite Scripture,
+          particularly the Psalms. His spiritual sensitivity was heightened
+          beyond the ordinary, and as he grew, it became clear that his journey
+          was not to be conventional.{" "}
           <p className="my-5">
             {" "}
-            Ever since, God has revealed and demystified many contentious
-            biblical issues to me to the extent that I can boldly, but with
-            humility, quote Psalm 119 verse 99. To us, the mystery of the Garden
-            of Eden has been resolved, ditto for the mystery of the Holy
-            Trinity. The early journey of the believer is likened to an egg race
-            with only very few being able to safely reach the end of the race
-            with their egg. That the letter was addressed to the simply dressed
-            black man is also symbolic. The black man has been a slave to two
-            major world religions: Christian and Islam.{" "}
+            His early attempts to join an existing church were unsuccessful as
+            he didn’t fit into any of them. He found that his distinct calling
+            could not be contained within the existing traditional structures.
+            Each attempt at settling in one of the existing churches ended with
+            a divine push, redirecting him towards the unique mission that God
+            had assigned to him.{" "}
           </p>
           {!showMandate ? (
             <>
@@ -148,18 +138,58 @@ const Biography: React.FC = () => {
           ) : (
             <>
               <p>
-                For the fact that Christianity got to the black man through the
-                people from the West, it did become a weapon of physical, mental
-                and spiritual colonization. The culture of the West became the
-                ideal way of life for a typical Christian. His prayer also has
-                to pass through the spiritual space of the West. His inability
-                or refusal to pray directly to God denies him of the real goal
-                of Holy Spirit as the life of God in man. The Holy Spirit
-                liberates man by fully harnessing his physical, mental and
-                spiritual potentials. He has come to set the captives free but
-                the black man would always deny himself the freedom but he had
-                to imitate the Pastors from the west. My letter was a call to
-                the black race to listen to Jesus in Isaiah 61 verse 1.
+                Then came a pivotal moment—a revelatory dream that cemented his
+                divine mandate. In this vision, he found himself presiding over
+                a flourishing white- garment, Aladura church. But just as
+                quickly, he was outside, clad in ordinary clothing, walking
+                alone on a vast six-lane road at the dead of night. In his
+                hands, he held a letter. Suddenly, he was pursued by fierce
+                dogs, their intention clear—to seize the letter that he carried.
+                He ran until exhaustion overcame him, and as he prepared to
+                surrender to the inevitable, a great calm settled upon him.
+                Before him stood a small yet immaculate bungalow, and as he
+                knocked, a middle-aged black man dressed simply in a t-shirt and
+                knickers opened the door halfway. Given his notion of a
+                spiritual leader as someone always wearing a massive regalia
+                complete with a symbolic crown-cap, he was disappointed at the
+                man’s casual appearance. He wondered why he should suffer so
+                much just to meet this ordinary-looking man.
+              </p>
+
+              <p>
+                He handed the man the letter and, at that moment, he looked up
+                at the doorway and saw the inscription &quot;House of
+                Prayer.&quot; This was when he realized the depth of his
+                mission.
+              </p>
+
+              <p>
+                When he sought understanding, the Lord directed me to Isaiah
+                49:3—&quot;And said unto me, Thou art my servant, O Isreal, in
+                whom I will be glorified.&quot; The vision was clear: he had
+                been entrusted with a divine message, a revelation that had to
+                be delivered to the right people. The black man in the dream was
+                symbolic—a representation of the black race, enslaved
+                spiritually, mentally, and physically. The world had fed him
+                with distorted doctrines, bound him with traditions foreign to
+                the essence of Christianity, and prevented him from experiencing
+                the fullness of God’s truth.
+              </p>
+
+              <p>
+                Ever since, God has illuminated many hidden truths to Prophet
+                Segun Adewumi, mysteries that had been veiled for centuries.
+                Through divine inspiration, he has been granted insight into the
+                true essence of Christianity, insights that challenge
+                conventional interpretations yet remain firmly rooted in
+                biblical truth.
+              </p>
+
+              <p>
+                This mandate is a divine call, an assignment entrusted to the
+                prophet by the Spirit of the Lord. Like Paul, he is compelled to
+                preach this gospel—not as one who seeks approval from men but as
+                a servant of God carrying a sacred responsibility.
               </p>
 
               <button
