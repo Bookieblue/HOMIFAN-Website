@@ -177,7 +177,7 @@ export const leadershipData = {
       title: 'General Overseer',
       imageUrl: '/GO1.svg',
     },
-    { name: 'Imoh Adewumi', title: 'Mummy GO', imageUrl: '/MummyGO.svg' },
+    { name: 'Imoh Adewumi', title: 'Mummy GO', imageUrl: '/MummyGO.png' },
     {
       name: 'Lawrence Osuntuyi',
       title: 'Superintendent',
