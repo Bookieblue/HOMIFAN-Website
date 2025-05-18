@@ -2,7 +2,7 @@ import Modal from '@/components/Modal';
 import React, { useState } from 'react';
 import PublicationForm from '@/components/forms/publication';
 
-const PublicationModal: React.FC = () => {
+const PublicationModal: React.FC<{bookId: string}> = ({bookId}) => {
   let [style, setStyle] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,7 +23,7 @@ const PublicationModal: React.FC = () => {
       </button>
       {/* Modal */}
       <Modal isOpen={isOpen} style={style} toggleModal={toggleModal}>
-        <PublicationForm toggleModal={toggleModal} />
+        <PublicationForm toggleModal={toggleModal} bookId={bookId} />
       </Modal>
     </div>
   );

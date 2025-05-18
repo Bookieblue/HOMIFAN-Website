@@ -6,20 +6,23 @@ import {
 import { formatZodError } from "@/app/utils/formatter";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { PaymentMethod, PaymentType, Status } from "../../enum";
+import { BookType, PaymentType, Status } from "../../enum";
 import { generateTransRef } from "@/app/utils";
 
 const buyBookSchema = z.object({
   bookId: z.string().uuid(),
-  customerName: z.string(),
-  paymentMethod: z.nativeEnum(PaymentMethod), // Fixed: Proper enum validation
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  phoneNumber: z.string().min(6, "Valid phone number is required"),
+  email: z.string().email("Valid email is required"),
+  country: z.string().min(1, "Country is required"),
+  cityAndState: z.string().min(1, "City/State is required"),
+  publicationType: z.nativeEnum(BookType),
+  additionalInfo: z.string().optional(),
+  delieveryAddress: z.string().optional(),
 });
 
-interface IBuyBookSchema {
-  bookId: string;
-  customerName: string;
-  paymentMethod: PaymentMethod; // Fixed: Removed `z.EnumLike`
-}
+interface IBuyBookSchema extends z.infer<typeof buyBookSchema> {}
 
 export async function POST(request: NextRequest) {
   try {
@@ -54,35 +57,30 @@ export async function POST(request: NextRequest) {
     }
 
     const reference = generateTransRef();
-    const pendingPayment = await prisma.payment.findFirst({
-      where: {
-        bookId: book.id,
-        paymentStatus: "initiated",
-      },
-    });
-    if (pendingPayment) {
-      if (pendingPayment.method !== payload.paymentMethod) {
-        await prisma.payment.update({
-          where: { id: pendingPayment.id },
-          data: {
-            method: payload.paymentMethod,
-          },
-        });
-      }
-      return sendSuccessResponse(
-        NextResponse,
-        { ...pendingPayment },
-        "Book purchase already initiated"
-      );
-    }
+    const {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      additionalInfo,
+      publicationType,
+      delieveryAddress,
+    } = payload;
 
     const payment = await prisma.payment.create({
       data: {
         amount: book.price,
-        customer: payload.customerName,
+        metadata: {
+          firstName,
+          lastName,
+          email,
+          phoneNumber,
+          additionalInfo,
+          publicationType,
+          delieveryAddress,
+        },
         paymentType: PaymentType.ORDER_BOOK,
         reference,
-        method: payload.paymentMethod,
         bookId: book.id,
       },
     });
@@ -92,8 +90,8 @@ export async function POST(request: NextRequest) {
       { ...payment },
       "Book purchase initiated successfully" // Fixed: Correct success message
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in POST /api/buy-book:", error);
-    throw error;
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
 }

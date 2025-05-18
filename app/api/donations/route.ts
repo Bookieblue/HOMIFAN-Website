@@ -1,4 +1,4 @@
-import { IDonation } from "@/app/interface";
+// Import necessary modules
 import prisma from "@/app/lib/prisma";
 import { generateTransRef } from "@/app/utils";
 import {
@@ -12,14 +12,21 @@ import { NextRequest, NextResponse } from "next/server";
 import { PaymentStatus, PaymentType } from "../enum";
 
 export async function POST(request: NextRequest) {
-  const payload: IDonation = await request.json();
-
   try {
-    const email = payload.email;
-    const amount = payload.amount;
-    const paymentMethod = payload.paymentMethod;
-    const validation = donationSchema.safeParse(payload);
+    // Parse the request body
+    const rawPayload = await request.json();
 
+    // Ensure amount is a number
+    const sanitizedPayload = {
+      ...rawPayload,
+      amount:
+        typeof rawPayload.amount === "string"
+          ? parseFloat(rawPayload.amount)
+          : rawPayload.amount,
+    };
+
+    // Validate the payload
+    const validation = donationSchema.safeParse(sanitizedPayload);
     if (!validation.success) {
       return sendErrorResponse(
         NextResponse,
@@ -27,59 +34,102 @@ export async function POST(request: NextRequest) {
         400
       );
     }
-    let donation: any;
-    delete payload.paymentMethod;
+
+    // Extract validated data
+    const {
+      email,
+      amount,
+      donationType,
+      firstName,
+      lastName,
+      phoneNumber,
+      country,
+      cityAndState,
+    } = sanitizedPayload;
+
+    // Check for existing pending donation with same email and amount
+    let donation;
     const pendingDonation = await prisma.donation.findFirst({
-      where: { ...payload, paymentStatus: PaymentStatus.initiated },
+      where: {
+        email,
+        amount,
+        paymentStatus: "initiated",
+      },
     });
 
     if (pendingDonation) {
       donation = pendingDonation;
     } else {
+      // Generate a unique transaction reference
       const trxRef = generateTransRef();
 
+      // Create a new donation
       donation = await prisma.donation.create({
         data: {
           email,
           amount,
-          donationType: payload.donationType,
-          firstName: payload.firstName,
-          lastName: payload.lastName,
-          phoneNumber: payload.phoneNumber,
-          country: payload.country,
-          cityAndState: payload.cityAndState,
-          paymentStatus: PaymentStatus.initiated,
+          donationType,
+          firstName,
+          lastName,
+          phoneNumber,
+          country,
+          cityAndState,
           trxfReference: trxRef,
         },
       });
     }
 
+    // Create a payment record
     await prisma.payment.create({
       data: {
         amount,
-        customer: donation.firstName + " " + donation.lastName,
+        metadata: {
+          firstName: donation.firstName,
+          lastName: donation.lastName,
+          email: donation.email,
+          phoneNumber: donation.phoneNumber,
+        },
         paymentType: PaymentType.DONATION,
-        reference: donation.trxfReference,
-        method: paymentMethod as string,
+        reference: donation.trxfReference || "",
         donationId: donation.id,
       },
     });
+
     return sendSuccessResponse(
       NextResponse,
-      donation,
+      {
+        ...donation,
+        paymentReference: donation.trxfReference,
+      },
       "Donation initialized successfully"
     );
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    console.error("Donation error:", error);
+    return sendErrorResponse(
+      NextResponse,
+      error.message || "An error occurred while processing your donation",
+      500
+    );
   }
 }
 
 export const GET = async (request: NextRequest) => {
-  const { searchParams } = new URL(request.url);
-  const page = Number(searchParams.get("page") || 1);
-  const limit = Number(searchParams.get("limit") || 20);
-  const text = searchParams.get("search") || "";
   try {
+    const { searchParams } = new URL(request.url);
+    const page = Number(searchParams.get("page") || 1);
+    const limit = Number(searchParams.get("limit") || 20);
+    const text = searchParams.get("search") || "";
+
+    // Validate pagination parameters
+    if (page < 1 || limit < 1 || limit > 100) {
+      return sendErrorResponse(
+        NextResponse,
+        "Invalid pagination parameters. Page must be >= 1 and limit must be between 1 and 100.",
+        400
+      );
+    }
+
+    // Query donations with pagination and search
     const result = await paginateQuery({
       where: text
         ? {
@@ -96,6 +146,18 @@ export const GET = async (request: NextRequest) => {
                   mode: "insensitive",
                 },
               },
+              {
+                email: {
+                  contains: text,
+                  mode: "insensitive",
+                },
+              },
+              {
+                donationType: {
+                  contains: text,
+                  mode: "insensitive",
+                },
+              },
             ],
           }
         : {},
@@ -108,13 +170,21 @@ export const GET = async (request: NextRequest) => {
         createdAt: "desc",
       },
     });
-    const { data: events, ...metadata } = result;
+
+    // Rename data to donations for clarity
+    const { data: donations, ...metadata } = result;
+
     return sendSuccessResponse(
       NextResponse,
-      { events, ...metadata },
+      { donations, ...metadata },
       "Donations retrieved successfully"
     );
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    console.error("Error fetching donations:", error);
+    return sendErrorResponse(
+      NextResponse,
+      error.message || "An error occurred while fetching donations",
+      500
+    );
   }
 };

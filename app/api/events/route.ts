@@ -10,6 +10,7 @@ import { Status } from "../enum";
 import { IEvent } from "@/app/interface";
 import { uploadFile } from "@/app/utils/file";
 import { paginateQuery } from "@/app/utils/paginate";
+import { extractTokenFromRequest, verifyToken } from "@/app/utils/auth";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -65,6 +66,12 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const token = extractTokenFromRequest(request);
+    const decodedToken = verifyToken(token);
+    // Now you can use decodedToken.userId or other properties
+    if (decodedToken.role !== "admin") {
+      return sendErrorResponse(NextResponse, "Unauthorized", 401);
+    }
     const formData = await request.formData();
 
     const title = formData.get("title") as string;

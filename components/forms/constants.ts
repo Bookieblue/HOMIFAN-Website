@@ -23,7 +23,7 @@ export const sharedSchema = yup.object().shape({
   phoneNumber: yup
     .string()
     .required('Phone number is required')
-    .matches(/^\+234\d{10}$/, 'Must start with +234'),
+    .matches(/^(\+234\d{10}|\d{11})$/, 'Phone number must be either 11 digits or start with +234 followed by 10 digits'),
   email: yup
     .string()
     .required('Email is required')

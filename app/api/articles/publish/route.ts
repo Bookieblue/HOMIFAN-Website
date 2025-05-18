@@ -36,11 +36,13 @@ export async function POST(request: NextRequest) {
     },
   });
 
-
   if (articles.length !== articleIds.length) {
+    const foundIds = articles.map((a) => a.id);
+    const missingIds = articleIds.filter((id) => !foundIds.includes(id));
+
     return sendErrorResponse(
       NextResponse,
-      "Oops...An article is missing or already published",
+      `Articles not found or already published: ${missingIds.join(", ")}`,
       404
     );
   }
@@ -56,7 +58,6 @@ export async function POST(request: NextRequest) {
       datePublished: new Date(Date.now()),
     },
   });
-
 
   return sendSuccessResponse(
     NextResponse,

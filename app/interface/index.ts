@@ -27,17 +27,17 @@ export interface IBook {
   id: string;
   title: string;
   description: string;
-  coverImage: string;
   price: number;
-  rating: number;
-  status: Status;
-  language?: string;
-  bookType?: string;
+  bookType: string;
+  language: string;
+  dimension: string;
   pages: number;
-  dimension?: string;
+  status: Status;
   authorName: string;
-  authorBio?: string;
+  authorBio: string;
   authorImage?: string;
+  coverImage: string;
+  pdfUrl?: string; // Add this field for EBook PDF URLs
 }
 
 export interface IBlog {
@@ -76,7 +76,6 @@ export interface IDonation {
   cityAndState: string;
   paymentStatus: PaymentStatus;
   trxfReference?: string;
-  paymentMethod?: PaymentMethod;
 }
 
 export interface IEventForm {
@@ -125,4 +124,23 @@ export interface ISermon {
   link: string;
   thumbnail: string;
   status: Status;
+}
+
+export interface IAdmin {
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+}
+
+export interface IAdminLogin {
+  email: string;
+  password: string;
+}
+
+export interface IAuthToken {
+  id: string;
+  email: string;
+  role: string;
 }

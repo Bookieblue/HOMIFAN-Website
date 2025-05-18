@@ -81,7 +81,7 @@ export async function PUT(
       updatedBook,
       "Book updated successfully"
     );
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
 }

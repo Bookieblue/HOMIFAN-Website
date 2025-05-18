@@ -14,12 +14,6 @@ export async function GET(request: NextRequest) {
         ? {
             OR: [
               {
-                customer: {
-                  contains: text,
-                  mode: "insensitive",
-                },
-              },
-              {
                 reference: {
                   contains: text,
                   mode: "insensitive",

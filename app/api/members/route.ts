@@ -2,59 +2,90 @@ import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { IMember } from "../../interface";
 import { memberSchema } from "@/app/validators";
-import { formatZodError } from "@/app/utils/formatter";
 import {
   sendErrorResponse,
   sendSuccessResponse,
 } from "@/app/utils/apiResponse";
 import { paginateQuery } from "@/app/utils/paginate";
 
-export async function POST(req: NextRequest) {
-  const payload: IMember = await req.json();
-  const { email, phoneNumber } = payload;
+export const POST = async (req: NextRequest) => {
   try {
-    const validation = memberSchema.safeParse(payload);
+    // Parse and sanitize request body
+    const rawPayload = await req.json();
 
+    // Sanitize input fields
+    const payload: Partial<IMember> = {
+      firstName: String(rawPayload.firstName || "").trim(),
+      lastName: String(rawPayload.lastName || "").trim(),
+      email: String(rawPayload.email || "")
+        .trim()
+        .toLowerCase(),
+      phoneNumber: String(rawPayload.phoneNumber || "").trim(),
+      country: String(rawPayload.country || "").trim(),
+      cityAndState: String(rawPayload.cityAndState || "").trim(),
+      areaOfInterest: String(rawPayload.areaOfInterest || "").trim(),
+      methodOfContact: String(rawPayload.methodOfContact || "").trim(),
+    };
+
+    // Validate with Zod schema
+    const validation = memberSchema.safeParse(payload);
     if (!validation.success) {
       return sendErrorResponse(
         NextResponse,
-        formatZodError(validation.error),
+        JSON.stringify(validation.error.format()),
         400
       );
     }
 
+    const { email, phoneNumber } = payload;
+
+    // Check for existing member
     const member = await prisma.member.findFirst({
-      where: { OR: [{ email }, { phoneNumber }] },
+      where: {
+        OR: [
+          { email: email as string },
+          { phoneNumber: phoneNumber as string },
+        ],
+      },
     });
 
     if (member) {
-      return sendErrorResponse(
-        NextResponse,
-        "Oops...Email or phone number alredy registered",
-        409
-      );
+      throw new Error("Email or phone number already registered");
     }
-    const newMenmber = await prisma.member.create({
-      data: payload,
+
+    // Create new member
+    const newMember = await prisma.member.create({
+      data: payload as IMember,
     });
+
     return sendSuccessResponse(
       NextResponse,
-      newMenmber,
-      "New member join successfully",
+      newMember,
+      "New member joined successfully",
       201
     );
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
-}
+};
 
-export async function GET(request: NextRequest) {
+export const GET = async (request: NextRequest) => {
   try {
     const { searchParams } = new URL(request.url);
     const page = Number(searchParams.get("page") || 1);
     const limit = Number(searchParams.get("limit") || 20);
     const search = searchParams.get("search") || "";
 
+    // Validate pagination parameters
+    if (page < 1 || limit < 1 || limit > 100) {
+      return sendErrorResponse(
+        NextResponse,
+        "Invalid pagination parameters",
+        400
+      );
+    }
+
+    // Perform search with pagination
     const result = await paginateQuery({
       where: search
         ? {
@@ -77,19 +108,30 @@ export async function GET(request: NextRequest) {
                   mode: "insensitive",
                 },
               },
+              {
+                phoneNumber: {
+                  contains: search,
+                  mode: "insensitive",
+                },
+              },
             ],
           }
         : {},
       model: prisma.member,
       options: { page, limit },
+      orderBy: {
+        createdAt: "desc", // Most recent members first
+      },
     });
+
     const { data: members, ...metadata } = result;
+
     return sendSuccessResponse(
       NextResponse,
       { members, ...metadata },
       "Members retrieved successfully"
     );
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    return sendErrorResponse(NextResponse, error.message, 500);
   }
-}
+};
