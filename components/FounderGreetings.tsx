@@ -23,7 +23,7 @@ export const FounderGreeting: React.FC<HeroCardProps> = ({
     <section className="lg:p-16">
       <div className="container bg-white py-10 lg:my-0 mx-auto flex flex-col lg:flex-row items-center justify-between gap-8  padding-container">
         {/* Left Section: Introduction Text */}
-        <div className="lg:w-[30%] text-black bg-white">
+        <div className="lg:w-[40%] text-black bg-white">
           <h4 className="uppercase text-sm text-gray-500">{title}</h4>
           <h2 className="text-xl lg:text-3xl font-bold my-4">{name}</h2>
           <p className="text-gray-600 mb-6">{description}</p>

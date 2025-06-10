@@ -14,7 +14,7 @@ const PrayerRequest: React.FC = () => {
           {/* Right Section - Image */}
           <div className="w-1/2 max-lg:hidden mt-8 md:mt-0 flex justify-center items-center">
             <img
-              src="/woman-worshipping.svg"
+              src="/woman-worshipping3.svg"
               alt="Prayer"
               className="rounded-lg object-cover w-full h-80 md:h-full"
             />

@@ -38,10 +38,10 @@ export const founderCardProps = {
   title: 'WELCOME TO OUR CHURCH',
   name: "HI, I'M PROPHET SEGUN ADEWUMI",
   description:
-    'Our Church is a prophetic ministry that excels in deliverance and spiritual warfare. The mission of our church is to relocate man from his soul to his spirit. Join our life-changing experience services online or at any of our branches close to you. God bless you.',
+    'House of Prayer Ministries for All Nations is a prophetic ministry that has engaged in deliverance and spiritual warfare against demonic agents. Hundreds have been delivered and are still being delivered from satanic webs and entanglements of demonic forces through the activities of this ministry. Join us and experience life-changing services online or at any of our branches close to you. God bless you.',
   missionTitle: 'OUR MISSION',
   missionTexts: [
-    'The mission of our church is relocating man from his soul to his spirit.',
+    'Relocating man from his soul to his spirit.',
   ],
   imageSrc: '/GO.svg',
 };
@@ -63,7 +63,7 @@ export const aboutFounderCardProps = {
     'I don’t see what God can’t do, you only have to come to this presence and witness him.',
     'Faith is believing that God has already done what you are asking for, even when you can’t see it yet.',
   ],
-  imageSrc: '/Go3.png',
+  imageSrc: '/Go3.svg',
 };
 
 export const aboutUsData = {
@@ -162,10 +162,12 @@ export const historyData = {
   title: 'Stay Up to Date with How We Began',
   founding:
     'House of Prayer Ministries for All Nations was founded by the Lord Jesus through the hands of His humble servant, Prophet Michael Segun Adewunmi Oluwayomi on 11th August 1989 in Akure, Ondo State.',
-  mission:
-    'House of Prayer Ministries for All Nations is a place of worship where believers can come together to build a strong relationship with the Lord. Through devotion, prayer, and dedication to the Word of God, we strive to bring people closer to Him. We believe that having a relationship with Jesus is the most important thing in life. Our mission is to spread the love of Christ and His message to everyone, no matter where they are in the world. We are dedicated to helping others experience the power of prayer and the Holy Spirit."',
+  goal:
+    'House of Prayer Ministries for All Nations is a place of worship where believers can come together to build a strong relationship with the Lord. Through devotion, prayer, and dedication to the Word of God, we strive to bring people closer to Him. We believe that having a relationship with Jesus is the most important thing in life. Our mission is to spread the love of Christ and His message to everyone, no matter where they are in the world. We are dedicated to helping others experience the power of prayer and the Holy Spirit.',
   ministry:
     'The church has been in operation for over 33 years, primarily ministering in spiritual warfare and deliverance, while also focusing on teaching the message of salvation as commanded by Jesus in Matthew 28:16–20.',
+  belief:
+    'The quality of our worship of God is a matter of motive and not of method.',  
 };
 
 export const leadershipData = {
@@ -173,18 +175,18 @@ export const leadershipData = {
     {
       name: 'Prophet Segun Adewumi',
       title: 'General Overseer',
-      imageUrl: '/GO.svg',
+      imageUrl: '/GO1.svg',
     },
     { name: 'Imoh Adewumi', title: 'Mummy GO', imageUrl: '/MummyGO.png' },
     {
       name: 'Lawrence Osuntuyi',
       title: 'Superintendent',
-      imageUrl: '/Superintendent.png',
+      imageUrl: '/Superintendent.svg',
     },
     {
       name: 'Adetiloye Aboluwoye',
       title: 'Resident Pastor (Akure)',
-      imageUrl: '/ResidentPastor(AK).png',
+      imageUrl: '/ResidentPastor(AK).svg',
     },
     {
       name: 'Samuel Ashaolu',

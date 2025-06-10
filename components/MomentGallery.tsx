@@ -30,17 +30,17 @@ const MomentsGallery = () => {
 
   // Sample gallery items - images can be replaced with real ones
   const galleryItems: GalleryItem[] = [
-    { id: 1, imageUrl: "/gallery (1).jpg", altText: "Moment 1" },
-    { id: 2, imageUrl: "/moment (6).jpg", altText: "Moment 2" },
-    { id: 3, imageUrl: "/gallery (3).jpg", altText: "Moment 3" },
-    { id: 4, imageUrl: "/moment (2).jpg", altText: "Moment 4" },
-    { id: 5, imageUrl: "/gallery (5).jpg", altText: "Moment 5" },
-    { id: 6, imageUrl: "/gallery (4).jpg", altText: "Moment 6" },
-    { id: 7, imageUrl: "/gallery (6).jpg", altText: "Moment 7" },
-    { id: 8, imageUrl: "/moment (7).jpg", altText: "Moment 8" },
-    { id: 9, imageUrl: "/moment (4).jpg", altText: "Moment 9" },
+    { id: 1, imageUrl: "/gallery (1).svg", altText: "Moment 1" },
+    { id: 2, imageUrl: "/moment (6).svg", altText: "Moment 2" },
+    { id: 3, imageUrl: "/gallery (3).svg", altText: "Moment 3" },
+    { id: 4, imageUrl: "/moment (2).svg", altText: "Moment 4" },
+    { id: 5, imageUrl: "/gallery (5).svg", altText: "Moment 5" },
+    { id: 6, imageUrl: "/gallery (4).svg", altText: "Moment 6" },
+    { id: 7, imageUrl: "/moment (7).svg", altText: "Moment 7" },
+    { id: 8, imageUrl: "/gallery (6).svg", altText: "Moment 8" },
+    { id: 9, imageUrl: "/moment (4).svg", altText: "Moment 9" },
     { id: 10, imageUrl: "/moment (1).jpg", altText: "Moment 10" },
-    { id: 11, imageUrl: "/moment (5).jpg",altText: "Moment 11" },
+    { id: 11, imageUrl: "/moment (5).svg",altText: "Moment 11" },
     { id: 12, imageUrl: "/moment (3).jpg", altText: "Moment 12" },
   ];
 
