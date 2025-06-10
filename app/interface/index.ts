@@ -38,6 +38,7 @@ export interface IBook {
   authorImage?: string;
   coverImage: string;
   pdfUrl?: string; // Add this field for EBook PDF URLs
+  sellerUrl?: string;
 }
 
 export interface IBlog {
