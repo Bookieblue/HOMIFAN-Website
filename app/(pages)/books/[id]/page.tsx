@@ -1,23 +1,24 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { footerProps } from '@/app/constants';
-import AuthorHighlight from '@/components/Author';
-import BackToTopButton from '@/components/BackToTop';
-import FooterSection from '@/components/Footer';
-import { HeroSection } from '@/components/Hero';
-import Navbar from '@/components/NavBar';
-import PublicationCard from '@/components/PublicationCard';
-import WhyBuyBooks from '@/components/WhyBuyBooks';
-import { useParams, useRouter } from 'next/navigation';
-import Image from 'next/image';
-import Heading from '@/components/Heading';
-import BtnDropdown from './PublicationModal';
+import React, { useEffect, useState } from "react";
+import { footerProps } from "@/app/constants";
+import AuthorHighlight from "@/components/Author";
+import BackToTopButton from "@/components/BackToTop";
+import FooterSection from "@/components/Footer";
+import { HeroSection } from "@/components/Hero";
+import Navbar from "@/components/NavBar";
+import PublicationCard from "@/components/PublicationCard";
+import WhyBuyBooks from "@/components/WhyBuyBooks";
+import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
+import Heading from "@/components/Heading";
+import BtnDropdown from "./PublicationModal";
 
 interface Publication {
+  sellerUrl: string;
   description: string;
   coverImage: string;
-  pages:string;
+  pages: string;
   id: string;
   title: string;
   desc: string;
@@ -37,7 +38,6 @@ const Publication: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
   useEffect(() => {
@@ -48,27 +48,22 @@ const Publication: React.FC = () => {
         setLoading(true);
         setError(false);
         const response = await fetch(`${API_BASE_URL}/api/books/${id}`);
-        if (!response.ok) throw new Error('Failed to fetch publication');
-    
+        if (!response.ok) throw new Error("Failed to fetch publication");
+
         const jsonResponse = await response.json();
         const data = jsonResponse.data; // Extract the `data` field
-    
+
         setPublication(data);
       } catch (error) {
-        console.error('Error fetching publication:', error);
+        console.error("Error fetching publication:", error);
         setError(true);
       } finally {
         setLoading(false);
       }
     };
-    
 
     fetchPublication();
   }, [id]);
-
-
-  
-
 
   return (
     <>
@@ -76,7 +71,7 @@ const Publication: React.FC = () => {
       <HeroSection className="h-[50svh]" backgroundImage="/pub_hero_img.jpg" />
       <div className="max-container text-main-50 padding-container px-6 relative -top-14">
         <div className="bg-gray-100 py-3 rounded-t-[12px]"></div>
-        
+
         <div className="bg-white flex flex-col lg:flex-row *:w-full gap-x-6 gap-y-3 p-4 md:p-6 lg:px-8 lg:py-10">
           {loading ? (
             // Cool Loading Effect
@@ -84,17 +79,19 @@ const Publication: React.FC = () => {
               <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
             </div>
           ) : error ? (
-            <p className="text-center text-red-500">Error loading publication. Try again later.</p>
+            <p className="text-center text-red-500">
+              Error loading publication. Try again later.
+            </p>
           ) : !publication ? (
             <p className="text-center text-gray-600">Publication not found.</p>
           ) : (
             <>
               {/* Image Section */}
               <div className="relative w-full lg:min-h-[500px]">
-                <div className="relative w-full h-full">
+              <div className="h-[500px] w-full">
                   <Image
                     fill
-                    className="object-fill !relative"
+                    className="w-full h-full object-cover"
                     src={publication.coverImage}
                     alt={publication.title}
                   />
@@ -111,7 +108,13 @@ const Publication: React.FC = () => {
                 <p>{publication.description}</p>
 
                 <div className="flex flex-col max-lg:flex-col-reverse gap-y-6">
-                  <BtnDropdown bookId={id}/>
+                  <button
+                    className="bg-purple-50 px-4 max-w-56 border-purple-50 text-white hover:font-bold p-3 flexCenter gap-1 relative rounded-lg"
+                    onClick={() => router.push(`${publication.sellerUrl}`)}
+                  >
+                    BUY YOUR COPY NOW
+                  </button>
+                  {/* <BtnDropdown bookId={id}/> */}
                   <div>
                     <p className="uppercase grid gap-y-2.5 font-semibold text-base lg:text-lg">
                       Feature of the book
@@ -143,7 +146,10 @@ const Publication: React.FC = () => {
       </div>
       <AuthorHighlight />
       <div className="max-container padding-container p-6">
-        <Heading heading="Explore our other publications" subHeading="Our books" />
+        <Heading
+          heading="Explore our other publications"
+          subHeading="Our books"
+        />
         {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {morePublications.map((pub, index) => (
             <PublicationCard
