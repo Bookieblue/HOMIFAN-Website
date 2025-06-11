@@ -59,6 +59,7 @@ export async function POST(request: NextRequest) {
     const status = formData.get("status") as Status;
     const authorBio = formData.get("authorBio") as string;
     const authorName = formData.get("authorName") as string;
+    const sellerUrl = formData.get("sellerUrl") as string;
 
     const payload: Partial<IBook> = {
       title,
@@ -71,6 +72,7 @@ export async function POST(request: NextRequest) {
       status,
       authorName,
       authorBio,
+      sellerUrl,
     };
 
     const validation = bookSchema.safeParse(payload);

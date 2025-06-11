@@ -68,6 +68,7 @@ export const bookSchema = z.object({
   authorName: nameValidator("Author name"),
   authorBio: z.string().min(10, "Author bio must be at least 10 characters"),
   pdfUrl: z.string().url("PDF URL must be a valid URL").optional(),
+  sellerUrl: z.string().url("SELLER URL must be a valid URL").optional(),
 });
 
 export const eventSchema = z.object({

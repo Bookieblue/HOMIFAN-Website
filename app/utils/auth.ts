@@ -1,7 +1,9 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { IAdmin, IAuthToken } from "../interface";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { NextApiResponse } from "next";
+import { sendErrorResponse } from "./apiResponse";
 
 // Ensure JWT_SECRET is defined (throw error if missing)
 const JWT_SECRET = process.env.JWT_SECRET!;
@@ -17,7 +19,7 @@ if (!JWT_SECRET) {
  * @returns JWT token.
  * @throws Error if token generation fails.
  */
-export const generateToken = (admin: IAdmin): string => {
+export const generateToken = (admin: IAdmin): string | any => {
   try {
     const payload: IAuthToken = {
       id: admin.id,
@@ -33,7 +35,7 @@ export const generateToken = (admin: IAdmin): string => {
     );
     return token;
   } catch (error) {
-    throw new Error("Failed to generate JWT token.");
+    return sendErrorResponse(NextResponse, "Failed to generate JWT token.");
   }
 };
 
@@ -43,12 +45,12 @@ export const generateToken = (admin: IAdmin): string => {
  * @returns Decoded token payload.
  * @throws Error if token is invalid or expired.
  */
-export const verifyToken = (token: string): IAuthToken => {
+export const verifyToken = (token: string): IAuthToken | any => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     return decoded as IAuthToken;
   } catch (error) {
-    throw new Error("Invalid or expired token.");
+    return sendErrorResponse(NextResponse, "Invalid or expired token.");
   }
 };
 
@@ -58,11 +60,11 @@ export const verifyToken = (token: string): IAuthToken => {
  * @returns Extracted JWT token.
  * @throws Error if no token is provided.
  */
-export const extractTokenFromRequest = (req: NextRequest): string => {
+export const extractTokenFromRequest = (req: NextRequest): string | any => {
   const authHeader = req.headers.get("authorization");
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    throw new Error("No token provided.");
+    return sendErrorResponse(NextResponse, "No token provided.");
   }
 
   return authHeader.split(" ")[1];
@@ -74,12 +76,12 @@ export const extractTokenFromRequest = (req: NextRequest): string => {
  * @returns Hashed password.
  * @throws Error if hashing fails.
  */
-export const hashPassword = async (password: string): Promise<string> => {
+export const hashPassword = async (password: string): Promise<string | any> => {
   try {
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password, salt);
   } catch (error) {
-    throw new Error("Failed to hash password.");
+    return sendErrorResponse(NextResponse, "Failed to hash password.");
   }
 };
 
@@ -93,10 +95,10 @@ export const hashPassword = async (password: string): Promise<string> => {
 export const comparePassword = async (
   password: string,
   hash: string
-): Promise<boolean> => {
+): Promise<boolean | any> => {
   try {
     return await bcrypt.compare(password, hash);
   } catch (error) {
-    throw new Error("Failed to compare passwords.");
+    return sendErrorResponse(NextResponse, "Failed to compare passwords.");
   }
 };
