@@ -24,7 +24,6 @@ const Publications: React.FC = () => {
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
-
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -59,8 +58,26 @@ const Publications: React.FC = () => {
         </p>
 
         {loading ? (
-          <div className="flex justify-center mt-10">
-            <p className="text-lg font-semibold text-gray-600">Loading...</p>
+          <div className="flex flex-col items-center justify-center mt-16 mb-16">
+            {/* Animated Spinner */}
+            <div className="relative">
+              {/* Outer ring */}
+              <div className="w-16 h-16 border-4 border-gray-200 border-solid rounded-full"></div>
+              {/* Spinning inner ring */}
+              <div className="absolute top-0 left-0 w-16 h-16 border-4 border-transparent border-t-purple-50 border-solid rounded-full animate-spin"></div>
+            </div>
+            
+            {/* Loading text */}
+            <p className="text-lg font-semibold text-gray-600 mt-4 animate-pulse">
+              Loading our publications...
+            </p>
+            
+            {/* Optional: Loading dots animation */}
+            <div className="flex space-x-1 mt-2">
+              <div className="w-2 h-2 bg-purple-50 rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-purple-50 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+              <div className="w-2 h-2 bg-purple-50 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+            </div>
           </div>
         ) : books.length === 0 ? (
           <div className="flex flex-col items-center justify-center mt-10">
