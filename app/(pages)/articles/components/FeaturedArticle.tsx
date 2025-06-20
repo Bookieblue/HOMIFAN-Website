@@ -19,6 +19,41 @@ export interface Article {
   imageUrl: string;
 }
 
+// Function to strip HTML tags and decode entities
+const stripHtml = (html: string) => {
+  if (!html) return '';
+  
+  // Create a temporary DOM element to parse HTML
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+  
+  // Get text content (this automatically handles HTML entities)
+  return tempDiv.textContent || tempDiv.innerText || '';
+};
+
+// Alternative server-side safe version (if you need SSR compatibility)
+const stripHtmlServerSafe = (html: string) => {
+  if (!html) return '';
+  
+  return html
+    // Remove HTML tags
+    .replace(/<[^>]*>/g, '')
+    // Decode common HTML entities
+    .replace(/&ldquo;/g, '"')
+    .replace(/&rdquo;/g, '"')
+    .replace(/&lsquo;/g, "'")
+    .replace(/&rsquo;/g, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    // Clean up extra whitespace
+    .replace(/\s+/g, ' ')
+    .trim();
+};
+
 const FeaturedArticle: React.FC<Article> = ({
   id,
   updatedAt,
@@ -27,6 +62,32 @@ const FeaturedArticle: React.FC<Article> = ({
   author,
   imageUrl,
 }) => {
+  // Function to create excerpt from HTML content
+  const getExcerpt = (htmlContent: string, maxLength: number) => {
+    if (!htmlContent) return '';
+    
+    // Strip HTML and get clean text
+    // Use stripHtml for client-side or stripHtmlServerSafe for SSR
+    const cleanText = typeof window !== 'undefined' 
+      ? stripHtml(htmlContent) 
+      : stripHtmlServerSafe(htmlContent);
+    
+    if (cleanText.length <= maxLength) {
+      return cleanText;
+    }
+    
+    // Truncate and ensure we don't cut off mid-word
+    const truncated = cleanText.slice(0, maxLength);
+    const lastSpaceIndex = truncated.lastIndexOf(' ');
+    
+    // If there's a space within the last 20 characters, cut at the space
+    if (lastSpaceIndex > maxLength - 20) {
+      return truncated.slice(0, lastSpaceIndex) + '...';
+    }
+    
+    return truncated + '...';
+  };
+
   const slug = slugify(title);
   
   return (
@@ -40,7 +101,8 @@ const FeaturedArticle: React.FC<Article> = ({
         <div className="lg:w-1/2 space-y-4">
           <p className="text-sm text-gray-500">{formatDate(updatedAt)}</p>
           <h3 className="text-2xl font-bold">{title}</h3>
-          <p className="text-gray-600">{content}</p>
+          {/* Clean excerpt without HTML tags - longer for featured article */}
+          <p className="text-gray-600">{getExcerpt(content, 350)}</p>
           <p className="text-sm text-gray-500">By {author}</p>
           <Link href={`/articles/${id}/${slug}`}>
             <button className="bg-purple-50 text-white py-2 px-4 rounded-md mt-4 hover:bg-purple-700">
