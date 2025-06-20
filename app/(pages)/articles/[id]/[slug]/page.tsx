@@ -27,17 +27,31 @@ const ArticlePage: React.FC = () => {
   const router = useRouter();
   const [article, setArticle] = useState<Article | null>(null);
   const [moreArticles, setMoreArticles] = useState<Article[]>([]);
-  const [loadingArticle, setLoadingArticle] = useState(true); // For article loading
+  const [loadingArticle, setLoadingArticle] = useState(true);
   const [loadingMoreArticles, setLoadingMoreArticles] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
+  // Function to clean and style HTML content
+  const cleanHTMLContent = (htmlContent: string) => {
+    if (!htmlContent) return '';
+    
+    return htmlContent
+      // Clean up common spacing issues
+      .replace(/\s+/g, ' ')
+      // Ensure proper paragraph spacing
+      .replace(/<\/p>\s*<p/g, '</p><p')
+      // Clean up break tags
+      .replace(/<br\s*\/?>/g, '<br>')
+      .trim();
+  };
+
   useEffect(() => {
     if (!id) return;
 
     const fetchArticle = async () => {
-      setLoadingArticle(true); // Start loading for the article section
+      setLoadingArticle(true);
       try {
         const response = await fetch(`${API_BASE_URL}/api/articles/${id}`);
         const data = await response.json();
@@ -53,7 +67,7 @@ const ArticlePage: React.FC = () => {
         setError("Something went wrong");
         router.push("/articles");
       } finally {
-        setLoadingArticle(false); // Stop loading when the article is fetched
+        setLoadingArticle(false);
       }
     };
 
@@ -72,7 +86,6 @@ const ArticlePage: React.FC = () => {
             (article: Article) => article.id !== id
           );
 
-          // Shuffle and pick 3 random articles
           const shuffled = filteredArticles.sort(() => 0.5 - Math.random());
           setMoreArticles(shuffled.slice(0, 3));
         }
@@ -132,9 +145,17 @@ const ArticlePage: React.FC = () => {
                 </div>
 
                 <div className="w-5/6 grid gap-10 mx-auto max-w-3xl text-balance">
-                  <p className="text-base pb-3 md:text-lg">
-                    {article?.content}
-                  </p>
+                  {/* Render HTML content properly with custom styles */}
+                  <div 
+                    className="article-content text-base md:text-lg leading-relaxed"
+                    dangerouslySetInnerHTML={{ 
+                      __html: cleanHTMLContent(article?.content || '') 
+                    }}
+                    style={{
+                      // Custom CSS for the article content
+                      lineHeight: '1.8',
+                    }}
+                  />
                 </div>
               </>
             )}
@@ -170,6 +191,52 @@ const ArticlePage: React.FC = () => {
         <JoinUsSection />
         <FooterSection {...footerProps} />
         <BackToTopButton />
+
+        {/* Add custom CSS for article content styling */}
+        <style jsx global>{`
+          .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+          }
+          
+          .article-content p:last-child {
+            margin-bottom: 0;
+          }
+          
+          .article-content em {
+            font-style: italic;
+            color: #695CAE; /* Slightly muted for emphasis */
+          }
+          
+          .article-content strong {
+            font-weight: bold;
+            color: #1f2937; /* Darker for strong emphasis */
+          }
+          
+          .article-content p[style*="text-align: center"] {
+            text-align: center;
+            font-style: italic;
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: #f9fafb;
+            border-left: 4px solid #8b5cf6;
+            border-radius: 0.375rem;
+          }
+          
+          .article-content br {
+            margin-bottom: 0.5rem;
+          }
+          
+          /* Style for scripture/quote sections */
+          .article-content p em {
+            display: inline;
+          }
+          
+          /* Better spacing for lists and content */
+          .article-content > * + * {
+            margin-top: 1.5rem;
+          }
+        `}</style>
       </div>
     )
   );
